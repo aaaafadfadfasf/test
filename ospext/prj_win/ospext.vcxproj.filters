@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{5ddd9a47-f16a-4298-bb1e-130d25bfbdc8}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;rc;def;r;odl;idl;hpj;bat</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{32b4e544-d366-488d-b50c-5eab392e372c}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl</Extensions>
+    </Filter>
+    <Filter Include="Make Files">
+      <UniqueIdentifier>{c4448eaa-f7d0-4714-b02e-616e7e966ab9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common Files">
+      <UniqueIdentifier>{582e2921-c822-4a0c-a325-82b21f2f9639}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\ospapp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\ospdbg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\ospinst.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\osplog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\osptask.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\osptool.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\osplogfile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\include\ospexevt.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\taskmng.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\10-Common\include\cms\ospext\ospapp.h">
+      <Filter>Common Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\10-Common\include\cms\ospext\ospdbg.h">
+      <Filter>Common Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\10-Common\include\cms\ospext\ospext.h">
+      <Filter>Common Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\10-Common\include\cms\ospext\ospinst.h">
+      <Filter>Common Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\10-Common\include\cms\ospext\osplog.h">
+      <Filter>Common Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\10-Common\include\cms\ospext\osptask.h">
+      <Filter>Common Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\10-Common\include\cms\ospext\osptool.h">
+      <Filter>Common Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\osplogfile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\10-Common\include\cms\container\cospobj.h">
+      <Filter>Common Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\10-Common\include\cms\ospext\ospmailbox.h">
+      <Filter>Common Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="..\prj_linux\makefile">
+      <Filter>Make Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\prj_linux\makefile_debug">
+      <Filter>Make Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\prj_linux\makefile_release">
+      <Filter>Make Files</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="compile.bat">
+      <Filter>Make Files</Filter>
+    </None>
+    <None Include="..\Compile.bat">
+      <Filter>Make Files</Filter>
+    </None>
+    <None Include="..\compile_linux.bat">
+      <Filter>Make Files</Filter>
+    </None>
+  </ItemGroup>
+</Project>

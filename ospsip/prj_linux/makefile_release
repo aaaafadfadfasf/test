@@ -1,0 +1,49 @@
+###
+### Copyright (c) 2004 Keda Telecom, Inc.
+###
+
+#########################################################################
+###
+###  DESCRIPTION:
+###    Common definitions for all Makefiles in ospsip linux project.
+###
+#########################################################################
+
+TOP := ..
+
+COMM_DIR := ../../../10-Common/include
+
+SRC_DIR := $(TOP)/src
+
+## Name and type of the target for this Makefile
+
+ARC_TARGET := ospsip
+
+## Define debugging symbols
+DEBUG = 0
+LINUX_COMPILER=_LINUX_# _EQUATOR_, _HHPPC_, _LINUX_ and so on
+
+CFLAGS += -D_LINUX_
+
+PWLIB_SUPPORT = 0
+
+## Object files that compose the target(s)
+
+CPP_FILES = $(wildcard $(SRC_DIR)/*.cpp)
+
+OBJS := $(CPP_FILES:%.cpp=%)
+
+
+
+
+## Add driver-specific include directory to the search path
+
+INC_PATH += $(TOP)/include \
+            $(COMM_DIR)
+
+
+## Libraries to include in shared object file
+
+
+INSTALL_LIB_PATH = ../../../10-Common/lib/release/linux
+include $(COMM_DIR)/common.mk

@@ -1,0 +1,54 @@
+###
+### Copyright (c) 2004 Keda Telecom, Inc.
+###
+
+#########################################################################
+###
+###  DESCRIPTION:
+###    Common definitions for all Makefiles in cmu linux project.
+###
+#########################################################################
+
+TOP := ..
+
+COMM_DIR := ../../../10-Common/include
+
+SRC_DIR := $(TOP)/source
+
+## Name and type of the target for this Makefile
+
+APP_TARGET := cmu
+
+## Define debuging symbols
+DEBUG = 1
+LINUX_COMPILER=_LINUX_# _EQUATOR_, _HHPPC_, _LINUX_ and so on
+
+CFLAGS += -D_LINUX_
+CFLAGS += -fno-omit-frame-pointer
+CFLAGS += -Wformat
+CFLAGS += -Wall
+CFLAGS += -m64 -fPIC
+
+PWLIB_SUPPORT = 0
+
+## Object files that compose the target(s)
+
+CPP_FILES = $(wildcard $(SRC_DIR)/*.cpp)
+OBJS := $(CPP_FILES:%.cpp=%)
+
+
+
+
+## Add driver-specific include directory to the search path
+
+INC_PATH += $(TOP)/include \
+            $(COMM_DIR)
+
+
+## Libraries to include in shared object file
+LIB_PATH += ../../../10-Common/lib/debug/linux64
+
+LIBS := pthread rt uuid  cmsproto64 ospsip64 ospext64 kdsip64 nmclib64 snmpadp64 tinyxml64 cmcfg64 kdvencrypt64 osp64 natagent64 redissdk64 fastdb64 hiredis64 sysdbg kdvsys64 kdmutil64 dl z
+
+INSTALL_APP_PATH := ../../../10-Common/version/debug/linux64/cmu
+include $(COMM_DIR)/common.mk

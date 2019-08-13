@@ -1,0 +1,219 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{70597ed5-e6a2-409c-82f3-46839f5ef89e}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;rc;def;r;odl;idl;hpj;bat</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{2fa68b32-2e6c-4dbc-9fca-59abd4b0c210}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl</Extensions>
+    </Filter>
+    <Filter Include="Config Files">
+      <UniqueIdentifier>{ec80e75a-0872-4af7-87a6-3a3374392b1e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Proto Files">
+      <UniqueIdentifier>{e039347a-d812-4220-ad69-225f2260926c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Task Files">
+      <UniqueIdentifier>{0de877de-1613-4174-9ff1-261e3e0e2c86}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Make Files">
+      <UniqueIdentifier>{5b309753-38b1-40f6-ba4e-5c41a5f58164}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="..\prj_linux\makefile">
+      <Filter>Make Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\prj_linux\makefile_debug">
+      <Filter>Make Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\prj_linux\makefile_release">
+      <Filter>Make Files</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\source\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\cmustubtestconf.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\cmustubtestdbg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\cmustubtestcoreapp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\cmustubtestdata.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\cuiregtasktest.cpp">
+      <Filter>Task Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\culogintasktest.cpp">
+      <Filter>Task Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\loginsession.cpp">
+      <Filter>Task Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\pusstasktest.cpp">
+      <Filter>Task Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\puptzctrltasktest.cpp">
+      <Filter>Task Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\videncparamsettasktest.cpp">
+      <Filter>Task Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\sysparamgettasktest.cpp">
+      <Filter>Task Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\sysparamsettasktest.cpp">
+      <Filter>Task Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\videncparamgettasktest.cpp">
+      <Filter>Task Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\devlogintask.cpp">
+      <Filter>Task Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\alarmlinksettasktest.cpp">
+      <Filter>Task Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\alarmlinkgettasktest.cpp">
+      <Filter>Task Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\invite3pctasktest.cpp">
+      <Filter>Task Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\invitetasktest.cpp">
+      <Filter>Task Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\twschemesavetasktest.cpp">
+      <Filter>Task Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\punormalcfgtasktest.cpp">
+      <Filter>Task Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\purecqrytasktest.cpp">
+      <Filter>Task Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\pusnapshottasktest.cpp">
+      <Filter>Task Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\include\cmustubtestconf.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cmustubtestdbg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cmustubtestcoreapp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cmustubtestconst.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\10-Common\include\cms\cmu\cmu_event.h">
+      <Filter>Proto Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\10-Common\include\cms\cmu\cmu_proto.h">
+      <Filter>Proto Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\10-Common\include\cms\cmu\cmu_struct.h">
+      <Filter>Proto Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\10-Common\include\cms\tas\tas_event.h">
+      <Filter>Proto Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\10-Common\include\cms\tas\tas_proto.h">
+      <Filter>Proto Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\10-Common\include\cms\tas\tas_struct.h">
+      <Filter>Proto Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\10-Common\include\cms\cms_proto.h">
+      <Filter>Proto Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\10-Common\include\cms\cms_const.h">
+      <Filter>Proto Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\10-Common\include\cms\cms_errorcode.h">
+      <Filter>Proto Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\10-Common\include\cms\cms_eventid.h">
+      <Filter>Proto Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cmustubtestdata.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cuiregtasktest.h">
+      <Filter>Task Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\loginsession.h">
+      <Filter>Task Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\culogintasktest.h">
+      <Filter>Task Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\pusstasktest.h">
+      <Filter>Task Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\puptzctrltasktest.h">
+      <Filter>Task Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\sysparamgettasktest.h">
+      <Filter>Task Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\sysparamsettasktest.h">
+      <Filter>Task Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\videncparamgettasktest.h">
+      <Filter>Task Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\videncparamsettasktest.h">
+      <Filter>Task Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\devlogintask.h">
+      <Filter>Task Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\alarmlinksettasktest.h">
+      <Filter>Task Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\alarmlinkgettasktest.h">
+      <Filter>Task Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\reqrsptasktest.h">
+      <Filter>Task Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\invitetasktest.h">
+      <Filter>Task Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\invite3pctasktest.h">
+      <Filter>Task Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\twschemesavetasktest.h">
+      <Filter>Task Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\punormalcfgtasktest.h">
+      <Filter>Task Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\purecqrytasktest.h">
+      <Filter>Task Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\pusnapshottasktest.h">
+      <Filter>Task Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="conf\cmustubtest.ini">
+      <Filter>Config Files</Filter>
+    </None>
+    <None Include="..\..\..\10-Common\include\common.mk">
+      <Filter>Make Files</Filter>
+    </None>
+  </ItemGroup>
+</Project>

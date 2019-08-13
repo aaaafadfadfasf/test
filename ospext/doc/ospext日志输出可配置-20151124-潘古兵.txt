@@ -1,0 +1,27 @@
+一、ospext修改
+1、允许使用ospext的模块动态修改运行日志、错误日志的大小及最大个数，但是模块重启后会丢失：
+  对应的telnet命令如下：
+  OspSetRunLogFileNum(u32 dwErrLogFileNum):param表示最大文件数: 设置运行日志文件数：1-255
+  OspSetRunLogFileSize(u32 dwErrLogFileSize):param表示最大文件大小: 设置运行日志文件大小：1M-1024M
+  OspSetErrLogFileNum(u32 dwErrLogFileNum):param表示最大文件数: 设置错误日志文件数：1-255
+  OspSetErrLogFileSize(u32 dwErrLogFileSize):param表示最大文件大小: 设置错误日志文件大小：1M-1024M
+
+2、ospext支持读取ini配置文件中以下配置项，如果没有配置使用原有默认值：
+//OSPEXT配置项
+[OSPEXT]
+WriteRunLogLev=0    //输出运行日志文件及级别：0:不输出; 非0:输出指定级别
+RunLogFileNum=10     //运行日志文件数：1-255
+RunLogFileSize=1    //运行日志文件大小：1M-1024M
+ErrLogFileNum=5		//错误日志文件数：1-255
+ErrLogFileSize=1	//错误日志文件大小：1M-1024M
+3、上述修改都可以通过OspShowLogParam命令查看当前设置的参数：
+  错误日志文件数:[5] 大小:[1024]
+  运行日志文件数:[4] 大小:[3072]
+
+二、平台模块相应的修改
+1、主流模块tas、gbs、rcs、vtdu、cmu、pms、pmcs、pui、tvs都已经添加处理，只要在配置文件中增加上诉配置项就可以；
+2、cui、cui1由于使用的是xml的配置文件，需要自行在模块中读取配置文件，再设置到ospext，后续有需要的话，再添加。
+3、cmssdk是一个独立的动态库，如果要支持的话需要增加初始化参数，然后由外部使用的模块读取相应的配置文件，传入cmssdk。
+    该部分也暂时没做，如有需要由cmsdk增加初始化参数，再由使用的模块传入。
+4、rms模块没有使用ospext，因此由模块根据需要自行修改。@周鲁阳
+5、其他不常用模块后续根据需要添加。

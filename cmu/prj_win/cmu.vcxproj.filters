@@ -1,0 +1,484 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{70597ed5-e6a2-409c-82f3-46839f5ef89e}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;rc;def;r;odl;idl;hpj;bat</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{2fa68b32-2e6c-4dbc-9fca-59abd4b0c210}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl</Extensions>
+    </Filter>
+    <Filter Include="Config Files">
+      <UniqueIdentifier>{ec80e75a-0872-4af7-87a6-3a3374392b1e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Proto Files">
+      <UniqueIdentifier>{e039347a-d812-4220-ad69-225f2260926c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Task Files">
+      <UniqueIdentifier>{0de877de-1613-4174-9ff1-261e3e0e2c86}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Make Files">
+      <UniqueIdentifier>{5b309753-38b1-40f6-ba4e-5c41a5f58164}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ospxxx Files">
+      <UniqueIdentifier>{462b1ba7-f021-4525-a1a3-b765031820bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sipxxx Files">
+      <UniqueIdentifier>{c6e6c7a8-65d4-46c6-8a30-2fd84ade9779}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Task Files\LoginSession Tasks">
+      <UniqueIdentifier>{354d99e1-3fee-449d-9f33-0a871bfe6047}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Task Files\Switch Tasks">
+      <UniqueIdentifier>{1d923381-5d9a-4cc4-afc4-1e55ee6bb22f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Task Files\Subscribe Tasks">
+      <UniqueIdentifier>{481294a5-9e51-407f-94a3-f54a02df7a2e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Task Files\PuOpr Tasks">
+      <UniqueIdentifier>{069cba32-118a-4c3e-ac27-e99369451def}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Task Files\WriteLog Tasks">
+      <UniqueIdentifier>{8d8b699d-f0bd-4b24-9bbf-2657f1bf6ccd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Config Files\language">
+      <UniqueIdentifier>{a9311de2-7382-4c9e-8b1e-6473c101c41f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Config Files\language\chinese">
+      <UniqueIdentifier>{c1b28832-f0c7-4a86-bf95-752360010ca5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Task Files\Nms Tasks">
+      <UniqueIdentifier>{df49a4d5-9827-4099-869e-94104cc5a902}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Redis Files">
+      <UniqueIdentifier>{8d5c2b33-0092-43fd-8602-b34d7ac22e85}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="内存释放管理task">
+      <UniqueIdentifier>{f362e8e9-27b1-4b68-ad09-311f66bac766}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="..\prj_linux\makefile">
+      <Filter>Make Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\prj_linux\makefile_debug">
+      <Filter>Make Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\prj_linux\makefile_release">
+      <Filter>Make Files</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\source\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\cmuconf.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\cmudbg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\cmucoreapp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\cmudata.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\cuiregtask.cpp">
+      <Filter>Task Files\LoginSession Tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\culogintask.cpp">
+      <Filter>Task Files\LoginSession Tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\devlogintask.cpp">
+      <Filter>Task Files\LoginSession Tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\loginsession.cpp">
+      <Filter>Task Files\LoginSession Tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\puiregtask.cpp">
+      <Filter>Task Files\LoginSession Tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\puregtask.cpp">
+      <Filter>Task Files\LoginSession Tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\regtastask.cpp">
+      <Filter>Task Files\LoginSession Tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\vtduregtask.cpp">
+      <Filter>Task Files\LoginSession Tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\cmuconnecttask.cpp">
+      <Filter>Task Files\LoginSession Tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\inviteswitchtask.cpp">
+      <Filter>Task Files\Switch Tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\invitesenderswitchtask.cpp">
+      <Filter>Task Files\Switch Tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\invitereceiverswitchtask.cpp">
+      <Filter>Task Files\Switch Tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\pusstask.cpp">
+      <Filter>Task Files\Subscribe Tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\puptzctrltask.cpp">
+      <Filter>Task Files\PuOpr Tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\3pcmsgtask.cpp">
+      <Filter>Task Files\Switch Tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\3pcinvitetask.cpp">
+      <Filter>Task Files\Switch Tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\3pctask.cpp">
+      <Filter>Task Files\Switch Tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\nmstask.cpp">
+      <Filter>Task Files\Nms Tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\catalogsstask.cpp">
+      <Filter>Task Files\Subscribe Tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\domaincatalogssertask.cpp">
+      <Filter>Task Files\Subscribe Tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\pulistsstask.cpp">
+      <Filter>Task Files\Subscribe Tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\domainpulistssertask.cpp">
+      <Filter>Task Files\Subscribe Tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\ssbasetask.cpp">
+      <Filter>Task Files\Subscribe Tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\getofflinedevtask.cpp">
+      <Filter>Task Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\pudecinvitetask.cpp">
+      <Filter>Task Files\PuOpr Tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\flowctrltask.cpp">
+      <Filter>Task Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\rediscomm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\pubatchregtask.cpp">
+      <Filter>Task Files\LoginSession Tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\cmupassiveconnecttask.cpp">
+      <Filter>Task Files\LoginSession Tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\domainredissynctask.cpp">
+      <Filter>Task Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\uaslogtask.cpp">
+      <Filter>Task Files\WriteLog Tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\puinotifytask.cpp">
+      <Filter>Task Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\redisssmng.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\redisloginsession.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\redisswitchunittask.cpp">
+      <Filter>Task Files\Switch Tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\switchentrytask.cpp">
+      <Filter>Task Files\Switch Tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\3pcmsgentrytask.cpp">
+      <Filter>Task Files\Switch Tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\3pcinviteentrytask.cpp">
+      <Filter>Task Files\Switch Tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\cmemorymngtask.cpp">
+      <Filter>内存释放管理task</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\include\cmuconf.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cmudbg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cmucoreapp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cmuconst.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\10-Common\include\cms\cmu\cmu_event.h">
+      <Filter>Proto Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\10-Common\include\cms\cmu\cmu_proto.h">
+      <Filter>Proto Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\10-Common\include\cms\cmu\cmu_struct.h">
+      <Filter>Proto Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\10-Common\include\cms\tas\tas_event.h">
+      <Filter>Proto Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\10-Common\include\cms\tas\tas_proto.h">
+      <Filter>Proto Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\10-Common\include\cms\tas\tas_struct.h">
+      <Filter>Proto Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\10-Common\include\cms\cms_proto.h">
+      <Filter>Proto Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\10-Common\include\cms\cms_const.h">
+      <Filter>Proto Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\10-Common\include\cms\cms_errorcode.h">
+      <Filter>Proto Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\10-Common\include\cms\cms_eventid.h">
+      <Filter>Proto Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cmudata.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\10-Common\include\cms\ospext\ospapp.h">
+      <Filter>Ospxxx Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\10-Common\include\cms\ospext\ospdbg.h">
+      <Filter>Ospxxx Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\10-Common\include\cms\ospext\ospext.h">
+      <Filter>Ospxxx Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\10-Common\include\cms\ospext\ospinst.h">
+      <Filter>Ospxxx Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\10-Common\include\cms\ospext\osplog.h">
+      <Filter>Ospxxx Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\10-Common\include\cms\ospext\osptask.h">
+      <Filter>Ospxxx Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\10-Common\include\cms\ospext\osptool.h">
+      <Filter>Ospxxx Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\10-Common\include\cbb\osp\osp.h">
+      <Filter>Ospxxx Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\10-Common\include\cbb\sip\kdsip.h">
+      <Filter>Sipxxx Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\10-Common\include\cms\ospsip\ospsip.h">
+      <Filter>Sipxxx Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\10-Common\include\cms\camera\newcamera.h">
+      <Filter>Proto Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cuiregtask.h">
+      <Filter>Task Files\LoginSession Tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\culogintask.h">
+      <Filter>Task Files\LoginSession Tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\devlogintask.h">
+      <Filter>Task Files\LoginSession Tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\loginsession.h">
+      <Filter>Task Files\LoginSession Tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\puiregtask.h">
+      <Filter>Task Files\LoginSession Tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\puregtask.h">
+      <Filter>Task Files\LoginSession Tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\regtastask.h">
+      <Filter>Task Files\LoginSession Tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\vtduregtask.h">
+      <Filter>Task Files\LoginSession Tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cmuconnecttask.h">
+      <Filter>Task Files\LoginSession Tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\invitesenderswitchtask.h">
+      <Filter>Task Files\Switch Tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\inviteswitchtask.h">
+      <Filter>Task Files\Switch Tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\invitereceiverswitchtask.h">
+      <Filter>Task Files\Switch Tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\10-Common\include\cms\cms_struct.h">
+      <Filter>Proto Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\pusstask.h">
+      <Filter>Task Files\Subscribe Tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\pureqrsptask.h">
+      <Filter>Task Files\PuOpr Tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\puptzctrltask.h">
+      <Filter>Task Files\PuOpr Tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\pureqrspntftask.h">
+      <Filter>Task Files\PuOpr Tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\10-Common\include\cms\uas\uas_struct.h">
+      <Filter>Proto Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\10-Common\include\cms\uas\uas_event.h">
+      <Filter>Proto Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\10-Common\include\cms\uas\uas_proto.h">
+      <Filter>Proto Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uaswritelogtask.h">
+      <Filter>Task Files\WriteLog Tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\10-Common\include\cms\cms_landesc.h">
+      <Filter>Proto Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\10-Common\include\cms\utility\uuid.h">
+      <Filter>Proto Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\10-Common\include\cms\utility\cmstime.h">
+      <Filter>Proto Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\10-Common\include\cms\utility\cmsver.h">
+      <Filter>Proto Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cmutask.h">
+      <Filter>Task Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\3pcmsgtask.h">
+      <Filter>Task Files\Switch Tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\3pctask.h">
+      <Filter>Task Files\Switch Tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\3pcinvitetask.h">
+      <Filter>Task Files\Switch Tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\nmstask.h">
+      <Filter>Task Files\Nms Tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cmureqrsptask.h">
+      <Filter>Task Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\catalogsstask.h">
+      <Filter>Task Files\Subscribe Tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\domaincatalogssertask.h">
+      <Filter>Task Files\Subscribe Tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\pulistsstask.h">
+      <Filter>Task Files\Subscribe Tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\domainpulistssertask.h">
+      <Filter>Task Files\Subscribe Tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\ssbasetask.h">
+      <Filter>Task Files\Subscribe Tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\domainssbasetasktmpl.h">
+      <Filter>Task Files\Subscribe Tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\getofflinedevtask.h">
+      <Filter>Task Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\pudecinvitetask.h">
+      <Filter>Task Files\PuOpr Tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\flowctrltask.h">
+      <Filter>Task Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\10-Common\include\sdk\fastdbsdk\fastdb.h">
+      <Filter>Redis Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\10-Common\include\sdk\fastdbsdk\keydef.h">
+      <Filter>Redis Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\10-Common\include\cms\cmu\cmu_data.h">
+      <Filter>Proto Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\rediscomm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\10-Common\include\cms\cmu\cmu_redis.h">
+      <Filter>Proto Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\pubatchregtask.h">
+      <Filter>Task Files\LoginSession Tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cmupassiveconnecttask.h">
+      <Filter>Task Files\LoginSession Tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\domainredissynctask.h">
+      <Filter>Task Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\uaslogtask.h">
+      <Filter>Task Files\WriteLog Tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\slidingwindowtmpl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\puinotifytask.h">
+      <Filter>Task Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\redisssmng.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\redisloginsession.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\redisswitchunittask.h">
+      <Filter>Task Files\Switch Tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\switchentrytask.h">
+      <Filter>Task Files\Switch Tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\3pcmsgentrytask.h">
+      <Filter>Task Files\Switch Tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\3pcinviteentrytask.h">
+      <Filter>Task Files\Switch Tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cmemorymngtask.h">
+      <Filter>内存释放管理task</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\10-Common\include\common.mk">
+      <Filter>Make Files</Filter>
+    </None>
+    <None Include="..\compile.bat">
+      <Filter>Make Files</Filter>
+    </None>
+    <None Include="compile.bat">
+      <Filter>Make Files</Filter>
+    </None>
+    <None Include="..\compile_linux.bat">
+      <Filter>Make Files</Filter>
+    </None>
+    <None Include="..\..\..\10-Common\version\config\commonconfig\lang\chinese\cmslandesc.lan">
+      <Filter>Config Files\language\chinese</Filter>
+    </None>
+    <None Include="..\..\..\10-Common\version\config\cmu\conf\cmu.ini">
+      <Filter>Config Files</Filter>
+    </None>
+    <None Include="..\..\..\10-Common\include\cms\cms_errorstr.txt">
+      <Filter>Proto Files</Filter>
+    </None>
+    <None Include="..\cmu_变更记录.txt" />
+  </ItemGroup>
+</Project>

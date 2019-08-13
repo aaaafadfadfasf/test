@@ -1,0 +1,224 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <SccProjectName>cmustubtest</SccProjectName>
+    <SccLocalPath>.</SccLocalPath>
+    <Keyword>MFCProj</Keyword>
+    <SccProvider>MSSCCI:ClearCase</SccProvider>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <UseOfMfc>Dynamic</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>Dynamic</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.Cpp.UpgradeFromVC60.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.Cpp.UpgradeFromVC60.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>.\Debug\</OutDir>
+    <IntDir>.\Debug\</IntDir>
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>.\Release\</OutDir>
+    <IntDir>.\Release\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <FunctionLevelLinking>false</FunctionLevelLinking>
+      <Optimization>Disabled</Optimization>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <WarningLevel>Level3</WarningLevel>
+      <MinimalRebuild>true</MinimalRebuild>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalIncludeDirectories>..\include;..\..\..\..\..\10-Common\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;WIN32_LEAN_AND_MEAN;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AssemblerListingLocation>.\Debug\</AssemblerListingLocation>
+      <BrowseInformation>true</BrowseInformation>
+      <PrecompiledHeaderOutputFile>.\Debug\cmustubtest.pch</PrecompiledHeaderOutputFile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <ObjectFileName>.\Debug\</ObjectFileName>
+      <ProgramDataBaseFileName>.\Debug\</ProgramDataBaseFileName>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+    </ClCompile>
+    <PostBuildEvent>
+      <Command>copy $(TargetPath) ..\..\..\..\..\10-Common\version\$(ConfigurationName)\win\</Command>
+    </PostBuildEvent>
+    <Midl>
+      <TypeLibraryName>.\Debug\cmustubtest.tlb</TypeLibraryName>
+    </Midl>
+    <ResourceCompile>
+      <Culture>0x0804</Culture>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <OutputFile>.\Debug\cmustubtest.bsc</OutputFile>
+    </Bscmake>
+    <Link>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+      <IgnoreSpecificDefaultLibraries>
+      </IgnoreSpecificDefaultLibraries>
+      <OutputFile>.\Debug\cmustubtest.exe</OutputFile>
+      <AdditionalLibraryDirectories>..\..\..\..\..\10-Common\lib\debug\win;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>kdsip.lib;osplib.lib;ospext.lib;tinyxml.lib;cmsprotolib.lib;kdvsys.lib;kdvencrypt.lib;ospsip.lib;cmcfg.lib;WS2_32.Lib;user32.lib;kernel32.lib;advapi32.lib;rpcrt4.lib;kdmutil.lib;natagent.lib;datadispatch.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <StringPooling>true</StringPooling>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <Optimization>MaxSpeed</Optimization>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <WarningLevel>Level3</WarningLevel>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalIncludeDirectories>..\include;..\..\..\..\..\10-Common\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;WIN32_LEAN_AND_MEAN;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AssemblerListingLocation>.\Release\</AssemblerListingLocation>
+      <BrowseInformation>true</BrowseInformation>
+      <PrecompiledHeaderOutputFile>.\Release\cmustubtest.pch</PrecompiledHeaderOutputFile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <ObjectFileName>.\Release\</ObjectFileName>
+      <ProgramDataBaseFileName>.\Release\</ProgramDataBaseFileName>
+    </ClCompile>
+    <Midl>
+      <TypeLibraryName>.\Release\cmustubtest.tlb</TypeLibraryName>
+    </Midl>
+    <ResourceCompile>
+      <Culture>0x0804</Culture>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <OutputFile>.\Release\cmustubtest.bsc</OutputFile>
+    </Bscmake>
+    <Link>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+      <IgnoreSpecificDefaultLibraries>
+      </IgnoreSpecificDefaultLibraries>
+      <OutputFile>.\Release\cmustubtest.exe</OutputFile>
+      <AdditionalLibraryDirectories>..\..\..\..\..\10-Common\lib\release\win;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>kdsip.lib;osplib.lib;ospext.lib;tinyxml.lib;cmsprotolib.lib;kdvsys.lib;kdvencrypt.lib;ospsip.lib;cmcfg.lib;WS2_32.Lib;user32.lib;kernel32.lib;advapi32.lib;rpcrt4.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy $(TargetPath) ..\..\..\..\..\10-Common\version\$(ConfigurationName)\win\</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="..\prj_linux\makefile">
+      <FileType>Document</FileType>
+    </CustomBuild>
+    <CustomBuild Include="..\prj_linux\makefile_debug">
+      <FileType>Document</FileType>
+    </CustomBuild>
+    <CustomBuild Include="..\prj_linux\makefile_release">
+      <FileType>Document</FileType>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\source\alarmlinkgettasktest.cpp" />
+    <ClCompile Include="..\source\alarmlinksettasktest.cpp" />
+    <ClCompile Include="..\source\cmustubtestconf.cpp" />
+    <ClCompile Include="..\source\cmustubtestcoreapp.cpp" />
+    <ClCompile Include="..\source\cmustubtestdata.cpp" />
+    <ClCompile Include="..\source\cmustubtestdbg.cpp" />
+    <ClCompile Include="..\source\cuiregtasktest.cpp" />
+    <ClCompile Include="..\source\culogintasktest.cpp" />
+    <ClCompile Include="..\source\devlogintask.cpp" />
+    <ClCompile Include="..\source\invite3pctasktest.cpp" />
+    <ClCompile Include="..\source\invitetasktest.cpp" />
+    <ClCompile Include="..\source\loginsession.cpp" />
+    <ClCompile Include="..\source\main.cpp" />
+    <ClCompile Include="..\source\punormalcfgtasktest.cpp" />
+    <ClCompile Include="..\source\puptzctrltasktest.cpp" />
+    <ClCompile Include="..\source\purecqrytasktest.cpp" />
+    <ClCompile Include="..\source\pusnapshottasktest.cpp" />
+    <ClCompile Include="..\source\pusstasktest.cpp" />
+    <ClCompile Include="..\source\sysparamgettasktest.cpp" />
+    <ClCompile Include="..\source\sysparamsettasktest.cpp" />
+    <ClCompile Include="..\source\twschemesavetasktest.cpp" />
+    <ClCompile Include="..\source\videncparamgettasktest.cpp" />
+    <ClCompile Include="..\source\videncparamsettasktest.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\10-Common\include\cms\cms_const.h" />
+    <ClInclude Include="..\..\..\10-Common\include\cms\cms_errorcode.h" />
+    <ClInclude Include="..\..\..\10-Common\include\cms\cms_eventid.h" />
+    <ClInclude Include="..\..\..\10-Common\include\cms\cms_proto.h" />
+    <ClInclude Include="..\..\..\10-Common\include\cms\cmu\cmu_event.h" />
+    <ClInclude Include="..\..\..\10-Common\include\cms\cmu\cmu_proto.h" />
+    <ClInclude Include="..\..\..\10-Common\include\cms\cmu\cmu_struct.h" />
+    <ClInclude Include="..\..\..\10-Common\include\cms\tas\tas_event.h" />
+    <ClInclude Include="..\..\..\10-Common\include\cms\tas\tas_proto.h" />
+    <ClInclude Include="..\..\..\10-Common\include\cms\tas\tas_struct.h" />
+    <ClInclude Include="..\include\alarmlinkgettasktest.h" />
+    <ClInclude Include="..\include\alarmlinksettasktest.h" />
+    <ClInclude Include="..\include\cmustubtestconf.h" />
+    <ClInclude Include="..\include\cmustubtestconst.h" />
+    <ClInclude Include="..\include\cmustubtestcoreapp.h" />
+    <ClInclude Include="..\include\cmustubtestdata.h" />
+    <ClInclude Include="..\include\cmustubtestdbg.h" />
+    <ClInclude Include="..\include\cuiregtasktest.h" />
+    <ClInclude Include="..\include\culogintasktest.h" />
+    <ClInclude Include="..\include\devlogintask.h" />
+    <ClInclude Include="..\include\invite3pctasktest.h" />
+    <ClInclude Include="..\include\invitetasktest.h" />
+    <ClInclude Include="..\include\loginsession.h" />
+    <ClInclude Include="..\include\punormalcfgtasktest.h" />
+    <ClInclude Include="..\include\puptzctrltasktest.h" />
+    <ClInclude Include="..\include\purecqrytasktest.h" />
+    <ClInclude Include="..\include\pusnapshottasktest.h" />
+    <ClInclude Include="..\include\pusstasktest.h" />
+    <ClInclude Include="..\include\reqrsptasktest.h" />
+    <ClInclude Include="..\include\sysparamgettasktest.h" />
+    <ClInclude Include="..\include\sysparamsettasktest.h" />
+    <ClInclude Include="..\include\twschemesavetasktest.h" />
+    <ClInclude Include="..\include\videncparamgettasktest.h" />
+    <ClInclude Include="..\include\videncparamsettasktest.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\10-Common\include\common.mk" />
+    <None Include="conf\cmustubtest.ini" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

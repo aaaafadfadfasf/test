@@ -1,0 +1,309 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <Keyword>MFCProj</Keyword>
+    <SccProvider>
+    </SccProvider>
+    <ProjectGuid>{83AE06CE-4C60-45B8-9A29-C87E74D65CBF}</ProjectGuid>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <UseOfMfc>Dynamic</UseOfMfc>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>Dynamic</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.Cpp.UpgradeFromVC60.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.Cpp.UpgradeFromVC60.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>.\Debug\</OutDir>
+    <IntDir>.\Debug\</IntDir>
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>.\Release\</OutDir>
+    <IntDir>.\Release\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <FunctionLevelLinking>false</FunctionLevelLinking>
+      <Optimization>Disabled</Optimization>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <WarningLevel>Level3</WarningLevel>
+      <MinimalRebuild>true</MinimalRebuild>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalIncludeDirectories>..\include;..\..\..\10-Common\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;WIN32_LEAN_AND_MEAN;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AssemblerListingLocation>.\Debug\</AssemblerListingLocation>
+      <BrowseInformation>true</BrowseInformation>
+      <PrecompiledHeaderOutputFile>.\Debug\cmu.pch</PrecompiledHeaderOutputFile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <ObjectFileName>.\Debug\</ObjectFileName>
+      <ProgramDataBaseFileName>.\Debug\</ProgramDataBaseFileName>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <DisableSpecificWarnings>4503</DisableSpecificWarnings>
+    </ClCompile>
+    <PostBuildEvent>
+      <Command>copy $(TargetPath) ..\..\..\10-Common\version\$(ConfigurationName)\win\cmu\</Command>
+    </PostBuildEvent>
+    <Midl>
+      <TypeLibraryName>.\Debug\cmu.tlb</TypeLibraryName>
+    </Midl>
+    <ResourceCompile>
+      <Culture>0x0804</Culture>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <OutputFile>.\Debug\cmu.bsc</OutputFile>
+    </Bscmake>
+    <Link>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+      <IgnoreSpecificDefaultLibraries>
+      </IgnoreSpecificDefaultLibraries>
+      <OutputFile>.\Debug\cmu.exe</OutputFile>
+      <AdditionalLibraryDirectories>..\..\..\10-Common\lib\debug\win;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>kdsip.lib;osplib.lib;ospext.lib;tinyxml.lib;cmsprotolib.lib;kdvsys.lib;kdvencrypt.lib;ospsip.lib;cmcfg.lib;WS2_32.Lib;user32.lib;kernel32.lib;advapi32.lib;rpcrt4.lib;snmpadp.lib;nmclib.lib;natagent.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <StringPooling>true</StringPooling>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <Optimization>MaxSpeed</Optimization>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <WarningLevel>Level3</WarningLevel>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalIncludeDirectories>..\include;..\..\..\10-Common\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;WIN32_LEAN_AND_MEAN;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AssemblerListingLocation>.\Release\</AssemblerListingLocation>
+      <BrowseInformation>true</BrowseInformation>
+      <PrecompiledHeaderOutputFile>.\Release\cmu.pch</PrecompiledHeaderOutputFile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <ObjectFileName>.\Release\</ObjectFileName>
+      <ProgramDataBaseFileName>.\Release\</ProgramDataBaseFileName>
+      <DisableSpecificWarnings>4503</DisableSpecificWarnings>
+    </ClCompile>
+    <Midl>
+      <TypeLibraryName>.\Release\cmu.tlb</TypeLibraryName>
+    </Midl>
+    <ResourceCompile>
+      <Culture>0x0804</Culture>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <OutputFile>.\Release\cmu.bsc</OutputFile>
+    </Bscmake>
+    <Link>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+      <IgnoreSpecificDefaultLibraries>
+      </IgnoreSpecificDefaultLibraries>
+      <OutputFile>.\Release\cmu.exe</OutputFile>
+      <AdditionalLibraryDirectories>..\..\..\10-Common\lib\release\win;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>kdsip.lib;osplib.lib;ospext.lib;tinyxml.lib;cmsprotolib.lib;kdvsys.lib;kdvencrypt.lib;ospsip.lib;cmcfg.lib;WS2_32.Lib;user32.lib;kernel32.lib;advapi32.lib;rpcrt4.lib;snmpadp.lib;nmclib.lib;natagent.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy $(TargetPath) ..\..\..\10-Common\version\$(ConfigurationName)\win\cmu\</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="..\prj_linux\makefile">
+      <FileType>Document</FileType>
+    </CustomBuild>
+    <CustomBuild Include="..\prj_linux\makefile_debug">
+      <FileType>Document</FileType>
+    </CustomBuild>
+    <CustomBuild Include="..\prj_linux\makefile_release">
+      <FileType>Document</FileType>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\source\3pcinviteentrytask.cpp" />
+    <ClCompile Include="..\source\3pcinvitetask.cpp" />
+    <ClCompile Include="..\source\3pcmsgtask.cpp" />
+    <ClCompile Include="..\source\3pcmsgentrytask.cpp" />
+    <ClCompile Include="..\source\3pctask.cpp" />
+    <ClCompile Include="..\source\catalogsstask.cpp" />
+    <ClCompile Include="..\source\cmemorymngtask.cpp" />
+    <ClCompile Include="..\source\cmuconf.cpp" />
+    <ClCompile Include="..\source\cmuconnecttask.cpp" />
+    <ClCompile Include="..\source\cmucoreapp.cpp" />
+    <ClCompile Include="..\source\cmudata.cpp" />
+    <ClCompile Include="..\source\cmudbg.cpp" />
+    <ClCompile Include="..\source\cmupassiveconnecttask.cpp" />
+    <ClCompile Include="..\source\cuiregtask.cpp" />
+    <ClCompile Include="..\source\culogintask.cpp" />
+    <ClCompile Include="..\source\devlogintask.cpp" />
+    <ClCompile Include="..\source\domaincatalogssertask.cpp" />
+    <ClCompile Include="..\source\domainpulistssertask.cpp" />
+    <ClCompile Include="..\source\flowctrltask.cpp" />
+    <ClCompile Include="..\source\getofflinedevtask.cpp" />
+    <ClCompile Include="..\source\invitereceiverswitchtask.cpp" />
+    <ClCompile Include="..\source\invitesenderswitchtask.cpp" />
+    <ClCompile Include="..\source\inviteswitchtask.cpp" />
+    <ClCompile Include="..\source\loginsession.cpp" />
+    <ClCompile Include="..\source\main.cpp" />
+    <ClCompile Include="..\source\nmstask.cpp" />
+    <ClCompile Include="..\source\pubatchregtask.cpp" />
+    <ClCompile Include="..\source\pudecinvitetask.cpp" />
+    <ClCompile Include="..\source\puiregtask.cpp" />
+    <ClCompile Include="..\source\pulistsstask.cpp" />
+    <ClCompile Include="..\source\puptzctrltask.cpp" />
+    <ClCompile Include="..\source\puregtask.cpp" />
+    <ClCompile Include="..\source\pusstask.cpp" />
+    <ClCompile Include="..\source\rediscomm.cpp" />
+    <ClCompile Include="..\source\domainredissynctask.cpp" />
+    <ClCompile Include="..\source\redisloginsession.cpp" />
+    <ClCompile Include="..\source\redisssmng.cpp" />
+    <ClCompile Include="..\source\switchentrytask.cpp" />
+    <ClCompile Include="..\source\redisswitchunittask.cpp" />
+    <ClCompile Include="..\source\regtastask.cpp" />
+    <ClCompile Include="..\source\puinotifytask.cpp" />
+    <ClCompile Include="..\source\ssbasetask.cpp" />
+    <ClCompile Include="..\source\uaslogtask.cpp" />
+    <ClCompile Include="..\source\vtduregtask.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\10-Common\include\cbb\osp\osp.h" />
+    <ClInclude Include="..\..\..\10-Common\include\cbb\sip\kdsip.h" />
+    <ClInclude Include="..\..\..\10-Common\include\cms\camera\newcamera.h" />
+    <ClInclude Include="..\..\..\10-Common\include\cms\cms_const.h" />
+    <ClInclude Include="..\..\..\10-Common\include\cms\cms_errorcode.h" />
+    <ClInclude Include="..\..\..\10-Common\include\cms\cms_eventid.h" />
+    <ClInclude Include="..\..\..\10-Common\include\cms\cms_landesc.h" />
+    <ClInclude Include="..\..\..\10-Common\include\cms\cms_proto.h" />
+    <ClInclude Include="..\..\..\10-Common\include\cms\cms_struct.h" />
+    <ClInclude Include="..\..\..\10-Common\include\cms\cmu\cmu_data.h" />
+    <ClInclude Include="..\..\..\10-Common\include\cms\cmu\cmu_event.h" />
+    <ClInclude Include="..\..\..\10-Common\include\cms\cmu\cmu_proto.h" />
+    <ClInclude Include="..\..\..\10-Common\include\cms\cmu\cmu_redis.h" />
+    <ClInclude Include="..\..\..\10-Common\include\cms\cmu\cmu_struct.h" />
+    <ClInclude Include="..\..\..\10-Common\include\cms\ospext\ospapp.h" />
+    <ClInclude Include="..\..\..\10-Common\include\cms\ospext\ospdbg.h" />
+    <ClInclude Include="..\..\..\10-Common\include\cms\ospext\ospext.h" />
+    <ClInclude Include="..\..\..\10-Common\include\cms\ospext\ospinst.h" />
+    <ClInclude Include="..\..\..\10-Common\include\cms\ospext\osplog.h" />
+    <ClInclude Include="..\..\..\10-Common\include\cms\ospext\osptask.h" />
+    <ClInclude Include="..\..\..\10-Common\include\cms\ospext\osptool.h" />
+    <ClInclude Include="..\..\..\10-Common\include\cms\ospsip\ospsip.h" />
+    <ClInclude Include="..\..\..\10-Common\include\cms\tas\tas_event.h" />
+    <ClInclude Include="..\..\..\10-Common\include\cms\tas\tas_proto.h" />
+    <ClInclude Include="..\..\..\10-Common\include\cms\tas\tas_struct.h" />
+    <ClInclude Include="..\..\..\10-Common\include\cms\uas\uas_event.h" />
+    <ClInclude Include="..\..\..\10-Common\include\cms\uas\uas_proto.h" />
+    <ClInclude Include="..\..\..\10-Common\include\cms\uas\uas_struct.h" />
+    <ClInclude Include="..\..\..\10-Common\include\cms\utility\cmstime.h" />
+    <ClInclude Include="..\..\..\10-Common\include\cms\utility\cmsver.h" />
+    <ClInclude Include="..\..\..\10-Common\include\cms\utility\uuid.h" />
+    <ClInclude Include="..\..\..\10-Common\include\sdk\fastdbsdk\fastdb.h" />
+    <ClInclude Include="..\..\..\10-Common\include\sdk\fastdbsdk\keydef.h" />
+    <ClInclude Include="..\include\3pcinviteentrytask.h" />
+    <ClInclude Include="..\include\3pcinvitetask.h" />
+    <ClInclude Include="..\include\3pcmsgtask.h" />
+    <ClInclude Include="..\include\3pcmsgentrytask.h" />
+    <ClInclude Include="..\include\3pctask.h" />
+    <ClInclude Include="..\include\cmemorymngtask.h" />
+    <ClInclude Include="..\include\redisloginsession.h" />
+    <ClInclude Include="..\include\redisssmng.h" />
+    <ClInclude Include="..\include\switchentrytask.h" />
+    <ClInclude Include="..\include\redisswitchunittask.h" />
+    <ClInclude Include="..\include\slidingwindowtmpl.h" />
+    <ClInclude Include="..\include\catalogsstask.h" />
+    <ClInclude Include="..\include\cmuconf.h" />
+    <ClInclude Include="..\include\cmuconnecttask.h" />
+    <ClInclude Include="..\include\cmuconst.h" />
+    <ClInclude Include="..\include\cmucoreapp.h" />
+    <ClInclude Include="..\include\cmudata.h" />
+    <ClInclude Include="..\include\cmudbg.h" />
+    <ClInclude Include="..\include\cmupassiveconnecttask.h" />
+    <ClInclude Include="..\include\cmureqrsptask.h" />
+    <ClInclude Include="..\include\cmutask.h" />
+    <ClInclude Include="..\include\cuiregtask.h" />
+    <ClInclude Include="..\include\culogintask.h" />
+    <ClInclude Include="..\include\devlogintask.h" />
+    <ClInclude Include="..\include\domaincatalogssertask.h" />
+    <ClInclude Include="..\include\domainpulistssertask.h" />
+    <ClInclude Include="..\include\domainssbasetasktmpl.h" />
+    <ClInclude Include="..\include\flowctrltask.h" />
+    <ClInclude Include="..\include\getofflinedevtask.h" />
+    <ClInclude Include="..\include\invitereceiverswitchtask.h" />
+    <ClInclude Include="..\include\invitesenderswitchtask.h" />
+    <ClInclude Include="..\include\inviteswitchtask.h" />
+    <ClInclude Include="..\include\loginsession.h" />
+    <ClInclude Include="..\include\nmstask.h" />
+    <ClInclude Include="..\include\pubatchregtask.h" />
+    <ClInclude Include="..\include\pudecinvitetask.h" />
+    <ClInclude Include="..\include\puiregtask.h" />
+    <ClInclude Include="..\include\pulistsstask.h" />
+    <ClInclude Include="..\include\puptzctrltask.h" />
+    <ClInclude Include="..\include\puregtask.h" />
+    <ClInclude Include="..\include\pureqrspntftask.h" />
+    <ClInclude Include="..\include\pureqrsptask.h" />
+    <ClInclude Include="..\include\pusstask.h" />
+    <ClInclude Include="..\include\rediscomm.h" />
+    <ClInclude Include="..\include\domainredissynctask.h" />
+    <ClInclude Include="..\include\regtastask.h" />
+    <ClInclude Include="..\include\puinotifytask.h" />
+    <ClInclude Include="..\include\ssbasetask.h" />
+    <ClInclude Include="..\include\uaslogtask.h" />
+    <ClInclude Include="..\include\vtduregtask.h" />
+    <ClInclude Include="..\include\uaswritelogtask.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\10-Common\include\cms\cms_errorstr.txt" />
+    <None Include="..\..\..\10-Common\include\common.mk" />
+    <None Include="..\..\..\10-Common\version\config\cmu\conf\cmu.ini" />
+    <None Include="..\..\..\10-Common\version\config\commonconfig\lang\chinese\cmslandesc.lan" />
+    <None Include="..\cmu_变更记录.txt" />
+    <None Include="..\compile.bat" />
+    <None Include="..\compile_linux.bat" />
+    <None Include="compile.bat" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
