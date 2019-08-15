@@ -206,6 +206,7 @@
     <ClCompile Include="..\source\ssbasetask.cpp" />
     <ClCompile Include="..\source\uaslogtask.cpp" />
     <ClCompile Include="..\source\vtduregtask.cpp" />
+    <ClCompile Include="demologintask.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\10-Common\include\cbb\osp\osp.h" />
@@ -292,6 +293,7 @@
     <ClInclude Include="..\include\uaslogtask.h" />
     <ClInclude Include="..\include\vtduregtask.h" />
     <ClInclude Include="..\include\uaswritelogtask.h" />
+    <ClInclude Include="demologintask.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\10-Common\include\cms\cms_errorstr.txt" />
