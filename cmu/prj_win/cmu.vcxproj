@@ -206,7 +206,6 @@
     <ClCompile Include="..\source\ssbasetask.cpp" />
     <ClCompile Include="..\source\uaslogtask.cpp" />
     <ClCompile Include="..\source\vtduregtask.cpp" />
-    <ClCompile Include="demologintask.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\10-Common\include\cbb\osp\osp.h" />

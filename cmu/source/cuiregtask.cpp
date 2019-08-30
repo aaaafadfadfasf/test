@@ -100,7 +100,7 @@ u32 CCuiRegTask::OnWaitReg(CMessage *const pcMsg)
             }
 
             CCuiRegReq cReq;
-            pcOspSipMsg->GetMsgBody(cReq);
+            pcOspSipMsg->GetMsgBody(cReq);	
 
 			//add by Royan 20130828 …Ë÷√punch Ù–‘
 			if (cReq.GetIsSupportNA())
