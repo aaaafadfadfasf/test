@@ -1,0 +1,55 @@
+###
+### Copyright (c) 2004 Keda Telecom, Inc.
+###
+
+#########################################################################
+###
+###  DESCRIPTION:
+###    Common definitions for all Makefiles in cmu linux project.
+###
+#########################################################################
+
+TOP := ../..
+
+COMM_DIR := ../../../../10-Common
+
+SRC_DIR := $(TOP)/code
+
+## Name and type of the target for this Makefile
+
+APP_TARGET := security_module
+
+## Define debuging symbols
+DEBUG = 1
+LINUX_COMPILER=_LINUX_# _EQUATOR_, _HHPPC_, _LINUX_ and so on
+
+CFLAGS += -D_LINUX_
+CFLAGS += -m32
+CFLAGS += -fno-omit-frame-pointer
+CFLAGS += -Wformat
+CFLAGS += -Wall
+
+PWLIB_SUPPORT = 0
+
+## Object files that compose the target(s)
+
+
+CPP_FILES = $(wildcard  $(SRC_DIR)/*.cpp ../../../../10-Common/include/cms/security_module/security_module_proto.cpp)   
+                                                                                                                                                                                              
+vpath %.cpp $(addsuffix :,$(dir $(CPP_FILES)))
+
+OBJS := $(CPP_FILES:%.cpp=%)
+
+## Add driver-specific include directory to the search path
+
+INC_PATH += $(COMM_DIR)/include $(TOP)/code
+
+## Libraries to include in shared object file
+LIB_PATH += $(COMM_DIR)/lib/debug/linux
+
+LIBS := dbix dbi sqlite3 sybct sybcs sybtcl sybblk sybdb sybunic mysqlclient_r clntsh nnz10 kdvsys cmcfg \
+kdmutil osp ospext ospsip cmsproto kdsip tinyxml idshelp  sysdbg pthread rt uuid kdvencrypt  \
+fastdb kdcrypto kdssl-ext skf
+
+INSTALL_APP_PATH := $(COMM_DIR)/version/debug/linux/security_module
+include $(COMM_DIR)/include/common.mk

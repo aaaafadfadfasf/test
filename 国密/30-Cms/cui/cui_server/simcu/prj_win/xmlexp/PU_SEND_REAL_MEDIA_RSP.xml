@@ -1,0 +1,1 @@
+<CPuSendRealMediaRsp><event>PU_SEND_REAL_MEDIA_RSP</event><seqNum>0</seqNum><session>Cu_In_Cmu_Session</session><errorCode>0</errorCode><srcChn><chnNO>0</chnNO></srcChn><dstChn><chnNO>0</chnNO></dstChn></CPuSendRealMediaRsp>

@@ -1,0 +1,349 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="..\..\code\inner_common.cpp" />
+    <ClCompile Include="..\..\code\main.cpp" />
+    <ClCompile Include="..\..\code\nmsconn.cpp" />
+    <ClCompile Include="..\..\code\license_mng.cpp" />
+    <ClCompile Include="..\..\code\cctrl.cpp" />
+    <ClCompile Include="..\..\code\dbopr\dbengine.cpp">
+      <Filter>dbopr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\dbopr\dbopr.cpp">
+      <Filter>dbopr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\dbopr\dboprdef.cpp">
+      <Filter>dbopr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\config_util\tas_config.cpp">
+      <Filter>config_util</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\db_task_pool.cpp" />
+    <ClCompile Include="..\..\code\log_system.cpp" />
+    <ClCompile Include="..\..\code\tasks\cmu_ssn_task.cpp">
+      <Filter>tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\tasks\cui_ssn_task.cpp">
+      <Filter>tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\tasks\p2p_tas_conn_task.cpp">
+      <Filter>tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\tasks\p2p_tas_ssn_task.cpp">
+      <Filter>tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\tasks\parent_tas_conn_task.cpp">
+      <Filter>tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\tasks\child_tas_ssn_task.cpp">
+      <Filter>tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\tasks\tac_ssn_task.cpp">
+      <Filter>tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\debug.cpp" />
+    <ClCompile Include="..\..\code\inner_util.cpp" />
+    <ClCompile Include="..\..\code\dbopr\dbcache.cpp">
+      <Filter>dbopr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\tasks\common\conn_taskbase.cpp">
+      <Filter>tasks\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\tasks\common\query_task.cpp">
+      <Filter>tasks\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\tasks\common\ssn_taskbase.cpp">
+      <Filter>tasks\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\data_sync\sync_analyzer_base.cpp">
+      <Filter>data_sync</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\data_sync\sync_analyzer_p2plimit.cpp">
+      <Filter>data_sync</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\data_sync\sync_analyzer_parent.cpp">
+      <Filter>data_sync</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\sync_analyzer_mng.cpp" />
+    <ClCompile Include="..\..\code\inner_msg.cpp" />
+    <ClCompile Include="..\..\code\data_sync\sync_analyzer_mng_poweron.cpp">
+      <Filter>data_sync</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\data_sync\sync_analyzer_p2pnolimit.cpp">
+      <Filter>data_sync</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\data_sync\syncdata_send.cpp">
+      <Filter>data_sync</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\data_sync\syncdata_recv.cpp">
+      <Filter>data_sync</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\tasks\tas_config_task.cpp">
+      <Filter>tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\tasks\tas_conn_task_poweron.cpp">
+      <Filter>tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\tasks\common\hb_detect_multi_task.cpp">
+      <Filter>tasks\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\tasks\ps_ssn_task.cpp">
+      <Filter>tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\tasks\other_tas_domainname_changentf.cpp">
+      <Filter>tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\tasks\tas_ctrl_task.cpp">
+      <Filter>tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\tasks\license_mng_task.cpp">
+      <Filter>tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\tasks\g300_del_task.cpp">
+      <Filter>tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\tasks\file_export_task.cpp">
+      <Filter>tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\tasks\license_server_mng_task.cpp">
+      <Filter>tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\tasks\common\long_query_task.cpp">
+      <Filter>tasks\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\redis\fastdbmng.cpp">
+      <Filter>redis</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\dbopr\dboper_batch.cpp">
+      <Filter>dbopr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\tasks\user_devgrp_vidsrc_query_task.cpp">
+      <Filter>tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\tasks\devgrp_vidsrc_totalnum_get_task.cpp">
+      <Filter>tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\tasks\devtree_add_task.cpp">
+      <Filter>tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\tasks\devgrp_dev_add_task.cpp">
+      <Filter>tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\tasks\devtree_devgrp_assign_task.cpp">
+      <Filter>tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\tasks\devgrp_mod.cpp">
+      <Filter>tasks\ForGb</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\tasks\devgrp2dev_mod.cpp">
+      <Filter>tasks\ForGb</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\tasks\gb_report_catalog_file_export.cpp">
+      <Filter>tasks\ForGb</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\10-Common\include\cms\tas\tas_event.h">
+      <Filter>protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\10-Common\include\cms\tas\tas_proto.h">
+      <Filter>protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\10-Common\include\cms\tas\tas_struct.h">
+      <Filter>protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\10-Common\include\cms\cmsassert.h">
+      <Filter>protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\10-Common\include\cms\cms_const.h">
+      <Filter>protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\10-Common\include\cms\cms_eventid.h">
+      <Filter>protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\10-Common\include\cms\cms_proto.h">
+      <Filter>protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\code\inner_common.h" />
+    <ClInclude Include="..\..\code\nmsconn.h" />
+    <ClInclude Include="..\..\code\license_mng.h" />
+    <ClInclude Include="..\..\code\cctrl.h" />
+    <ClInclude Include="..\..\code\dbopr\dbengine.h">
+      <Filter>dbopr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\code\dbopr\dbopr.h">
+      <Filter>dbopr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\code\dbopr\dboprdef.h">
+      <Filter>dbopr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\code\config_util\tas_config.h">
+      <Filter>config_util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\code\db_task_pool.h" />
+    <ClInclude Include="..\..\code\log_system.h" />
+    <ClInclude Include="..\..\code\tasks\cmu_ssn_task.h">
+      <Filter>tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\code\tasks\cui_ssn_task.h">
+      <Filter>tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\code\tasks\p2p_tas_conn_task.h">
+      <Filter>tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\code\tasks\p2p_tas_ssn_task.h">
+      <Filter>tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\code\tasks\parent_tas_conn_task.h">
+      <Filter>tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\code\tasks\child_tas_ssn_task.h">
+      <Filter>tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\code\tasks\tac_ssn_task.h">
+      <Filter>tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\code\inner_util.h" />
+    <ClInclude Include="..\..\code\dbopr\dbcache.h">
+      <Filter>dbopr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\code\tasks\common\conn_taskbase.h">
+      <Filter>tasks\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\code\tasks\common\query_task.h">
+      <Filter>tasks\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\code\tasks\common\ssn_taskbase.h">
+      <Filter>tasks\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\10-Common\include\cms\cms_errorcode.h">
+      <Filter>protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\code\data_sync\sync_analyzer_base.h">
+      <Filter>data_sync</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\code\data_sync\sync_analyzer_p2plimit.h">
+      <Filter>data_sync</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\code\data_sync\sync_analyzer_parent.h">
+      <Filter>data_sync</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\code\sync_analyzer_mng.h" />
+    <ClInclude Include="..\..\code\inner_msg.h" />
+    <ClInclude Include="..\..\code\data_sync\sync_analyzer_mng_poweron.h">
+      <Filter>data_sync</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\code\data_sync\sync_analyzer_p2pnolimit.h">
+      <Filter>data_sync</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\code\data_sync\syncdata_send.h">
+      <Filter>data_sync</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\code\data_sync\syncdata_recv.h">
+      <Filter>data_sync</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\code\tasks\tas_config_task.h">
+      <Filter>tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\code\tasks\tas_conn_task_poweron.h">
+      <Filter>tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\code\tasks\common\hb_detect_multi_task.h">
+      <Filter>tasks\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\code\tasks\ps_ssn_task.h">
+      <Filter>tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\code\tasks\other_tas_domainname_changentf.h">
+      <Filter>tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\code\tasks\tas_ctrl_task.h">
+      <Filter>tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\code\tasks\license_mng_task.h">
+      <Filter>tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\code\dbopr\dbquerytemplate.h">
+      <Filter>dbopr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\code\tasks\g300_del_task.h">
+      <Filter>tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\code\tasks\file_export_task.h">
+      <Filter>tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\10-Common\include\cbb\license\licensedef.h" />
+    <ClInclude Include="..\..\..\..\10-Common\include\cbb\license\licensesdk.h" />
+    <ClInclude Include="..\..\code\tasks\license_server_mng_task.h">
+      <Filter>tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\code\tasks\common\long_query_task.h">
+      <Filter>tasks\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\10-Common\include\cms\tas\tas_redis.h">
+      <Filter>redis</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\code\redis\fastdbmng.h">
+      <Filter>redis</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\code\tasks\user_devgrp_vidsrc_query_task.h">
+      <Filter>tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\code\tasks\devgrp_vidsrc_totalnum_get_task.h">
+      <Filter>tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\code\tasks\devtree_add_task.h">
+      <Filter>tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\code\tasks\devgrp_dev_add_task.h">
+      <Filter>tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\code\tasks\devtree_devgrp_assign_task.h">
+      <Filter>tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\code\tasks\devgrp_mod .h">
+      <Filter>tasks\ForGb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\code\tasks\devgrp2dev_mod.h">
+      <Filter>tasks\ForGb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\code\tasks\gb_report_catalog_file_export.h">
+      <Filter>tasks\ForGb</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="protocol">
+      <UniqueIdentifier>{c7206ee4-ea8c-4f68-85a1-c47b2c1b6852}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="config_util">
+      <UniqueIdentifier>{331838f5-7ed3-40fc-ade5-3b2551ac6c70}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dbopr">
+      <UniqueIdentifier>{3400b360-df0e-49b0-b1e5-0402fce2be6a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tasks">
+      <UniqueIdentifier>{e378be39-847e-4ace-b040-9fcd95c14cb5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tasks\common">
+      <UniqueIdentifier>{22898dc8-09fa-4f2d-99bf-91bed590041a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="data_sync">
+      <UniqueIdentifier>{9731a652-9f6f-4dce-bb92-eb70bc085ea6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="redis">
+      <UniqueIdentifier>{e5e6ad3f-b4ba-4369-a8ac-8916a894f5ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tasks\ForGb">
+      <UniqueIdentifier>{0367ee21-be9f-4505-8343-3b5e05406776}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\3as_变更记录.txt" />
+    <None Include="..\..\..\..\10-Common\include\cms\cms_errorstr_en.txt">
+      <Filter>protocol</Filter>
+    </None>
+    <None Include="..\..\..\..\10-Common\include\cms\cms_errorstr.txt">
+      <Filter>protocol</Filter>
+    </None>
+  </ItemGroup>
+</Project>

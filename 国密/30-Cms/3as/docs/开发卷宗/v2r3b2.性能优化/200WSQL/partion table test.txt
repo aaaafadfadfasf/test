@@ -1,0 +1,118 @@
+结论：皆是亿数量级的两个表还是考虑分区，对于查询和删除都有好处，否则多表join时不预加载索引1秒以上且删除3秒以上。
+
+环境搭建：
+CREATE TABLE `tblCuser2DevAll` (
+  `cuserId` char(32) COLLATE utf8_bin NOT NULL,
+  `devId` char(32) COLLATE utf8_bin NOT NULL,
+  `devPrivilege` int(11) DEFAULT NULL,
+  PRIMARY KEY (`cuserId`,`devId`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin
+200亿条记录时tblCuser2DevAll.MYD 37G  tblCuser2DevAll.MYI 15G 构造数据批量插入花费2个小时左右，加一个单列索引也耗时2小时左右
+
+CREATE TABLE `tblCuser2DeviceCapAll` (
+  `cuserId` char(32) COLLATE utf8_bin NOT NULL,
+  `devId` char(32) COLLATE utf8_bin NOT NULL,
+  `devCapId` int(11) NOT NULL,
+  `devCapIndex` int(11) NOT NULL,
+  `devCapIndexPrivilege` int(11) DEFAULT NULL,
+  PRIMARY KEY (`cuserId`,`devId`,`devCapId`,`devCapIndex`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin
+
+
+
+for((i=1; i<100; ++i))
+do
+    mysql -uroot -pkdc KDMAAA -e "insert into tblCuser2DevAll select 'useriduseriduserid${i}',devId,255 from tblDevice"
+done
+
+for((i=1; i<100; ++i))
+do
+    mysql -uroot -pkdc KDMAAA -e "insert into tblCuser2DeviceCapAll select 'useriduseriduserid${i}',devId,1,0,255 from tblDevice"
+done
+
+
+
+CREATE TABLE `tblCuser2DevPartition` (
+  `cuserId` char(32) COLLATE utf8_bin NOT NULL,
+  `devId` char(32) COLLATE utf8_bin NOT NULL,
+  `devPrivilege` int(11) DEFAULT NULL,
+  PRIMARY KEY (`cuserId`,`devId`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin 
+partition by key(cuserId) partitions 100
+
+CREATE TABLE `tblCuser2DeviceCapPartition` (
+  `cuserId` char(32) COLLATE utf8_bin NOT NULL,
+  `devId` char(32) COLLATE utf8_bin NOT NULL,
+  `devCapId` int(11) NOT NULL,
+  `devCapIndex` int(11) NOT NULL,
+  `devCapIndexPrivilege` int(11) DEFAULT NULL,
+  PRIMARY KEY (`cuserId`,`devId`,`devCapId`,`devCapIndex`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin
+partition by key(cuserId) partitions 100
+
+for((i=1; i<100; ++i))
+do
+    mysql -uroot -pkdc KDMAAA -e "insert into tblCuser2DevPartition select 'useriduseriduserid${i}',devId,255 from tblDevice"
+done
+
+for((i=1; i<100; ++i))
+do
+    mysql -uroot -pkdc KDMAAA -e "insert into tblCuser2DeviceCapPartition select 'useriduseriduserid${i}',devId,1,0,255 from tblDevice"
+done
+
+
+查询测试：查询存在分区时速度明显快很多(加索引加的适当速度可以提升至分区表相近，1秒多)，整表扫描时分区后的速度也快了1倍
+devid:49f92708dae84881aeb73ec151000000  49f92708dae84881aeb73ec152000000  49f92708dae84881aeb73ec152900000
+cuserId:useriduseriduserid1  useriduseriduserid50  useriduseriduserid99
+
+select * from tblCuser2DevAll a,tblCuser2DeviceCapAll b
+where a.cuserId=b.cuserId and a.devId=b.devId 
+and a.cuserId='useriduseriduserid99' and a.devId='49f92708dae84881aeb73ec152900000';
+0.02s 0.12s 0.14s
+
+select a.*,b.* from tblCuser2DevAll a,tblCuser2DeviceCapAll b, tblDevGrp2Dev c
+where a.cuserId=b.cuserId and a.devId=b.devId and a.devId=c.devId 
+and c.devgroupId='asdff49f92708dae84881aeb73e20000'  
+and a.cuserId='useriduseriduserid99';
+30.99s 28.94s   注：上面分组中100条记录
+tblCuser2DevAll的devId列加索引后（不连接tblCuser2DeviceCapAll）0.xx sec可以搞定（虽然比分区还是慢） 
+devId不加索引时里面2张亿级别的表如果额外指定设备id指定join时0.xx sec的。
+2张表都加上devId索引时join时1.50 sec的（索引预加载时0.07 sec，2个表的索引预加载耗时分钟级别）。
+
+select cuserId from tblCuser2DevAll where devId='49f92708dae84881aeb73ec152000000'
+6 min 44.13 sec  整表扫描呀，加完索引后0.84 sec
+create index idxcuser2dev on tblCuser2DevAll(devId);
+
+
+select * from tblCuser2DevPartition a,tblCuser2DeviceCapPartition b
+where a.cuserId=b.cuserId and a.devId=b.devId 
+and a.cuserId='useriduseriduserid50' and a.devId='49f92708dae84881aeb73ec151000000';
+0.00s 0.01s 0.03s
+
+select a.*,b.* from tblCuser2DevPartition a,tblCuser2DeviceCapPartition b, tblDevGrp2Dev c
+where a.cuserId=b.cuserId and a.devId=b.devId and a.devId=c.devId 
+and c.devgroupId='asdff49f92708dae84881aeb73e20000'  
+and a.cuserId='useriduseriduserid1';
+0.00s 0.26s
+
+select cuserId from tblCuser2DevPartition where devId='49f92708dae84881aeb73ec152000000'
+3 min 49.63 sec  整表扫描呀，加完索引后0.50 sec
+create index idxcuser2dev on tblCuser2DevPartition(devId);
+
+
+删除测试：删除某个用户的某个设备时速度都很快,全部分区删除时分区后(0.64 sec)比分区前（3.12 sec）快很多
+delete from tblCuser2DevAll where cuserId='useriduseriduserid49' 
+and devId='49f92708dae84881aeb73ec152000000';
+0.00s 0.01s
+
+delete from tblCuser2DevPartition where cuserId='useriduseriduserid49' 
+and devId='49f92708dae84881aeb73ec152000000';
+0.02s 0.01s
+
+
+delete from tblCuser2DevAll where devId='49f92708dae84881aeb73ec151000108';
+devId未加索引时4 min 45.66 sec  devId加索引后3.12 sec（经过第一次删除再删除旁边的记录也是0.xx sec）
+
+delete from tblCuser2DevPartition where devId='49f92708dae84881aeb73ec151000108';
+devId未加索引时4 min 51.81 sec  devId加索引后0.64 sec
+ 

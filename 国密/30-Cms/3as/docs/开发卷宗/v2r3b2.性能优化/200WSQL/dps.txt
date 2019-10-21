@@ -1,0 +1,56 @@
+1，
+time : 275
+SQL : SELECT            DISTINCT tblDevGroup.devgroupId                         ,tblDevGroup.domainId                   ,tblDevGroup.groupName                      ,tblDevGroup.fullpath                   ,tblDevGroup.grpseq                     ,tblDevGroup.parentDevgroupId                       ,tblDomainRelation.domainName           
+FROM            KDMAAA.tblDevGroup              , KDMAAA.tblDevGrp2Dev              , KDMAAA.tblDomainRelation              WHERE           tblDevGroup.devgroupId = tblDevGrp2Dev.devgroupId  AND tblDevGroup.domainId = tblDomainRelation.domainId            AND EXISTS( SELECT * FROM tblCuser2DeviceCap WHERE tblCuser2DeviceCap.cuserId = "f986d5f0be4243fab03c9ccf83f8a2d5" AND tblCuser2DeviceCap.devId = tblDevGrp2Dev.devId                                  AND tblCuser2DeviceCap.devCapId = 1                                      AND tblCuser2DeviceCap.devCapIndex = tblDevGrp2Dev.devCapIndex                                      );
+
+解决：
+不处理，看到的是旧版本 李之兴说XXH已经优化好了
+
+
+2，
+
+SELECT 
+	tblCuser2DeviceCap.devId, tblCuser2DeviceCap.devCapIndex 			
+	, KDMAAA.tblDevice.devname, KDMAAA.tblDevice.devModelId, KDMAAA.tblDevice.domainId 			
+    , KDMAAA.tblDevGrp2Dev.devgroupId 			
+    , KDMAAA.tblDeviceCapIndexData.deviceCapIndexName ,KDMAAA.tblDeviceCapIndexData.deviceCapIndexExtData 	
+    , KDMAAA.tblDeviceModel.capNum, KDMAAA.tblDevGroup.groupName, KDMAAA.tblDevGroup.fullpath 		     
+    , KDMAAA.tblDomainRelation.domainName 		
+FROM 
+	KDMAAA.tblCuser2DeviceCap LEFT OUTER JOIN KDMAAA.tblDeviceCapIndexData 	
+	ON KDMAAA.tblCuser2DeviceCap.devId = tblDeviceCapIndexData.deviceId 			
+        AND KDMAAA.tblCuser2DeviceCap.devCapIndex = tblDeviceCapIndexData.deviceCapIndex 			
+        AND KDMAAA.tblCuser2DeviceCap.devCapId = tblDeviceCapIndexData.deviceCapId 			
+	, KDMAAA.tblDevice 			
+    , KDMAAA.tblDeviceModel 			, KDMAAA.tblDevGrp2Dev 			, KDMAAA.tblDevGroup 			
+    , KDMAAA.tblDomainRelation 		
+WHERE			
+	tblCuser2DeviceCap.devCapId = 1 			
+    AND (tblDevGroup.fullPath like "%f986d5f0be4243fab03c9ccf83f8a2d5%" 			
+		OR tblDevGroup.devgroupId = "f986d5f0be4243fab03c9ccf83f8a2d5" )
+    AND tblCuser2DeviceCap.cuserId = "f986d5f0be4243fab03c9ccf83f8a2d5" 		     
+    AND tblDevice.devId = tblCuser2DeviceCap.devId 			
+    AND tblDevGrp2Dev.devCapIndex = tblCuser2DeviceCap.devCapIndex 			
+    AND tblDeviceModel.modelId = tblDevice.devModelId 			
+    AND tblDeviceModel.devCapId = tblCuser2DeviceCap.devCapId 			
+    AND tblDevGrp2Dev.devId = tblCuser2DeviceCap.devId 			
+    AND tblDevGrp2Dev.devCapIndex = tblCuser2DeviceCap.devCapIndex 			
+    AND tblDevGroup.devgroupId = tblDevGrp2Dev.devgroupId 			
+    AND tblDevice.domainId = tblDomainRelation.domainId
+
+200W环境中根组执行时     
+2020002 rows in set (3 min 52.54 sec)
+
+select g.*,h.domainName,i.capNum from   
+(select e.*,f.deviceCapIndexName,f.deviceCapIndexExtData from 
+(select c.devId, c.devCapIndex, a.devgroupId,a.groupName,a.fullPath, d.devName, d.devModelId, d.domainId 
+from (select devgroupId,groupName,fullPath from tblDevGroup 
+where fullPath like '%asdff3ffce5cf64b0482bb192a510001%' 
+union all 
+select devgroupId,groupName,fullPath from tblDevGroup 
+where devgroupId='asdff3ffce5cf64b0482bb192a510001') a,
+tblDevGrp2Dev b, tblCuser2DeviceCap c, tblDevice d  
+where b.devgroupId=a.devgroupId and b.devCapId=1 and c.cuserId='f986d5f0be4243fab03c9ccf83f8a2d5' 
+and c.devId=b.devId and c.devCapId=1 and c.devCapIndex=b.devCapIndex and d.devId=c.devId) e 
+left join tblDeviceCapIndexData f on f.deviceId=e.devId) g, tblDomainRelation h, tblDeviceModel i 
+where h.domainId=g.domainId and i.modelId=g.devModelId and i.devCapId=1

@@ -1,0 +1,1 @@
+<CPuVidEncParamGetRsp><event>PU_VID_ENC_PARAM_GET_RSP</event><seqNum>0</seqNum><session>Cu_In_Cmu_Session</session><errorCode>0</errorCode><param><frameRate>0</frameRate><quality>0</quality><bitRate>0</bitRate><interval>0</interval><brightness>0</brightness><contrast>0</contrast><saturation>0</saturation></param><surportedMediaType /></CPuVidEncParamGetRsp>

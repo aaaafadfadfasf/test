@@ -1,0 +1,34 @@
+拼音搜索优化中平台的数据库接口：
+
+CREATE TABLE `tblVideoNameSearch` (
+  `devId` char(32) COLLATE utf8_bin NOT NULL,  -- 设备Id
+  `videoId` int(11) NOT NULL,  -- 视频源序号
+  `searchText` varchar(512) COLLATE utf8_bin DEFAULT NULL,  -- 搜索字符串
+  `videoName` varchar(64) COLLATE utf8_bin DEFAULT '',   -- 视频源名称
+  PRIMARY KEY (`devId`,`videoId`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin
+
+说明：
+searchText 此字段到时由李之兴提供一个api（封装于kdmutil库中），传入视频源名称api会返回一个字符串，那即是searchText的内容。
+  比如api输入为“IPC西藏省”，输出为“IPC西藏省@IPCxcs@IPCxzs@IPCxcx@IPCxzx”。
+
+每个视频源都会在表中有1条记录，没有取别名的视频源名称，tas为其自动生成视频源名称，生成规则如下：
+  只有一个视频源时自动生成的视频源名称为设备名称，多余一个视频源时自动生成的视频源名称为设备名称_<视频源序号（序号是从0开始的，故后面加1）+1>。
+
+
+@刘永涛：
+后续实现时TAS涉及到视频源名称和编码设备名称的地方，设备的增删，设备型号变更引发的视频源的增删等场景（可能场景比这还多），都需要考虑到。
+
+
+开发：
+
+视频源名称生成算法：
+
+视频源
+
+添加：单个设备(本域，私有下级)，gbu批量
+删除：单个设备(本域，下级)，gbu批量
+      按照kd域(本域，下级 TAS_CHILDTAS_DEL_REQ TAS_SYNC_TAS_DATA_REQ)，
+      按照owner(TAS_GATEWAY_DEL_REQ)
+修改：单个设备(本域，下级，批量，TAS_DEV_CAPINFO_MOD_REQ), 
+      视频源修改(本域TAS_DEVICE_CAP_INDEX_NAME_SET_REQ，下级TAS_SYNC_TAS_DATA_REQ，批量DevBatchChg4VidSrcMod)

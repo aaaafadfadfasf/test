@@ -1,0 +1,1 @@
+<CDomainRelationQryNtfReq><event>TAS_DOMAIN_RELATION_QRY_NTF_REQ</event><seqNum>114</seqNum><session>Cu_In_Tas_Session</session><entryNum>1</entryNum><lastNtf>1</lastNtf><queryTag>DomainRelationQry</queryTag><infos size="1"><item index="0"><domainID>ea6c07c6c6a54230ba121fc578b14b90</domainID><domainName>nanjing</domainName></item></infos></CDomainRelationQryNtfReq>

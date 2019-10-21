@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="soap">
+      <UniqueIdentifier>{96d63f61-44db-44bf-a710-7d0ca82846b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="common">
+      <UniqueIdentifier>{95f401e4-9066-40f8-94af-2b0b3b1954cf}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\main.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\soap\soapC.cpp">
+      <Filter>soap</Filter>
+    </ClCompile>
+    <ClCompile Include="..\soap\soapcusdkService.cpp">
+      <Filter>soap</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\cusdkserviceimp.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\serviceappimp.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\10-Common\include\system\soap\stdsoap2.cpp">
+      <Filter>soap</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\cui_server\src\cuistruct.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\cui_server\src\transutility.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\soap\cusdk.nsmap">
+      <Filter>soap</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\soap\soapcusdkService.h">
+      <Filter>soap</Filter>
+    </ClInclude>
+    <ClInclude Include="..\soap\soapH.h">
+      <Filter>soap</Filter>
+    </ClInclude>
+    <ClInclude Include="..\soap\soapStub.h">
+      <Filter>soap</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\serviceappimp.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\10-Common\include\system\soap\stdsoap2.h">
+      <Filter>soap</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\cuiproto.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\10-Common\include\cms\cmu\cmu_event.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\10-Common\include\cms\cmu\cmu_proto.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\transutility.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\10-Common\include\cms\tas\tas_event.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\10-Common\include\cms\tas\tas_proto.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\cuistruct.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\cuievent.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\cuiprotoconvertor.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\10-Common\include\cms\cms_errorcode.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\10-Common\include\sdk\cusdk\cusdk.h">
+      <Filter>soap</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

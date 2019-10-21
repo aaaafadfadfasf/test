@@ -1,0 +1,38 @@
+跨域授权脚本所在平台目录：/opt/kdm/tas/dbscript/mysql/authorize
+其中脚本分为3部分：导出授权设备、导入授权设备、取消授权设备
+
+一、导出授权设备数据（脚本：exprot.sh），可以有两种导出方式：按单个设备导出、按设备列表文件导出
+1、按单个设备导出
+a、执行./exprot.sh 设备ID，如./exprot.sh 55010000000000000011100011900000。
+b、导出成功会提示：all device's info have exported to file[/opt/kdm/tas/dbscript/mysql/authorize/export-2014-10-27-160632/data.tar]，
+其中，/opt/kdm/tas/dbscript/mysql/authorize为export.sh所在目录，export-2014-10-27-160632，是按当前导出时间所创建的目录，
+导出数据在data.tar中。
+c、如果导出失败，请按照失败提示进行操作。
+
+2、按设备列表文件导出
+a、新建一个设备列表文件，如devicelist；在文件中按照每行一个设备ID的格式，添加需要导出的设备ID；保存文件。
+b、执行./exprot.sh 设备列表文件，如 ./exprot.sh devicelist
+c、输出同“按单个设备导出”，不详述。
+
+二、导入授权设备（脚本：authorize.sh）
+1、把刚才导出的授权设备信息data.tar，上传到授权目的平台的/opt/kdm/tas/dbscript/mysql/authorize目录下。
+2、执行 ./authorize.sh data.tar。
+3、如果导入成功，则提示：finish completely, press any key to reboot!
+4、按下任意键重启平台。
+
+三、取消授权设备（脚本：cancel.sh），也有两种方式：按单个设备取消、按设备列表文件取消
+1、按单个设备取消
+a、执行./cancel.sh 设备ID，如./cancel.sh 55010000000000000011100011900000。
+b、导出成功会提示：all data deleted is  backup to file[/opt/kdm/tas/dbscript/mysql/authorize/export-2014-10-27-161032/backupdata.tar]
+                   finish completely, press any key to reboot!
+其中，/opt/kdm/tas/dbscript/mysql/authorize为cancel.sh所在目录，export-2014-10-27-161032，是按当前取消时间所创建的目录，
+备份数据在backupdata.tar中。
+c、其中备份数据backupdata.tar是为了防止误删数据库数据，进行恢复使用。使用方式同导入授权设备，执行./authorize.sh backupdata.tar。
+d、按下任意键重启平台。
+e、如果导出失败，请按照失败提示进行操作。
+
+2、按设备列表文件取消
+a、新建一个设备列表文件，如devicelist；在文件中按照每行一个设备ID的格式，添加需要取消的设备ID；保存文件。
+b、执行./cancel.sh 设备列表文件，如 ./cancel.sh devicelist
+c、输出同“按单个设备取消”，不详述。
+ 

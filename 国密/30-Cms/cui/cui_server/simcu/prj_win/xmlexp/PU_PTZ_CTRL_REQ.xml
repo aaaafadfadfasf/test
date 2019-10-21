@@ -1,0 +1,1 @@
+<CPuPtzCtrlReq><event>PU_PTZ_CTRL_REQ</event><seqNum>18</seqNum><session>Cu_In_Cmu_Session</session><devChn><chnNO>0</chnNO></devChn><camCtrl><commandId>0</commandId><priLevel>0</priLevel><holdTime>0</holdTime><matrixIn>0</matrixIn></camCtrl></CPuPtzCtrlReq>

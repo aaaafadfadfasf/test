@@ -1,0 +1,64 @@
+###
+### Copyright (c) 2004 Keda Telecom, Inc.
+###
+
+#########################################################################
+###
+###  DESCRIPTION:
+###    Common definitions for all Makefiles in cmu linux project.
+###
+#########################################################################
+
+TOP := ../..
+
+COMM_DIR := ../../../../10-Common
+
+SRC_DIR := $(TOP)/code
+
+## Name and type of the target for this Makefile
+
+APP_TARGET := tas
+
+## Define debuging symbols
+DEBUG = 1
+LINUX_COMPILER=_LINUX_# _EQUATOR_, _HHPPC_, _LINUX_ and so on
+
+CFLAGS += -D_LINUX_
+CFLAGS += -m32
+CFLAGS += -fno-omit-frame-pointer
+CFLAGS += -Wformat
+CFLAGS += -Wall
+
+PWLIB_SUPPORT = 0
+
+## Object files that compose the target(s)
+
+
+CPP_FILES = $(wildcard  $(SRC_DIR)/*.cpp $(SRC_DIR)/data_sync/*.cpp $(SRC_DIR)/config_util/*.cpp $(SRC_DIR)/dbopr/*.cpp $(SRC_DIR)/redis/*.cpp $(SRC_DIR)/tasks/*.cpp $(SRC_DIR)/tasks/common/*.cpp)   
+                                                                                                                                                                                              
+vpath %.cpp $(addsuffix :,$(dir $(CPP_FILES)))
+
+OBJS := $(CPP_FILES:%.cpp=%)
+
+## Add driver-specific include directory to the search path
+
+INC_PATH += $(COMM_DIR)/include/ \
+                $(COMM_DIR)/include/cbb/ \
+                $(COMM_DIR)/include/cbb/osp \
+                $(COMM_DIR)/include/system \
+                $(COMM_DIR)/include/cms \
+                $(COMM_DIR)/include/cms/tas \
+                $(TOP)/code
+
+## Libraries to include in shared object file
+LIB_PATH += $(COMM_DIR)/lib/debug/linux
+
+LIBS := pthread rt kdvsys nmclib snmpadp \
+           dbi sqlite3 sybct sybcs sybtcl sybblk sybdb sybunic mysqlclient_r clntsh nnz10 \
+           dl z ospsip ospext kdsip uuid cmcfg cmsproto tinyxml kdvencrypt kdmutil osp sysdbg \
+           licensesdk crypt hkapi epassapi EleCrypt senseELE fastdb hiredis kdssl-ext skf kdcrypto
+
+	   
+
+INSTALL_APP_PATH := $(COMM_DIR)/version/debug/linux/tas
+include $(COMM_DIR)/include/common.mk

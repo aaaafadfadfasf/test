@@ -1,0 +1,38 @@
+设备经纬度信息导入、导出工具使用说明
+一、工具上传
+1、使用SecureCRT或者其他SSH工具，连接2.0平台
+2、在 /opt/kdm/gbs 下创建目录gbdevtmp：mkdir gbdevtmp
+3、上传工具：exportgbdev.sh importgbdev.sh 到目录 gbdevtmp
+
+二、设备经纬度信息导出，支持整体及部分导出
+1、整体导出：
+   a、执行：bash exportgbdev.sh all
+   b、执行完成得到：GbDevExport-**.tar
+2、部分导出：
+   a、新建文件gbualist：vi gbualist
+   b、在里面插入需要导出国标设备的国标域，每个国标域一行，如：
+	  31010000002000000000
+	  31000000002000000000
+   c、执行：bash exportgbdev.sh gbualist
+   d、执行完成得到：GbDevExport-**.tar
+3、下载导出信息
+	a、sz GbDevExport-**.tar到本地磁盘
+	b、使用解压工具解压，得到各个国标域的设备列表：
+	   如：GbDevice_31010000002000000000.csv
+   
+三、录入各个国标域设备的经纬度信息
+    1、使用excel或者其他编辑器打开
+	2、填写经纬度信息
+	3、保存
+	
+四、设备经纬度信息导入
+	1、在 /opt/kdm/gbs/gbdevtmp 下创建目录gbdevimport：mkdir gbdevimport
+    2、上传已经填写经纬度信息的国标域设备列表到gbdevimport，如：
+	   GbDevice_31010000002000000000.csv
+	3、执行：bash importgbdev.sh gbdevimport
+    4、等待执行完成
+	
+五、使用2.0CU进行验证
+	1、使用2.0CU登录平台
+	2、进入：”系统管理“-》”前端配置“，右侧选择设备视频源通道，查看对应经纬度信息
+	   

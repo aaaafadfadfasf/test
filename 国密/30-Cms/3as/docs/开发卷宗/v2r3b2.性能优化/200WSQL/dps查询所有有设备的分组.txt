@@ -1,0 +1,83 @@
+select a.*, b.domainName from 
+(SELECT DISTINCT tblDevGroup.devgroupId, tblDevGroup.domainId, tblDevGroup.groupName, tblDevGroup.fullpath, 
+tblDevGroup.grpseq, tblDevGroup.parentDevgroupId 
+FROM 		KDMAAA.tblDevGroup, KDMAAA.tblDevGrp2Dev 
+WHERE	 tblDevGroup.devgroupId = tblDevGrp2Dev.devgroupId 		
+AND EXISTS(SELECT * FROM tblCuser2DeviceCap  
+           WHERE tblCuser2DeviceCap.cuserId = 'b21b1aba683846eea823730fd493159a' 
+           AND tblCuser2DeviceCap.devId = tblDevGrp2Dev.devId AND tblCuser2DeviceCap.devCapId = 1 							
+		   AND tblCuser2DeviceCap.devCapIndex = tblDevGrp2Dev.devCapIndex) 		) a, 
+		   KDMAAA.tblDomainRelation b 	where a.domainId = b.domainId;
+
+
+SELECT DISTINCT tblDevGroup.devgroupId, tblDevGroup.domainId, tblDevGroup.groupName, tblDevGroup.fullpath, 
+tblDevGroup.grpseq, tblDevGroup.parentDevgroupId FROM KDMAAA.tblDevGroup, KDMAAA.tblDevGrp2Dev 
+WHERE tblDevGroup.devgroupId = tblDevGrp2Dev.devgroupId AND EXISTS(SELECT * FROM tblCuser2DeviceCap  
+           WHERE tblCuser2DeviceCap.cuserId = 'b21b1aba683846eea823730fd493159a' AND 
+		   tblCuser2DeviceCap.devId = tblDevGrp2Dev.devId AND tblCuser2DeviceCap.devCapId = 1 AND 
+		   tblCuser2DeviceCap.devCapIndex = tblDevGrp2Dev.devCapIndex) 
+		   
+SELECT * FROM tblCuser2DeviceCap  
+           WHERE tblCuser2DeviceCap.cuserId = 'b21b1aba683846eea823730fd493159a' AND 
+		   tblCuser2DeviceCap.devId = tblDevGrp2Dev.devId AND tblCuser2DeviceCap.devCapId = 1 AND 
+		   tblCuser2DeviceCap.devCapIndex = tblDevGrp2Dev.devCapIndex	
+
+
+		   
+		   
+需求：查询某用户拥有设备的所有的直接分组
++----------------------------------+----------------------------------+-----------+----------+--------+------------------+
+| devgroupId                       | domainId                         | groupName | fullpath | grpseq | parentDevgroupId |
++----------------------------------+----------------------------------+-----------+----------+--------+------------------+
+| b21b1aba683846eea823730fd493159a | b21b1aba683846eea823730fd493159a | kedacom   |          |      0 |                  |
++----------------------------------+----------------------------------+-----------+----------+--------+------------------+
+
+desc tblCuser2DeviceCap;
++----------------------+----------+------+-----+---------+-------+
+| Field                | Type     | Null | Key | Default | Extra |
++----------------------+----------+------+-----+---------+-------+
+| cuserId              | char(32) | NO   | PRI | NULL    |       |
+| devId                | char(32) | NO   | PRI | NULL    |       |
+| devCapId             | int(11)  | NO   | PRI | NULL    |       |
+| devCapIndex          | int(11)  | NO   | PRI | NULL    |       |
+| devCapIndexPrivilege | int(11)  | YES  |     | NULL    |       |
++----------------------+----------+------+-----+---------+-------+
+
+desc tblDevGrp2Dev;
++-------------+----------+------+-----+---------+-------+
+| Field       | Type     | Null | Key | Default | Extra |
++-------------+----------+------+-----+---------+-------+
+| devgroupId  | char(32) | NO   | PRI | NULL    |       |
+| devId       | char(32) | NO   | PRI | NULL    |       |
+| devCapId    | int(11)  | NO   | PRI | NULL    |       |
+| devCapIndex | int(11)  | NO   | PRI | NULL    |       |
++-------------+----------+------+-----+---------+-------+
+
+desc tblDevGroup;
++------------------+---------------+------+-----+---------+-------+
+| Field            | Type          | Null | Key | Default | Extra |
++------------------+---------------+------+-----+---------+-------+
+| devgroupId       | char(32)      | NO   | PRI | NULL    |       |
+| domainId         | char(32)      | NO   |     | NULL    |       |
+| parentDevgroupId | char(32)      | YES  | MUL | NULL    |       |
+| groupName        | varchar(64)   | NO   | MUL | NULL    |       |
+| groupDesc        | varchar(1024) | YES  |     | NULL    |       |
+| createDate       | datetime      | YES  |     | NULL    |       |
+| creater          | int(11)       | NO   |     | 0       |       |
+| owner            | varchar(64)   | YES  |     |         |       |
+| fullpath         | varchar(2048) | YES  |     |         |       |
+| grpseq           | double        | NO   |     | 0       |       |
++------------------+---------------+------+-----+---------+-------+
+
+
+方案1：
+select * from tblDevGroup a where 
+exists(select * from tblDevGrp2Dev b,tblCuser2DeviceCap c 
+      where b.devgroupId=a.devgroupId and b.devId=c.devId and b.devCapId=c.devCapId 
+	  and b.devCapIndex=c.devCapIndex and b.devCapId=1 and c.devCapId=1 and c.cuserId='b21b1aba683846eea823730fd493159a')
+
+select d.*,e.domainName from (select * from tblDevGroup a where 
+exists(select 1 from tblDevGrp2Dev b,tblCuser2DeviceCap c 
+      where b.devgroupId=a.devgroupId and b.devId=c.devId and b.devCapId=c.devCapId 
+	  and b.devCapIndex=c.devCapIndex and b.devCapId=1 and c.devCapId=1 and c.cuserId='b21b1aba683846eea823730fd493159a' limit 1)) d 
+	  inner join  tblDomainRelation e where d.domainId = e.domainId

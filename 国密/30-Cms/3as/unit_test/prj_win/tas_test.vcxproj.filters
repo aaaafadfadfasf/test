@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="..\code\main.cpp" />
+    <ClCompile Include="..\code\teleapp.cpp" />
+    <ClCompile Include="..\code\configfile.cpp" />
+    <ClCompile Include="..\code\debug.cpp" />
+    <ClCompile Include="..\code\inner_common.cpp" />
+    <ClCompile Include="..\code\protocol_test.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\code\inner_common.h" />
+    <ClInclude Include="..\code\teleapp.h" />
+    <ClInclude Include="..\code\configfile.h" />
+  </ItemGroup>
+</Project>

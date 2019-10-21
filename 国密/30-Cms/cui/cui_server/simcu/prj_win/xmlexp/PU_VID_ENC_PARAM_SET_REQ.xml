@@ -1,0 +1,1 @@
+<CPuVidEncParamSetReq><event>PU_VID_ENC_PARAM_SET_REQ</event><seqNum>22</seqNum><session>Cu_In_Cmu_Session</session><devChn><chnNO>0</chnNO></devChn><param><frameRate>0</frameRate><quality>0</quality><bitRate>0</bitRate><interval>0</interval><brightness>0</brightness><contrast>0</contrast><saturation>0</saturation></param><surportedMediaType /></CPuVidEncParamSetReq>

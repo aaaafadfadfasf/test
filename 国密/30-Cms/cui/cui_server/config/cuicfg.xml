@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cuiconfig>
+	<cui_local_info>
+		<local_sip_ip>172.16.64.74</local_sip_ip>
+		<local_sip_port>5201</local_sip_port>
+		<cui_uuid>cui74</cui_uuid>
+		<tcp_listen_port>5300</tcp_listen_port>
+		<tcp_timeout>35000</tcp_timeout>
+		<sip_rsp_timeout>35</sip_rsp_timeout>
+		<dlg_rsp_timeout>35</dlg_rsp_timeout>
+		<cu_hb_timeout>10</cu_hb_timeout>
+		<app_queue_szie>10000</app_queue_szie>
+	</cui_local_info>
+</cuiconfig>

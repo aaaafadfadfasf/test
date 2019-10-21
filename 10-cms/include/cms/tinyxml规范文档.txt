@@ -1,0 +1,34 @@
+tinyxml支持：
+      基本数据类型(例如：int、bool、double等原生类型)
+      string类型 
+      CTransparentData类型
+      枚举类型
+      类类型（注：当前发现类名不能为test）
+      结构体类型（注：当前发现结构体名不能为test）
+      基本容器类型以及容器嵌套容器（注：不支持三层或者三层以上容器）
+tinyxml不支持：
+      不支持三层或者三层以上嵌套容器类型
+      不支持容器内嵌套数组 
+      不支持数组的嵌套或数组中内嵌容器
+tinyxml的特殊处理：
+      对于空字串则删除该结点,如果全部字串均为空则显示为<XXX />
+      保留用户的所有数据，对于空格数据均保留
+      
+tinyxml的透明数据传输
+      我们的业务中存在XML透传XML的情况
+      例如
+      1，pmc-->pmcs会将真正的XML请求嵌入到外层XML中
+      2，TAS的CLoginTasReq请求中嵌入XML作为扩展信息
+      3，CUI中会填入Desc字段为全WhiteSpace
+      5，tinyxml不支持全WhiteSpace的元素结点, 对于全WhiteSpace的元素结点，tinyxml会自动删除
+      4，根据XML标准，元素内容如果包含<, >, &, ', "，这五个字符需要转义
+
+      针对这些情况，XML标准中提出采用CDATA字段解决透传数据，CDATA字段内的任何字符都可以不用解析，原样传输
+      tinyxml是完整支持CDATA的
+      建议研发人员对以上需要透传数据的情况使用CDATA，便于抓包分析
+      如何使用CDATA？
+      1，修改了tinyxml的源码之后，现在tinyxml已经不会压缩多余空格，会严格完整保存所有WhiteSpace      
+      2，如果需要配置某个字段为透明数据，则需要定义数据成员类型为CTransparentData
+      3，增加了GetNodeContent接口，用于解析重名、嵌套元素结点
+      4，修复了GetXmlKeyText()/ReplaceXmlKeyText()接口中可能解析嵌套元素结点出错的问题，接口未变
+      5，支持透明数据的嵌套，具体实现是，当CTransparentData::toxml()时，会将内容中的所有CDATA 的tag全部删除，只保留最外一层

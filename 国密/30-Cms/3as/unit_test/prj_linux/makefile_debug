@@ -1,0 +1,62 @@
+###
+### Copyright (c) 2004 Keda Telecom, Inc.
+###
+
+#########################################################################
+###
+###  DESCRIPTION:
+###    Common definitions for all Makefiles in cmu linux project.
+###
+#########################################################################
+
+TOP := ..
+
+COMM_DIR := ../../../../10-Common/include
+
+SRC_DIR := $(TOP)/code
+
+## Name and type of the target for this Makefile
+
+APP_TARGET := tas_test
+
+## Define debuging symbols
+DEBUG = 1
+LINUX_COMPILER=_LINUX_# _EQUATOR_, _HHPPC_, _LINUX_ and so on
+
+CFLAGS += -D_LINUX_
+CFLAGS += -m32
+CFLAGS += -fno-omit-frame-pointer
+CFLAGS += -Wformat
+
+PWLIB_SUPPORT = 0
+
+## Object files that compose the target(s)
+
+CPP_FILES = $(wildcard $(SRC_DIR)/*.cpp)
+
+OBJS := $(CPP_FILES:%.cpp=%)
+
+
+
+
+## Add driver-specific include directory to the search path
+
+INC_PATH += ../../../../10-Common/include/cbb \
+            ../../../../10-Common/include/cbb/osp \
+            ../../../../10-Common/include/system \
+            ../../../../10-Common/include/cms \
+            ../../../../10-Common/include/cms/tas \
+            $(TOP)/code \
+            $(COMM_DIR)
+
+
+## Libraries to include in shared object file
+LIB_PATH += ../../../../10-Common/lib/release/linux
+
+LIBS := pthread rt kdvsys snmpadp3as \
+        dbi sqlite3 sybct sybcs sybtcl sybblk sybdb sybunic mysqlclient_r clntsh\
+        dl z readlicenselib haikey hkapi epassapi nipx86 \
+	    ospsip ospext kdsip uuid cmcfg cmsproto tinyxml kdvencrypt osp nipdebug
+
+INSTALL_APP_PATH := ../../../../10-Common/version/release/linux/tas
+include $(COMM_DIR)/common.mk

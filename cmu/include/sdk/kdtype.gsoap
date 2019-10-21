@@ -1,0 +1,13 @@
+/*-----------------------------------------------------------------------------
+系统公用文件，开发人员严禁修改
+------------------------------------------------------------------------------*/
+
+typedef std::string xsd__string; // encode xsd__string value as the xsd:string schema type
+typedef std::string xsd__anyURI; // encode xsd__anyURI value as the xsd:anyURI schema type
+typedef std::string xsd__dateTime; // encode xsd__dateTime value as the xsd:dateTime schema type
+typedef float xsd__float;        // encode xsd__float value as the xsd:float schema type
+typedef int   xsd__int;          // encode xsd__int value as the xsd:int schema type
+typedef int   time_duration;     // encode time_duration value as the time:duration schema type
+typedef bool  xsd__boolean;      // encode xsd__boolean value as the xsd:boolean schema type
+typedef unsigned long long xsd__positiveInteger; // encode xsd__positiveInteger value as the xsd:positiveInteger schema type
+

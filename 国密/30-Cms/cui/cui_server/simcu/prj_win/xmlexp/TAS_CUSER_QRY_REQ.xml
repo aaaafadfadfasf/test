@@ -1,0 +1,1 @@
+<CUserQryReq><event>TAS_CUSER_QRY_REQ</event><seqNum>69</seqNum><session>Cu_In_Tas_Session</session><startEntryIndex>0</startEntryIndex><expectEntryNum>0</expectEntryNum><condition><optionField /><type>0</type><mLoginFlag>1</mLoginFlag><enabledFlag>1</enabledFlag></condition></CUserQryReq>

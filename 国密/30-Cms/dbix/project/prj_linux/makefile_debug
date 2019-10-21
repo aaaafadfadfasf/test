@@ -1,0 +1,55 @@
+###
+### Copyright (c) 2004 Keda Telecom, Inc.
+###
+
+#########################################################################
+###
+###  DESCRIPTION:
+###    Common definitions for all Makefiles in cmsprotolib linux project.
+###
+#########################################################################
+
+TOP := ../..
+
+COMM_DIR := ../../../../10-Common
+
+SRC_DIR := $(TOP)/code
+
+## Name and type of the target for this Makefile
+
+ARC_TARGET := dbix
+
+## Define debuging symbols
+DEBUG = 1
+LINUX_COMPILER=_LINUX_# _EQUATOR_, _HHPPC_, _LINUX_ and so on
+
+CFLAGS += -D_LINUX_
+CFLAGS += -m32
+
+PWLIB_SUPPORT = 0
+
+## Object files that compose the target(s)
+
+CPP_FILES = $(wildcard $(SRC_DIR)/*.cpp)
+
+OBJS := $(CPP_FILES:%.cpp=%)
+
+CPP_FILES = $(wildcard  $(SRC_DIR)/*.cpp $(SRC_DIR)/utils/*.cpp $(COMM_DIR)/include/cms/dbix/dbresult_callback_imp4osptask.cpp)   
+                                                                                                                                                                                              
+vpath %.cpp $(addsuffix :,$(dir $(CPP_FILES)))
+
+OBJS := $(CPP_FILES:%.cpp=%)
+
+
+
+## Add driver-specific include directory to the search path
+
+INC_PATH += $(COMM_DIR)/include/ \
+			$(TOP)/code
+
+
+## Libraries to include in shared object file
+
+
+INSTALL_LIB_PATH = $(COMM_DIR)/lib/debug/linux/
+include $(COMM_DIR)/include/common.mk

@@ -1,0 +1,1 @@
+<CUserQryReq><event>TAS_CUSER_QRY_REQ</event><seqNum>100</seqNum><session>CEvent_Req_Session</session><startEntryIndex>0</startEntryIndex><expectEntryNum>2</expectEntryNum></CUserQryReq>
