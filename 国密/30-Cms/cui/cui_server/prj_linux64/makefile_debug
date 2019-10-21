@@ -1,0 +1,59 @@
+###
+### Copyright (c) 2004 Keda Telecom, Inc.
+###
+
+#########################################################################
+###
+###  DESCRIPTION:
+###    Common definitions for all Makefiles in cui_server linux project.
+###
+#########################################################################
+
+TOP := ..
+
+COMM_DIR := ../../../../10-Common/include
+
+SRC_DIR := $(TOP)/src
+
+## Name and type of the target for this Makefile
+
+APP_TARGET := cuiserver
+
+## Define debugging symbols
+DEBUG = 1
+# _EQUATOR_, _HHPPC_, _LINUX_ and so on
+LINUX_COMPILER=_LINUX_
+
+CFLAGS += -D_LINUX_
+CFLAGS += -fno-omit-frame-pointer -fstack-protector-all
+CFLAGS += -Wformat
+CFLAGS += -DUSE_EPOLL
+CFLAGS += -D_CUISERVER_
+CFLAGS += -m64 -fPIC
+
+PWLIB_SUPPORT = 0
+
+## Object files that compose the target(s)
+
+CPP_FILES = $(wildcard $(SRC_DIR)/*.cpp $(COMM_DIR)/cbb/sip/testsecurity.cpp $(COMM_DIR)/cms/security_module/security_module_proto.cpp $(COMM_DIR)/cms/security_module/security_module_proto_dependent.cpp)
+
+OBJS := $(CPP_FILES:%.cpp=%)
+
+
+
+
+## Add driver-specific include directory to the search path
+
+INC_PATH += $(TOP)/include \
+            $(TOP)/../common \
+			$(COMM_DIR)/cbb/kdssl-ext \
+            $(COMM_DIR)
+
+
+## Libraries to include in shared object file
+LIB_PATH += ../../../../10-Common/lib/debug/linux64
+
+LIBS := pthread rt uuid  ospsip64 ospext64 kdsip64 tinyxml64 cmcfg64 cmsproto64 kdmutil64 vtdu64 datadispatch64 natagent64 nmclib64 snmpadp64 kdssl-ext skf kdcrypto kdvencrypt64 redissdk64 fastdb64 hiredis64 sysdbg osp64 kdvsys64 dl z
+
+INSTALL_APP_PATH := ../../../../10-Common/version/debug/linux64/cui
+include $(COMM_DIR)/common.mk

@@ -1,0 +1,257 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <SccProjectName />
+    <SccLocalPath />
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>Dynamic</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.Cpp.UpgradeFromVC60.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.Cpp.UpgradeFromVC60.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>.\Release\</OutDir>
+    <IntDir>.\Release\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>.\Debug\</OutDir>
+    <IntDir>.\Debug\</IntDir>
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <StringPooling>true</StringPooling>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <Optimization>MaxSpeed</Optimization>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_WARNINGS;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;WIN32_LEAN_AND_MEAN;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AssemblerListingLocation>.\Release\</AssemblerListingLocation>
+      <PrecompiledHeaderOutputFile>.\Release\3as.pch</PrecompiledHeaderOutputFile>
+      <ObjectFileName>.\Release\</ObjectFileName>
+      <ProgramDataBaseFileName>.\Release\</ProgramDataBaseFileName>
+      <AdditionalIncludeDirectories>../../../../10-Common/include/;../../../../10-Common/include/cbb/;../../../../10-Common/include/cbb/osp;../../../../10-Common/include/system;../../../../10-Common/include/cms;../../../../10-Common/include/cms/tas;../../code;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>/MD %(AdditionalOptions)</AdditionalOptions>
+      <DisableSpecificWarnings>%(DisableSpecificWarnings)</DisableSpecificWarnings>
+    </ClCompile>
+    <Midl>
+      <TypeLibraryName>.\Release\3as.tlb</TypeLibraryName>
+    </Midl>
+    <ResourceCompile>
+      <Culture>0x0804</Culture>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <OutputFile>.\Release\3as.bsc</OutputFile>
+    </Bscmake>
+    <Link>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <SubSystem>Console</SubSystem>
+      <OutputFile>.\Release\3as.exe</OutputFile>
+      <AdditionalDependencies>osplib.lib;kdvsys.lib;snmpadp3as.lib;dbi.lib;libsybct.lib;libsybcs.lib;libmysql.lib;oci.lib;readlicenselib.lib;hkapi.lib;kdvencrypt.lib;Rpcrt4.lib;ep1kdl20.lib;ospext.lib;kdsip.lib;ospsip.lib;odbc32.lib;odbccp32.lib;cmcfg.lib;tinyxml.lib;cmsprotolib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>../../../../10-Common/lib/release/win;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <IgnoreSpecificDefaultLibraries>libc.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <FunctionLevelLinking>false</FunctionLevelLinking>
+      <Optimization>Disabled</Optimization>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <WarningLevel>Level3</WarningLevel>
+      <MinimalRebuild>true</MinimalRebuild>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_WARNINGS;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AssemblerListingLocation>.\Debug\</AssemblerListingLocation>
+      <PrecompiledHeaderOutputFile>.\Debug\3as.pch</PrecompiledHeaderOutputFile>
+      <ObjectFileName>.\Debug\</ObjectFileName>
+      <ProgramDataBaseFileName>.\Debug\</ProgramDataBaseFileName>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <AdditionalIncludeDirectories>../../../../10-Common/include/;../../../../10-Common/include/cbb/;../../../../10-Common/include/cbb/osp;../../../../10-Common/include/system;../../../../10-Common/include/cms;../../../../10-Common/include/cms/tas;../../code</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Midl>
+      <TypeLibraryName>.\Debug\3as.tlb</TypeLibraryName>
+    </Midl>
+    <ResourceCompile>
+      <Culture>0x0804</Culture>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <OutputFile>.\Debug\3as.bsc</OutputFile>
+    </Bscmake>
+    <Link>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+      <OutputFile>.\Debug\3as.exe</OutputFile>
+      <AdditionalDependencies>osplib.lib;kdvsys.lib;snmpadp3as.lib;dbi.lib;libsybct.lib;libsybcs.lib;libmysql.lib;oci.lib;readlicenselib.lib;hkapi.lib;kdvencrypt.lib;Rpcrt4.lib;ep1kdl20.lib;ospext.lib;kdsip.lib;ospsip.lib;odbc32.lib;odbccp32.lib;cmcfg.lib;tinyxml.lib;cmsprotolib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>../../../../10-Common/lib/debug/win</AdditionalLibraryDirectories>
+      <IgnoreSpecificDefaultLibraries>
+      </IgnoreSpecificDefaultLibraries>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\code\config_util\tas_config.cpp" />
+    <ClCompile Include="..\..\code\data_sync\syncdata_recv.cpp" />
+    <ClCompile Include="..\..\code\data_sync\syncdata_send.cpp" />
+    <ClCompile Include="..\..\code\data_sync\sync_analyzer_base.cpp" />
+    <ClCompile Include="..\..\code\data_sync\sync_analyzer_mng_poweron.cpp" />
+    <ClCompile Include="..\..\code\data_sync\sync_analyzer_p2plimit.cpp" />
+    <ClCompile Include="..\..\code\data_sync\sync_analyzer_p2pnolimit.cpp" />
+    <ClCompile Include="..\..\code\data_sync\sync_analyzer_parent.cpp" />
+    <ClCompile Include="..\..\code\dbopr\dbcache.cpp" />
+    <ClCompile Include="..\..\code\dbopr\dbengine.cpp" />
+    <ClCompile Include="..\..\code\dbopr\dboper_batch.cpp" />
+    <ClCompile Include="..\..\code\dbopr\dbopr.cpp" />
+    <ClCompile Include="..\..\code\dbopr\dboprdef.cpp" />
+    <ClCompile Include="..\..\code\db_task_pool.cpp" />
+    <ClCompile Include="..\..\code\debug.cpp" />
+    <ClCompile Include="..\..\code\inner_common.cpp" />
+    <ClCompile Include="..\..\code\inner_msg.cpp" />
+    <ClCompile Include="..\..\code\inner_util.cpp" />
+    <ClCompile Include="..\..\code\log_system.cpp" />
+    <ClCompile Include="..\..\code\main.cpp" />
+    <ClCompile Include="..\..\code\nmsconn.cpp" />
+    <ClCompile Include="..\..\code\license_mng.cpp" />
+    <ClCompile Include="..\..\code\cctrl.cpp" />
+    <ClCompile Include="..\..\code\redis\fastdbmng.cpp" />
+    <ClCompile Include="..\..\code\sync_analyzer_mng.cpp" />
+    <ClCompile Include="..\..\code\tasks\child_tas_ssn_task.cpp" />
+    <ClCompile Include="..\..\code\tasks\cmu_ssn_task.cpp" />
+    <ClCompile Include="..\..\code\tasks\common\conn_taskbase.cpp" />
+    <ClCompile Include="..\..\code\tasks\common\hb_detect_multi_task.cpp" />
+    <ClCompile Include="..\..\code\tasks\common\long_query_task.cpp" />
+    <ClCompile Include="..\..\code\tasks\common\query_task.cpp" />
+    <ClCompile Include="..\..\code\tasks\common\ssn_taskbase.cpp" />
+    <ClCompile Include="..\..\code\tasks\cui_ssn_task.cpp" />
+    <ClCompile Include="..\..\code\tasks\devgrp2dev_mod.cpp" />
+    <ClCompile Include="..\..\code\tasks\devgrp_dev_add_task.cpp" />
+    <ClCompile Include="..\..\code\tasks\devgrp_mod.cpp" />
+    <ClCompile Include="..\..\code\tasks\devgrp_vidsrc_totalnum_get_task.cpp" />
+    <ClCompile Include="..\..\code\tasks\devtree_add_task.cpp" />
+    <ClCompile Include="..\..\code\tasks\devtree_devgrp_assign_task.cpp" />
+    <ClCompile Include="..\..\code\tasks\file_export_task.cpp" />
+    <ClCompile Include="..\..\code\tasks\g300_del_task.cpp" />
+    <ClCompile Include="..\..\code\tasks\gb_report_catalog_file_export.cpp" />
+    <ClCompile Include="..\..\code\tasks\license_mng_task.cpp" />
+    <ClCompile Include="..\..\code\tasks\license_server_mng_task.cpp" />
+    <ClCompile Include="..\..\code\tasks\other_tas_domainname_changentf.cpp" />
+    <ClCompile Include="..\..\code\tasks\p2p_tas_conn_task.cpp" />
+    <ClCompile Include="..\..\code\tasks\p2p_tas_ssn_task.cpp" />
+    <ClCompile Include="..\..\code\tasks\parent_tas_conn_task.cpp" />
+    <ClCompile Include="..\..\code\tasks\tac_ssn_task.cpp" />
+    <ClCompile Include="..\..\code\tasks\tas_config_task.cpp" />
+    <ClCompile Include="..\..\code\tasks\tas_conn_task_poweron.cpp" />
+    <ClCompile Include="..\..\code\tasks\ps_ssn_task.cpp" />
+    <ClCompile Include="..\..\code\tasks\tas_ctrl_task.cpp" />
+    <ClCompile Include="..\..\code\tasks\user_devgrp_vidsrc_query_task.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\10-Common\include\cbb\license\licensedef.h" />
+    <ClInclude Include="..\..\..\..\10-Common\include\cbb\license\licensesdk.h" />
+    <ClInclude Include="..\..\..\..\10-Common\include\cms\cmsassert.h" />
+    <ClInclude Include="..\..\..\..\10-Common\include\cms\cms_const.h" />
+    <ClInclude Include="..\..\..\..\10-Common\include\cms\cms_errorcode.h" />
+    <ClInclude Include="..\..\..\..\10-Common\include\cms\cms_eventid.h" />
+    <ClInclude Include="..\..\..\..\10-Common\include\cms\cms_proto.h" />
+    <ClInclude Include="..\..\..\..\10-Common\include\cms\tas\tas_event.h" />
+    <ClInclude Include="..\..\..\..\10-Common\include\cms\tas\tas_proto.h" />
+    <ClInclude Include="..\..\..\..\10-Common\include\cms\tas\tas_redis.h" />
+    <ClInclude Include="..\..\..\..\10-Common\include\cms\tas\tas_struct.h" />
+    <ClInclude Include="..\..\code\config_util\tas_config.h" />
+    <ClInclude Include="..\..\code\data_sync\syncdata_recv.h" />
+    <ClInclude Include="..\..\code\data_sync\syncdata_send.h" />
+    <ClInclude Include="..\..\code\data_sync\sync_analyzer_base.h" />
+    <ClInclude Include="..\..\code\data_sync\sync_analyzer_mng_poweron.h" />
+    <ClInclude Include="..\..\code\data_sync\sync_analyzer_p2plimit.h" />
+    <ClInclude Include="..\..\code\data_sync\sync_analyzer_p2pnolimit.h" />
+    <ClInclude Include="..\..\code\data_sync\sync_analyzer_parent.h" />
+    <ClInclude Include="..\..\code\dbopr\dbcache.h" />
+    <ClInclude Include="..\..\code\dbopr\dbengine.h" />
+    <ClInclude Include="..\..\code\dbopr\dbopr.h" />
+    <ClInclude Include="..\..\code\dbopr\dboprdef.h" />
+    <ClInclude Include="..\..\code\dbopr\dbquerytemplate.h" />
+    <ClInclude Include="..\..\code\db_task_pool.h" />
+    <ClInclude Include="..\..\code\inner_common.h" />
+    <ClInclude Include="..\..\code\inner_msg.h" />
+    <ClInclude Include="..\..\code\inner_util.h" />
+    <ClInclude Include="..\..\code\log_system.h" />
+    <ClInclude Include="..\..\code\nmsconn.h" />
+    <ClInclude Include="..\..\code\license_mng.h" />
+    <ClInclude Include="..\..\code\cctrl.h" />
+    <ClInclude Include="..\..\code\redis\fastdbmng.h" />
+    <ClInclude Include="..\..\code\sync_analyzer_mng.h" />
+    <ClInclude Include="..\..\code\tasks\child_tas_ssn_task.h" />
+    <ClInclude Include="..\..\code\tasks\cmu_ssn_task.h" />
+    <ClInclude Include="..\..\code\tasks\common\conn_taskbase.h" />
+    <ClInclude Include="..\..\code\tasks\common\hb_detect_multi_task.h" />
+    <ClInclude Include="..\..\code\tasks\common\long_query_task.h" />
+    <ClInclude Include="..\..\code\tasks\common\query_task.h" />
+    <ClInclude Include="..\..\code\tasks\common\ssn_taskbase.h" />
+    <ClInclude Include="..\..\code\tasks\cui_ssn_task.h" />
+    <ClInclude Include="..\..\code\tasks\devgrp2dev_mod.h" />
+    <ClInclude Include="..\..\code\tasks\devgrp_dev_add_task.h" />
+    <ClInclude Include="..\..\code\tasks\devgrp_mod .h" />
+    <ClInclude Include="..\..\code\tasks\devgrp_vidsrc_totalnum_get_task.h" />
+    <ClInclude Include="..\..\code\tasks\devtree_add_task.h" />
+    <ClInclude Include="..\..\code\tasks\devtree_devgrp_assign_task.h" />
+    <ClInclude Include="..\..\code\tasks\file_export_task.h" />
+    <ClInclude Include="..\..\code\tasks\g300_del_task.h" />
+    <ClInclude Include="..\..\code\tasks\gb_report_catalog_file_export.h" />
+    <ClInclude Include="..\..\code\tasks\license_mng_task.h" />
+    <ClInclude Include="..\..\code\tasks\license_server_mng_task.h" />
+    <ClInclude Include="..\..\code\tasks\other_tas_domainname_changentf.h" />
+    <ClInclude Include="..\..\code\tasks\p2p_tas_conn_task.h" />
+    <ClInclude Include="..\..\code\tasks\p2p_tas_ssn_task.h" />
+    <ClInclude Include="..\..\code\tasks\parent_tas_conn_task.h" />
+    <ClInclude Include="..\..\code\tasks\tas_config_task.h" />
+    <ClInclude Include="..\..\code\tasks\tac_ssn_task.h" />
+    <ClInclude Include="..\..\code\tasks\tas_conn_task_poweron.h" />
+    <ClInclude Include="..\..\code\tasks\ps_ssn_task.h" />
+    <ClInclude Include="..\..\code\tasks\tas_ctrl_task.h" />
+    <ClInclude Include="..\..\code\tasks\user_devgrp_vidsrc_query_task.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\..\10-Common\include\cms\cms_errorstr.txt" />
+    <None Include="..\..\..\..\10-Common\include\cms\cms_errorstr_en.txt" />
+    <None Include="..\..\3as_变更记录.txt" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

@@ -1,0 +1,30 @@
+time : 68
+SQL : call procDevicefullinfoAndPrivilege('2ef5418335154d5d80d2ac1fb6fca16c', '', '2ef5418335154d5d80d2ac1fb6fca16c','', 0, 30)
+
+time : 66
+SQL : select count(*) from                                                               ((select b.*, a.cuserId as cuserId, a.devPrivilege as devPrivilege                                                          FROM tblCuser2Dev a, tblDevice b, tblDevGrp2Dev c  where a.devId = b.devId and a.devId = c.devId and a.cuserId='2ef5418335154d5d80d2ac1fb6fca16c' and                                  c.devgroupId='2ef5418335154d5d80d2ac1fb6fca16c')                                                                 union              (select b.*, '' as cuserId, 0 as devPrivilege                                                            FROM tblDevice b, tblDevGrp2Dev c, tblDeviceModel d                                                                 where b.devId = c.devId and c.devgroupId='2ef5418335154d5d80d2ac1fb6fca16c'                                                                 and b.devModelId=d.modelId and d.deviceTypeId=2 and d.devCapId=5)) res
+
+time : 68
+SQL : call procDevicefullinfoAndPrivilege('2ef5418335154d5d80d2ac1fb6fca16c', '', '2ef5418335154d5d80d2ac1fb6fca16c','', 0, 30)
+
+time : 68
+SQL : call procDevicefullinfoAndPrivilege('2ef5418335154d5d80d2ac1fb6fca16c', '', '2ef5418335154d5d80d2ac1fb6fca16c','', 0, 30)
+
+time : 237
+SQL : select count(*) from                                                               ((select b.*, a.cuserId as cuserId, a.devPrivilege as devPrivilege                                                          FROM tblCuser2Dev a, tblDevice b, tblDevGrp2Dev c  where a.devId = b.devId and a.devId = c.devId and a.cuserId='2ef5418335154d5d80d2ac1fb6fca16c' and                                  c.devgroupId='2ef5418335154d5d80d2ac1fb6fca16c')                                                                 union              (select b.*, '' as cuserId, 0 as devPrivilege                                                            FROM tblDevice b, tblDevGrp2Dev c, tblDeviceModel d                                                                 where b.devId = c.devId and c.devgroupId='2ef5418335154d5d80d2ac1fb6fca16c'                                                                 and b.devModelId=d.modelId and d.deviceTypeId=2 and d.devCapId=5)) res
+
+time : 79
+SQL : call procDevicefullinfoAndPrivilege('2ef5418335154d5d80d2ac1fb6fca16c', '', '2ef5418335154d5d80d2ac1fb6fca16c','', 0, 200)
+
+time : 66
+SQL : call procDevicefullinfoAndPrivilege('2ef5418335154d5d80d2ac1fb6fca16c', '', '2ef5418335154d5d80d2ac1fb6fca16c','', 0, 30)
+
+time : 73
+SQL : call procDevicefullinfoAndPrivilege('2ef5418335154d5d80d2ac1fb6fca16c', '', '2ef5418335154d5d80d2ac1fb6fca16c','', 0, 200)
+
+time : 75
+SQL : select count(*) from                                                               ((select b.*, a.cuserId as cuserId, a.devPrivilege as devPrivilege                                                          FROM tblCuser2Dev a, tblDevice b, tblDevGrp2Dev c  where a.devId = b.devId and a.devId = c.devId and a.cuserId='2ef5418335154d5d80d2ac1fb6fca16c' and                                  c.devgroupId='2ef5418335154d5d80d2ac1fb6fca16c')                                                                 union              (select b.*, '' as cuserId, 0 as devPrivilege                                                            FROM tblDevice b, tblDevGrp2Dev c, tblDeviceModel d                                                                 where b.devId = c.devId and c.devgroupId='2ef5418335154d5d80d2ac1fb6fca16c'                                                                 and b.devModelId=d.modelId and d.deviceTypeId=2 and d.devCapId=5)) rescmd pstat Return value: 1
+tas->
+
+time : 77
+SQL : select count(*) from                                                               ((select b.*, a.cuserId as cuserId, a.devPrivilege as devPrivilege                                                          FROM tblCuser2Dev a, tblDevice b, tblDevGrp2Dev c  where a.devId = b.devId and a.devId = c.devId and a.cuserId='2ef5418335154d5d80d2ac1fb6fca16c' and                                  c.devgroupId='2ef5418335154d5d80d2ac1fb6fca16c')                                                                 union              (select b.*, '' as cuserId, 0 as devPrivilege                                                            FROM tblDevice b, tblDevGrp2Dev c, tblDeviceModel d                                                                 where b.devId = c.devId and c.devgroupId='2ef5418335154d5d80d2ac1fb6fca16c'                                                                 and b.devModelId=d.modelId and d.deviceTypeId=2 and d.devCapId=5)) res

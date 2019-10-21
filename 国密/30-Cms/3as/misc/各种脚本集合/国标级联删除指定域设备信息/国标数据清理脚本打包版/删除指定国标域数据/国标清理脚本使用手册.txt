@@ -1,0 +1,16 @@
+﻿使用说明
+一、cleangbdomain.sh 用于清理指定国标域的设备（该脚本通常使用在整体删除某个国标域）
+1、新建一个待删除的域国标id列表文件（文件名任意，编码格式utf-8），
+    如附件cleangblist所示。
+   
+2、上传cleangbdomain.sh及上述新建的文件到平台任意目录，并给cleangbdomain.sh增加
+    可执行权限（chmod +x cleangbdomain.sh）
+    
+3、执行./cleangbdomain.sh cleangblist
+
+4、最后会提示所清理数据备份的路径：
+   all device's info need to clean exported to file[文件及目录]
+   可以根据该文件校验是否删除了所要删除的数据；
+   可以校验是否错误删除了数据。
+
+备注：使用该脚本只能在退网前删除指定下级国标域或者孙子域等国标域数据信息

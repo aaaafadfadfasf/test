@@ -1,0 +1,84 @@
+// shared definition among cdb_admin.proto with internal protos.
+
+// TODO: add DiskStat to merge MetaDiskStat and ChunkDiskStat
+message MetaDiskStat {
+  required string disk_uuid = 1;
+  required string disk_name = 2;
+  
+  optional uint64 total_bytes = 3;
+  optional uint64 free_bytes = 4;
+  optional uint64 num_failed_writes = 5;
+  optional uint64 num_failed_reads = 6;
+ 
+  optional uint32 disk_id = 7;
+}
+
+message AllocatorStat {
+  optional uint32 stripe_blocks = 1;
+  optional uint32 block_size = 2;
+  optional uint32 meta_total_stripes = 3;
+  optional uint32 meta_free_stripes = 4;
+  optional uint32 data_total_stripes = 5;
+  optional uint32 data_free_stripes = 6;
+}
+
+message ChunkDiskStat {
+  required uint32 disk_id = 1;
+  
+  enum DiskStatus {
+    MOUNTING = 1;
+    RUNNING = 2;
+    EXITING = 3;
+    DISABLED = 4;
+    FULL = 5;
+  }
+  
+  required DiskStatus status = 2 [default = RUNNING];
+  
+  required string disk_uuid = 3;
+  required string disk_name = 4;
+  
+  optional uint64 total_bytes = 5;
+  optional uint64 free_bytes = 6;
+  
+  optional uint64 num_failed_writes = 7;
+  optional uint64 num_failed_reads = 8;
+  
+  optional AllocatorStat allocator = 9;  
+  
+  optional uint64 normal_req_bytes_dropped = 10;
+  optional uint64 reserv_req_bytes_dropped = 11;
+  optional uint64 normal_req_bytes_dropped_interval = 12;
+  optional uint64 reserv_req_bytes_dropped_interval = 13;
+  
+  optional uint32 req_pending_queue_depth = 14;
+  optional uint32 aio_pending_queue_depth = 15;
+  optional uint32 defer_queue_depth = 16;
+  optional uint32 pending_reservations = 17;
+  
+  optional uint64 write_bytes_received = 18;
+  optional uint64 write_bytes_received_interval = 19;
+  
+  optional uint64 write_bytes_redirected = 20;
+}
+
+message ChunkServerStat {
+  enum ServerStatus {
+    CONNECTING_TO_META = 1;
+    CONNECTED_TO_META = 2;
+  }
+  required ServerStatus status = 1;
+  required uint32 cs_id = 2;
+  required bytes cs_uuid = 3;
+  repeated ChunkDiskStat stat = 4;
+  optional int64 total_bytes = 5;
+  optional int64 free_bytes = 6;
+  
+  optional MetaDiskStat chunk_meta_disk = 7;
+  optional uint64 update_timestamp = 8;
+  
+  optional bytes zone = 9;
+  optional bytes machine_id = 10;
+  optional bytes internal_cluster_uuid = 11;
+  optional bytes version = 12;
+}

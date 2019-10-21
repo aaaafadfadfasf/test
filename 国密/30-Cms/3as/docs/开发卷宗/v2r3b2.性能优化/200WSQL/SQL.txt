@@ -1,0 +1,130 @@
+一  耗时语句
+1，PMS获取网管树
+select count(*) from tblDevice a where a.domainId='cdb3d025f08f408fa1e8bd6cd7082725' and (a.creater=0) and (a.devType=1 or a.devType=2)
+
+select a.* from tblDevice a where a.domainId='cdb3d025f08f408fa1e8bd6cd7082725' and (a.creater=0) and (a.devType=1 or a.devType=2) order by convert(a.devName using gbk) limit 0,300000
+
+解决：
+a, 分页方式优化
+   由于原来每页查询采用相同的条件，只是通过页起始号区分，改为通过指定devId值作为起始位置和指定它为排序列。
+   
+   pms按需添加devId大小列，添加devId作为排序列。
+   tas CDeviceInfoQueryCondition添加指定起始的devId; 判断指定了排序列时使用指定的，放弃自己使用的默认排序列。
+b, 单页大小也控制一下，减少单页耗时过长和服务端缓存过多数据   
+   CRegTasTask::GetDevInfo中一页原来为ENTRY_MAX_NUM_ONE_PAGE，但是ENTRY_MAX_NUM_ONE_PAGE放大至30W了，
+   pms中此函数中一页大小改为1W(不用那个宏）。
+   
+c, 收到NTF过程中未刷新状态，pms进行刷新 避免认为是超时自动重发。
+
+
+
+2，PMC设备管理界面
+select a.* from tblDevice a where a.domainId='e42f2d092d84421680b9400098f2f07e' and (a.creater=0 or a.creater=2) and (a.devType=1 or a.devType=2 or a.devType=3) order by convert(a.devName using gbk) limit 0,20
+
+解决：
+由于当前拼音排序没有更好的方案，先只优化至下面的第2步。
+另外对于任意跳转的方式，没有优化方案，上面只能优化下一页操作。
+
+select a.* from tblDevice a where a.domainId='49f92708dae84881aeb73ec15beaa5d8' and (a.creater=0 or a.creater=2) and (a.devType=1 or a.devType=2 or a.devType=3) order by convert(a.devName using gbk) limit 1900000,20;
+8.70S
+
+select a.* from tblDevice a where a.domainId='49f92708dae84881aeb73ec15beaa5d8' and (a.creater=0 or a.creater=2) and (a.devType=1 or a.devType=2 or a.devType=3) and (convert(a.devName using gbk)>'zjq909999' and a.devId>'49f92708dae84881aeb73ec151909999') order by convert(a.devName using gbk),a.devId limit 20;
+1.61S
+
+select a.* from tblDevice a where a.domainId='49f92708dae84881aeb73ec15beaa5d8' and (a.creater=0 or a.creater=2) and (a.devType=1 or a.devType=2 or a.devType=3) and (a.devName>'zjq909999' and a.devId>'49f92708dae84881aeb73ec151909999') order by a.devName,a.devId limit 20;
+0.12S
+
+
+
+
+3，CUI获取某用户的全部的设备权限
+time : 94
+SQL : call procCuserDevQry('cdb3d025f08f408fa1e8bd6cd7082725', '', '', -1, -1, 0, 300000)
+
+解决：
+问题无效了，cui已经全部从redis中取权限了，不会采用此存储过程。
+
+4，CU设备树导出
+time : 87
+SQL : call procExportCuserDeviceData('cdb3d025f08f408fa1e8bd6cd7082725')
+
+解决：
+不优化，200W版本中cu不再用它
+
+5，GBS，CUI1等分页获取设备列表   must
+time : 40
+SQL : select a.* from tblDevice a where (a.devType=1) order by convert(a.devName using gbk) limit 1960000,10000
+
+解决：
+采用问题1的解决方案。相对而言，它们是通过CCmsDeviceQryReq透传了一道，
+此信令中增加一个字段，也即CDeviceInfoQueryCondition添加的指定起始的devId字段。
+
+
+
+6，
+time : 77
+SQL : select a.*,                 exists(select * from tblDevGrp2Dev b where b.devgroupId=a.devgroupId                 and (exists(select * from tblDevice d where d.devId=b.devId and d.devType=2) or                 exists(select * from tblCuser2Dev c where c.cuserId='f986d5f0be4243fab03c9ccf83f8a2d5' and c.devId=b.devId))) existflag, coalesce(e.domainId, '') parentDomainId                 from tblDevGroup a left join tblDevGroup e on a.parentDevgroupId = e.devgroupId  where a.parentDevgroupId='' order by a.parentDevgroupId, a.grpseq , convert(a.groupName using gbk) limit 0,30
+
+解决：
+不需要解决，是由于tblDevGrp2Dev表中被bug插入了4亿数据引起的，规格是200W的。
+正常情况下0.0Xs。
+
+7，退网私有下级平台时处理特别缓慢，十分钟以上（其实是来不及等待处理完成） must
+
+procDelAllDataFromCertainDomain
+| 195 | root | localhost:37714      | KDMAAA | Query   | 1470 | Sending data                 | delete from tblCuser2DeviceCap where exists(select * from tmptbldevlist4DelAllDataFromCertainDomain  |
+
+解决：原来此存储过程中有2个临时表，都是没有索引的，加上hash索引后满足需求。
+
+8，大量查询消耗tas的内存占用至3.6G多了，频繁出现分配内存失败
+注：研发演示的200W设备量的平台中此问题不存在，应该是很多模块不走tas查询了，减少了开销。
+
+原因：并发的整体设备查询task过多，内存占用过多 
+13个CQueryTask[TAS_DEVICE_QRY_REQ]，1个CLongQueryTask[TAS_CUSER_DEVICE_QRY_REQ]。
+
+不能及时地返回所有的数据，客户端超时重查，进入恶性循环。
+
+解决：并发的慢查询TASK的SQL方式（采用类似问题5的处理方案）进行优化以及调整客户端的超时设置。
+
+9，CU展开分组慢 平均2-3秒  must
+解决：试验了把key_buffer_size改至512M大小时效果足够好了，
+      补充，后面发现不稳定还是决定启动时主动预加载相关表。
+
+10, 后台定期计算license信息耗时48秒   must
+select a.modelId,a.licenseNum,a.manufacturer, count(b.devId) devNum from tblDeviceModel a 
+inner join tblDevice b on a.modelId=b.devModelId 
+where a.domainId='f986d5f0be4243fab03c9ccf83f8a2d5' and a.deviceTypeId=1 
+group by a.modelId,a.licenseNum,a.manufacturer
+
+原因：
+连接200W记录的时间很长
+
+解决：
+select a.modelId,a.licenseNum,a.manufacturer, count(b.devId) devNum from tblDeviceModel a 
+inner join tblDevice b on a.modelId=b.devModelId 
+where a.licenseNum>0 and a.domainId='f986d5f0be4243fab03c9ccf83f8a2d5' and a.deviceTypeId=1 
+group by a.modelId,a.licenseNum,a.manufacturer
+0.00 sec
+
+todo 还需要确保一下外厂商直接接入的限制的影响，看起来有问题
+      CLicenseAppData::ValidateOtherPULicense  ok
+      TLicenseUsageInfo::AddOtherPULicense ok
+
+11, 用户的设备数量查询慢
+call procCuserDevQryCount('4ab0c48bed854e74845b3cff03be39f0','f986d5f0be4243fab03c9ccf83f8a2d5','',-1, -1);
++-----------+
+| tNumCount |
++-----------+
+|         7 |
++-----------+
+1 row in set (29.48 sec)
+
+解决：优化至0.0X秒了
+
+二  后续优化
+1，字段特定语言（比如中文）排序  还需要考虑国标化方案
+目前没有完善的方案，utf8字符集必须使用convert才能按照拼音排序，这样效率又不高；
+采用gbk编码列存储，可以快速排序 但是他国语言时怎么办？
+
+2，pmc上任意跳转还没有优化方案
+

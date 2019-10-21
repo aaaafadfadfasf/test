@@ -1,0 +1,1 @@
+<CDeviceQryReq><event>TAS_DEVICE_QRY_REQ</event><seqNum>48</seqNum><session>Cu_In_Tas_Session</session><startEntryIndex>0</startEntryIndex><expectEntryNum>0</expectEntryNum><condition><optionField /><usedFlag>1</usedFlag><netType>4</netType></condition></CDeviceQryReq>

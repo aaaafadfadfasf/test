@@ -1,0 +1,115 @@
+package cdb_admin;
+ 
+import "cdb_common.proto";
+
+message AdminStatus {
+  enum ReturnCode {
+    OK = 1;
+    
+    // Generic failure
+    TIME_OUT = 2;
+    FAILED_TO_CONNECT = 3;
+    FAILED_OPEN_DISK = 4;
+    // <= 64MB    
+    DISK_TOO_SMALL = 5;
+    DISK_NOT_BELONGING_TO_CLUSTER = 6;    
+      
+    // FormatChunkDisk failure
+    DISK_FORMATTED = 101;
+    DISK_EXISTING_IN_CLUSTER = 102;    
+    
+    // StartChunkDisk failure
+    DISK_NOT_FORMATTED = 201;
+    DISK_NOT_BELONGING_TO_CHUNK_SERVER = 202;
+    
+    HAVE_DISK_RUNNING = 801;
+    
+    INVALID_ARGUMENT = 901;
+  }
+  
+  required ReturnCode code = 1 [default = OK];
+  optional string error = 2;
+}
+
+message FormatDiskReq {  
+  required string cluster_name = 1;
+  required bytes cluster_uuid = 2;  
+  
+  required string disk_uuid = 3;
+  required string disk_name = 4;
+  
+  // Format already-formatted disk
+  required bool force_format = 5 [default = false]; 
+}
+
+message MetaNode {
+  // Requires id > 0
+  required uint32 id = 1;
+  // MetaAdminClient connects to meta_port.
+  required uint32 meta_port = 2;
+  required uint32 election_port = 3;   
+  required string primary_ip = 4;
+  optional string secondary_ip = 5;
+}
+
+message MetaCluster {
+  required string cluster_name = 1;
+  required bytes cluster_uuid = 2;
+  required uint32 meta_service_port = 3;
+  repeated MetaNode node = 4;  
+}
+
+message MetaServerConf {
+  required MetaCluster cluster = 1;
+  // my_id equals to one MetaNode.id
+  required uint32 my_id = 2;
+  required string db_disk_name = 3;  
+  required string db_ram_cache_dir = 5;
+  optional string local_backup_dir = 6;
+  optional bool has_bbu = 7;
+}
+
+message ChunkServerConf {
+  required MetaCluster cluster = 1;
+  // ChunkAdminClient connects to chunk_port.  
+  required uint32 chunk_port = 2;
+  // chunk_ips is required.
+  repeated string chunk_ips = 3;
+  required string db_disk_name = 4;
+  required string db_ram_cache_dir = 5;
+  optional string local_backup_dir = 6;
+  optional bool has_bbu = 7;
+  
+  optional string zone_name = 8;
+  optional string machine_id = 9;
+}
+
+enum MetaState {  
+  SLAVE = 1;
+  MASTER_CANDIDATE = 2;
+  MASTER = 3;
+}
+
+message StatMetaReq {
+  required string user = 1;
+  required string password = 2;
+}
+
+message MetaStat {
+  required MetaState state = 1;
+  optional uint32 leader_id = 2;
+  optional MetaDiskStat meta_disk = 3;
+  optional bytes internal_cluster_uuid = 4;
+  optional bytes version = 5;
+}
+
+message AdminReq {
+  optional bool exit = 1;
+  optional bool stop = 2;
+  optional bool power_off = 3;
+  optional string backup_path = 4;
+}
+
+message AdminLoginReq {
+  required bytes version = 1;
+}

@@ -1,0 +1,1 @@
+<CDeviceAddNtfReq><event>TAS_DEVICE_ADD_NTF_REQ</event><seqNum>43</seqNum><session>Cu_In_Tas_Session</session><info><type>0</type><propertyFlags /><usedFlag>1</usedFlag><netType>4</netType></info></CDeviceAddNtfReq>

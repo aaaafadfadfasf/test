@@ -1,0 +1,14 @@
+﻿使用说明
+一、cleangbdevbyua.sh 用于清理指定国标UA的所有数据（该脚本删除整个国标下级域设备使其重新获取）
+1、上传cleangbdevbyua.sh 到平台任意目录，并给cleangbdevbyua.sh增加
+    可执行权限（chmod +x cleangbdevbyua.sh .sh）
+    
+2、执行./cleangbdevbyua.sh  gbua
+
+3、最后会提示所清理数据备份的路径：
+   all device's info need to clean exported to file[文件及目录]
+   可以根据该文件校验是否删除了所要删除的数据；
+   可以校验是否错误删除了数据。
+
+
+备注：该脚本主要用于在上级主动删除下级推送上来的所有数据信息，然后在上级重新获取。

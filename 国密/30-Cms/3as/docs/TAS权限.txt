@@ -1,0 +1,55 @@
+CTvwallPrivilege  CAlarmInputPrivilege   这两个只具有是否拥有的权限，并且cu上没有告警输入划归的应用
+
+
+CDevicePrivilege  CEncoderPrivilege
+class CEncoderPrivilege: public CBitsContainer
+{ // 编码器权限
+public:
+    CEncoderPrivilege(){}
+    enum TPrivilege
+    {
+        en_Vod_Rec              = 1, // 前端录像
+        en_Vod_Play             = 2, // 前端放像
+        en_Vod_Del              = 3, // 前端录像删除
+        en_Vod_Download         = 4, // 前端录像下载
+
+        en_Param_Config         = 5, // 前端参数设置
+        en_IO_Ctrl              = 6, // 前端开关量输出控制
+        en_Defence_Ctrl         = 7, // 布防/撤防
+
+
+
+class CVideosourcePrivilege: public CBitsContainer
+{ // 视频源权限
+public:
+    CVideosourcePrivilege(){}
+    enum TPrivilege
+    {
+        en_PTZ_Ctrl              = 1,  // 云镜控制(1-CMS_PTZ_MAX_PRI_LEV)级 共占用CMS_PTZ_MAX_PRI_LEV位(为了XML便于阅读)
+        en_AUDIO_PLAY            = 11, // 声音播放
+		en_PrePos_Set            = 12, // 预置位设置   [12/10/2015 pangubing]
+		en_PTZ_Lock              = 13  // PTZ锁定   [3/28/2016 pangubing]
+
+
+
+class CUserPrivilege: public CBitsContainer     用户权限
+{ // cu用户权限位
+public:
+    CUserPrivilege(){}
+    enum TPrivilege
+    {
+        en_Vod_Rec              = 1, // 平台录像 第一位
+        en_Vod_Play             = 2, // 平台放像
+        en_Vod_Del              = 3, // 平台录像删除
+        en_Vod_Download         = 4, // 平台录像下载
+        en_Vod_Local_Rec        = 5, // 本地录像，本地抓拍
+        en_Rec_Query_Remote     = 6, // 跨域录像查询
+
+        en_Call_Ctrl            = 7,  // 呼叫控制
+        en_Alarm_Manage         = 8,  // 现场告警管理
+
+        // 下面两权限暂时用不到, 先注释掉
+        //en_Explore              = 9,  // 视频浏览权限
+        //en_Cycle_Explore        = 10, // 轮巡权限
+    };
+

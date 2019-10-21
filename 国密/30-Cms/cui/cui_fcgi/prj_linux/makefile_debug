@@ -1,0 +1,58 @@
+###
+### Copyright (c) 2004 Keda Telecom, Inc.
+###
+
+#########################################################################
+###
+###  DESCRIPTION:
+###    Common definitions for all Makefiles in cui_fcgi linux project.
+###
+#########################################################################
+
+TOP := ..
+
+COMM_DIR := ../../../../10-Common/include
+
+SRC_DIR := $(TOP)/src
+
+## Name and type of the target for this Makefile
+
+APP_TARGET := cui.fcgi
+
+## Define debugging symbols
+DEBUG = 1
+# _EQUATOR_, _HHPPC_, _LINUX_ and so on
+LINUX_COMPILER=_LINUX_
+
+CFLAGS += -D_LINUX_
+CFLAGS += -m32 -DWITH_FASTCGI
+CFLAGS += -fno-omit-frame-pointer
+CFLAGS += -Wformat
+
+PWLIB_SUPPORT = 0
+
+## Object files that compose the target(s)
+
+CPP_FILES = $(wildcard $(SRC_DIR)/*.cpp $(TOP)/soap/soapC.cpp $(TOP)/soap/soapcusdkService.cpp $(COMM_DIR)/system/soap/stdsoap2.cpp $(TOP)/../cui_server/src/cuistruct.cpp $(TOP)/../cui_server/src/transutility.cpp $(COMM_DIR)/cbb/sip/testsecurity.cpp $(COMM_DIR)/cms/security_module/security_module_proto.cpp $(COMM_DIR)/cms/security_module/security_module_proto_dependent.cpp)
+
+OBJS := $(CPP_FILES:%.cpp=%)
+
+
+## Add driver-specific include directory to the search path
+
+INC_PATH += $(TOP)/include \
+            $(TOP)/../common \
+			$(TOP)/../cui_server/include \
+            $(COMM_DIR) \
+			$(COMM_DIR)/system/soap \
+			$(COMM_DIR)/system/libfcgi/include \
+			$(COMM_DIR)/cbb/kdssl-ext
+
+
+## Libraries to include in shared object file
+LIB_PATH += ../../../../10-Common/lib/debug/linux
+
+LIBS := pthread rt uuid kdsip ospext  kdmutil cmcfg cmsproto tinyxml kdssl-ext skf kdcrypto kdvencrypt  osp kdvsys dl z sysdbg fcgi
+			
+INSTALL_APP_PATH := ../../../../10-Common/version/debug/linux/cui
+include $(COMM_DIR)/common.mk

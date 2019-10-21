@@ -1,0 +1,37 @@
+1， 
+
+	void SetOperUuid(const UUIDString &val)
+	{
+		operUuid = val;
+	}
+	const UUIDString &GetOperUuid() const
+	{
+		return operUuid;
+	}
+	UUIDString &GetOperUuid()
+	{
+		return operUuid;
+	}
+
+private:
+	UUIDString operUuid;				// 操作Id，标志唯一的一次操作，用于后续查询进度
+	
+	
+	兼容性通过operUuid来解决：
+	    老版本CU新版本平台时，CU不识别它，直接认为成功了，数据量少的场景OK的  数据量大的场景有延时
+	    新版本CU老版本平台时，CU通过判断operUuid非空来决定是否要查询进度
+	    
+	TAS_CUSER_DEL_RSP
+	TAS_CUSER_GROUP_DEL_RSP
+	
+	
+	
+	string strTransTag = CUUID();
+			g_cDbTaskPool.AddTransProgress(strTransTag, vctGroups.size(), 0);		// 登记初始处理进度
+
+
+
+	
+	
+	
+	

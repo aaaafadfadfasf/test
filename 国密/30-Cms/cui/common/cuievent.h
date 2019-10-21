@@ -1,0 +1,214 @@
+/*****************************************************************************
+   模块名      : cui_fcgi 
+   文件名      : cuievent.h
+   相关文件    : 
+   文件实现功能: 定义cuifcgi与cuiserver之间的内部消息
+   作者        : liangli
+   版本        : vs_phoenix  Copyright(C) 2009-2015 KDC, All rights reserved.
+-----------------------------------------------------------------------------
+   修改记录:
+   日  期      版本        修改人      修改内容
+   2012/1/6   1.0         liangli        创建
+******************************************************************************/
+#ifndef _CUI_EVENT_H_
+#define _CUI_EVENT_H_
+
+//#include "cms/cms_eventid.h"
+//#include "cms/cms_proto.h"
+
+enum ECUI_EVENT
+{
+	CU_CUI_INNER_EVENT_BEGIN  = USER_INNER_MSG_BEGIN,
+    CU_CUI_WEBSERVICE_REQ = CU_CUI_INNER_EVENT_BEGIN,       //所有WebService接口与SIP一一对应的消息用此消息号
+    CUI_CU_WEBSERVICE_RSP,
+    CUI_REG_CMU_TIMER,              //向CMU注册定时器, 两种情况下使用: 1, 连接上Proxy后；2，和CMU断链后
+	CUI_WAIT_CMU_REG_RSP_TIMER,     //等待CMU的注册应答定时器，以防超时
+	CUI_CONNECT_REDIS_TIMER,            //连接REDIS数据库定时器
+	CUI_UPDATE_NETSEG_TIMER,        //更新注册网段信息定时器
+    CU_CUI_GET_NOTIFY_REQ,          //CU向CUI发送心跳保活, 消息体CGetNotifyReq
+    CUI_CU_GET_NOTIFY_RSP,          //CUI向CU应答所有的通知消息, 消息体CGetNotifyRsp
+    CU_CUI_SUBSCRIBE_PUSTATUS_REQ,  //订阅PU状态请求，可能订阅四种状态
+    CUI_CU_SUBSCRIBE_PUSTATUS_RSP,  //订阅PU状态应答
+    CU_CUI_UNSUBSCRIBE_PUSTATUS_REQ,  //取消订阅PU状态请求，可能取消多种状态订阅
+    CUI_CU_UNSUBSCRIBE_PUSTATUS_RSP,  //取消订阅PU状态应答
+    CU_CUI_INVITE_ACK_REQ,
+    CUI_CU_INVITE_ACK_RSP,          //因为CUI都是请求应答模式，为了满足INVITE_ACK有应答而添加
+    CU_CUI_INVITE_BYE_REQ,
+    CUI_CU_INVITE_BYE_RSP,          //BYE实际上不需要消息体，但是为了满足CUI请求应答模式而添加
+    CU_CUI_INVITE_PLAY_PLATFORMRECORD_REQ,
+    //CU_CUI_INVITE_PLAY_PLATFORMRECORD_RSP,
+    CU_CUI_INVITE_ACK_PLAY_PLATFORMRECORD_REQ,
+    CU_CUI_INVITE_ACK_PLAY_PLATFORMRECORD_RSP,
+    CU_CUI_INVITE_BYE_PLAY_PLATFORMRECORD_REQ,
+    //CU_CUI_INVITE_BYE_PLAY_PLATFORMRECORD_RSP,
+    CU_CUI_INVITE_PLAY_DOWNLOADPLATFORMRECORD_REQ,
+    //CU_CUI_INVITE_PLAY_DOWNLOADPLATFORMRECORD_RSP,
+    CU_CUI_INVITE_ACK_DOWNLOADPLATFORMRECORD_REQ,
+    CU_CUI_INVITE_ACK_DOWNLOADPLATFORMRECORD_RSP,
+    CU_CUI_INVITE_BYE_DOWNLOADPLATFORMRECORD_REQ,
+    //CU_CUI_INVITE_BYE_DOWNLOADPLATFORMRECORD_RSP,
+    CU_CUI_CHANGE_PASSWORD_REQ,
+    CU_CUI_PLAYBACK_PROGRESS_QUERY_REQ,
+    CU_CUI_PLAYBACK_PROGRESS_QUERY_RSP,
+    CU_CUI_INVITE_PLAY_DOWNLOADPURECORD_REQ,
+    CU_CUI_INVITE_STOP_DOWNLOADPURECORD_REQ,
+    CU_CUI_INVITE_PLAY_PURECORD_REQ,
+    CU_CUI_INVITE_STOP_PURECORD_REQ,
+    CU_CUI_GET_EXPORT_PROCESS_REQ,		// CCuGetExportProcessReq 仅限于和3A UAS通信，旧接口
+	CU_CUI_GET_EXPORT_PROCESS_RSP,		// CCuGetExportProcessRsp 
+    CU_CUI_STOP_EXPORT_REQ,
+    CU_CUI_STOP_EXPORT_RSP,
+    CU_CUI_PU_REC_QRY_REQ,
+    CU_CUI_PU_REC_QRY_RSP,
+	CUI_NATDETECT_CALLBACK,  // NAT探测包回调
+	CU_CUI_CU_PROPERTY_REQ,
+	CU_CUI_CU_PROPERTY_RSP,
+	CU_CUI_INNER_EVENT_END,          
+	CUI_CLEAR_VTDUNATPACKET, //清除vtdu NAT探测包信息
+	CU_CUI_OFFLINEDEV_QRY_REQ,
+	CU_CUI_OFFLINEDEV_QRY_RSP,
+	CUI_CLEAR_VTDUNATPACKET_TIMER,  // cu退出后，再次清空nat探测包
+	CU_CUI_FILE_EXPORT_START_EX_REQ,		// CCuFileExportStartExReq
+	CU_CUI_FILE_EXPORT_START_EX_RSP,		// CCuFileExportStartExRsp
+	CU_CUI_FILE_EXPORT_GET_PROCESS_EX_REQ,	// CCuFileExportGetProcessExReq
+	CU_CUI_FILE_EXPORT_GET_PROCESS_EX_RSP,	// CCuFileExportGetProcessExRsp
+	CU_CUI_FILE_EXPORT_STOP_EX_REQ,			// CCuFileExportStopExReq
+	CU_CUI_FILE_EXPORT_STOP_EX_RSP,			// CCuFileExportStopExRsp
+	CU_CUI_FILE_IMPORT_START_EX_REQ,		// CCuFileImportStartExReq
+	CU_CUI_FILE_IMPORT_START_EX_RSP,		// CCuFileImportStartExRsp
+	CU_CUI_FILE_IMPORT_SET_PROCESS_EX_REQ,	// CCuFileImportSetProcessExReq
+	CU_CUI_FILE_IMPORT_SET_PROCESS_EX_RSP,	// CCuFileImportSetProcessExRsp
+	CU_CUI_FILE_IMPORT_STOP_EX_REQ,			// CCuFileImportStopExReq
+	CU_CUI_FILE_IMPORT_STOP_EX_RSP,			// CCuFileImportStopExRsp
+	CUI_REDIS_NTF_CALLBACK,					// redis订阅通知的回调
+	CUI_REDIS_DISC,				            // redis断链
+	CU_CUI_DPS_SEARCH_REQ,                  // CCuDPSSearchReq
+	CU_CUI_DPS_SEARCH_RSP,                  // CCuDPSSearchRsp
+	CU_CUI_DPS_GET_SEARCH_RESULT_REQ,       // CCuDPSGetResultReq
+	CU_CUI_DPS_GET_SEARCH_RESULT_RSP,       // CCuDPSGetResultRsp
+	CU_CUI_DPS_GET_SEARCH_RESULT_BY_GROUP_REQ, // CCuDPSGetResultByGroupReq
+	CU_CUI_DPS_GET_SEARCH_RESULT_BY_GROUP_RSP, // CCuDPSGetResultByGroupRsp
+	CU_CUI_DPS_SEARCH_STOP_REQ,             // CCuDPSStopReq
+	CU_CUI_DPS_SEARCH_STOP_RSP,             // CCuDPSStopRsp
+    CU_CUI_GET_USER_VIDEOSRC_LIST_REQ,      // CCuUserDevGrpVidsrcQryReq
+    CU_CUI_GET_USER_VIDEOSRC_LIST_RSP,      // CCuUserDevGrpVidsrcQryRsp
+	CU_CUI_BATCH_OPT_REQ,					// CCuBatOptReq
+	CU_CUI_BATCH_OPT_RSP,					// CCuBatOptRsp
+	CU_CUI_GET_DEV_INFO_AND_STATUS_REQ,     // CCuGetDevInfoAndStatusReq
+	CU_CUI_GET_DEV_INFO_AND_STATUS_RSP,     // CCuGetDevInfoAndStatusRsp
+	CU_CUI_START_ENCODER_TRANS_NTF_REQ,		// CCuStartEncoderTransNtfReq
+	CU_CUI_START_ENCODER_TRANS_NTF_RSP,		// CCuStartEncoderTransNtfRsp
+    CU_CUI_DEV_RECORD_SVR_QRY_REQ,          // CDeviceRecordSvrQryReq
+    CU_CUI_DEV_RECORD_SVR_QRY_RSP,          // CDeviceRecordSvrQryRsp
+	CUI_BAT_OPT_TASK_NTF,           //批量任务循环通知
+	CUI_BAT_OPT_TASK_TIMER,         //批量任务循环定时器
+
+	CU_CUI_SECURE_CERTIFICATE_QRY_REQ,      // CCuCertificateQryReq
+	CU_CUI_SECURE_CERTIFICATE_QRY_RSP,      // CCuCertificateQryRsp
+	CU_CUI_SECURITY_AUTHORIZATION_FIRST_REQ, // CCuSecurityAuthorizationFirstReq
+	CU_CUI_SECURITY_AUTHORIZATION_FIRST_RSP, // CCuSecurityAuthorizationFirstRsp
+	CU_CUI_SECURITY_AUTHORIZATION_SECOND_REQ,// CCuSecurityAuthorizationSecondReq
+	CU_CUI_SECURITY_AUTHORIZATION_SECOND_RSP,// CCuSecurityAuthorizationSecondRsp
+};
+
+
+inline void InitCuiEventDesc()
+{
+    //多个模块重复调用时，只需初始化一次
+    static bool bInit = false;
+    if(bInit)
+    {
+        return;
+    }
+    bInit = true;
+
+    OSP_ADD_EVENT_DESC(CU_CUI_WEBSERVICE_REQ);                   //所有WebService接口与SIP一一对应的消息用此消息号
+    OSP_ADD_EVENT_DESC(CUI_CU_WEBSERVICE_RSP);                   
+    OSP_ADD_EVENT_DESC(CUI_REG_CMU_TIMER);                       //向CMU注册定时器, 两种情况下使用: 1, 连接上Proxy后；2，和CMU断链后
+    OSP_ADD_EVENT_DESC(CUI_WAIT_CMU_REG_RSP_TIMER);              //等待CMU的注册应答定时器，以防超时
+    OSP_ADD_EVENT_DESC(CUI_CONNECT_REDIS_TIMER);                 //连接REDIS数据库定时器
+    OSP_ADD_EVENT_DESC(CUI_UPDATE_NETSEG_TIMER);                 //更新注册网段信息定时器
+    OSP_ADD_EVENT_DESC(CU_CUI_GET_NOTIFY_REQ);                   //CU向CUI发送心跳保活, 消息体CGetNotifyReq
+    OSP_ADD_EVENT_DESC(CUI_CU_GET_NOTIFY_RSP);                   //CUI向CU应答所有的通知消息, 消息体CGetNotifyRsp
+    OSP_ADD_EVENT_DESC(CU_CUI_SUBSCRIBE_PUSTATUS_REQ);           //订阅PU状态请求，可能订阅四种状态
+    OSP_ADD_EVENT_DESC(CUI_CU_SUBSCRIBE_PUSTATUS_RSP);           //订阅PU状态应答
+    OSP_ADD_EVENT_DESC(CU_CUI_UNSUBSCRIBE_PUSTATUS_REQ);         //取消订阅PU状态请求，可能取消多种状态订阅
+    OSP_ADD_EVENT_DESC(CUI_CU_UNSUBSCRIBE_PUSTATUS_RSP);         //取消订阅PU状态应答
+    OSP_ADD_EVENT_DESC(CU_CUI_INVITE_ACK_REQ);                   
+    OSP_ADD_EVENT_DESC(CUI_CU_INVITE_ACK_RSP);                   //因为CUI都是请求应答模式，为了满足INVITE_ACK有应答而添加
+    OSP_ADD_EVENT_DESC(CU_CUI_INVITE_BYE_REQ);                   
+    OSP_ADD_EVENT_DESC(CUI_CU_INVITE_BYE_RSP);                   //BYE实际上不需要消息体，但是为了满足CUI请求应答模式而添加
+    OSP_ADD_EVENT_DESC(CU_CUI_INVITE_PLAY_PLATFORMRECORD_REQ);   
+    OSP_ADD_EVENT_DESC(CU_CUI_INVITE_ACK_PLAY_PLATFORMRECORD_REQ);
+    OSP_ADD_EVENT_DESC(CU_CUI_INVITE_ACK_PLAY_PLATFORMRECORD_RSP);
+    OSP_ADD_EVENT_DESC(CU_CUI_INVITE_BYE_PLAY_PLATFORMRECORD_REQ);
+    OSP_ADD_EVENT_DESC(CU_CUI_INVITE_PLAY_DOWNLOADPLATFORMRECORD_REQ);
+    OSP_ADD_EVENT_DESC(CU_CUI_INVITE_ACK_DOWNLOADPLATFORMRECORD_REQ);
+    OSP_ADD_EVENT_DESC(CU_CUI_INVITE_ACK_DOWNLOADPLATFORMRECORD_RSP);
+    OSP_ADD_EVENT_DESC(CU_CUI_INVITE_BYE_DOWNLOADPLATFORMRECORD_REQ);
+    OSP_ADD_EVENT_DESC(CU_CUI_CHANGE_PASSWORD_REQ);              
+    OSP_ADD_EVENT_DESC(CU_CUI_PLAYBACK_PROGRESS_QUERY_REQ);      
+    OSP_ADD_EVENT_DESC(CU_CUI_PLAYBACK_PROGRESS_QUERY_RSP);      
+    OSP_ADD_EVENT_DESC(CU_CUI_INVITE_PLAY_DOWNLOADPURECORD_REQ); 
+    OSP_ADD_EVENT_DESC(CU_CUI_INVITE_STOP_DOWNLOADPURECORD_REQ); 
+    OSP_ADD_EVENT_DESC(CU_CUI_INVITE_PLAY_PURECORD_REQ);         
+    OSP_ADD_EVENT_DESC(CU_CUI_INVITE_STOP_PURECORD_REQ);         
+    OSP_ADD_EVENT_DESC(CU_CUI_GET_EXPORT_PROCESS_REQ);           // CCuGetExportProcessReq 仅限于和3A UAS通信，旧接口
+    OSP_ADD_EVENT_DESC(CU_CUI_GET_EXPORT_PROCESS_RSP);           // CCuGetExportProcessRsp 
+    OSP_ADD_EVENT_DESC(CU_CUI_STOP_EXPORT_REQ);                  
+    OSP_ADD_EVENT_DESC(CU_CUI_STOP_EXPORT_RSP);                  
+    OSP_ADD_EVENT_DESC(CU_CUI_PU_REC_QRY_REQ);                   
+    OSP_ADD_EVENT_DESC(CU_CUI_PU_REC_QRY_RSP);                   
+    OSP_ADD_EVENT_DESC(CUI_NATDETECT_CALLBACK);                  // NAT探测包回调
+    OSP_ADD_EVENT_DESC(CU_CUI_CU_PROPERTY_REQ);                  
+    OSP_ADD_EVENT_DESC(CU_CUI_CU_PROPERTY_RSP);                  
+    OSP_ADD_EVENT_DESC(CUI_CLEAR_VTDUNATPACKET);                 //清除vtdu NAT探测包信息
+    OSP_ADD_EVENT_DESC(CU_CUI_OFFLINEDEV_QRY_REQ);               
+    OSP_ADD_EVENT_DESC(CU_CUI_OFFLINEDEV_QRY_RSP);               
+    OSP_ADD_EVENT_DESC(CUI_CLEAR_VTDUNATPACKET_TIMER);           // cu退出后，再次清空nat探测包
+    OSP_ADD_EVENT_DESC(CU_CUI_FILE_EXPORT_START_EX_REQ);         // CCuFileExportStartExReq
+    OSP_ADD_EVENT_DESC(CU_CUI_FILE_EXPORT_START_EX_RSP);         // CCuFileExportStartExRsp
+    OSP_ADD_EVENT_DESC(CU_CUI_FILE_EXPORT_GET_PROCESS_EX_REQ);   // CCuFileExportGetProcessExReq
+    OSP_ADD_EVENT_DESC(CU_CUI_FILE_EXPORT_GET_PROCESS_EX_RSP);   // CCuFileExportGetProcessExRsp
+    OSP_ADD_EVENT_DESC(CU_CUI_FILE_EXPORT_STOP_EX_REQ);          // CCuFileExportStopExReq
+    OSP_ADD_EVENT_DESC(CU_CUI_FILE_EXPORT_STOP_EX_RSP);          // CCuFileExportStopExRsp
+    OSP_ADD_EVENT_DESC(CU_CUI_FILE_IMPORT_START_EX_REQ);         // CCuFileImportStartExReq
+    OSP_ADD_EVENT_DESC(CU_CUI_FILE_IMPORT_START_EX_RSP);         // CCuFileImportStartExRsp
+    OSP_ADD_EVENT_DESC(CU_CUI_FILE_IMPORT_SET_PROCESS_EX_REQ);   // CCuFileImportSetProcessExReq
+    OSP_ADD_EVENT_DESC(CU_CUI_FILE_IMPORT_SET_PROCESS_EX_RSP);   // CCuFileImportSetProcessExRsp
+    OSP_ADD_EVENT_DESC(CU_CUI_FILE_IMPORT_STOP_EX_REQ);          // CCuFileImportStopExReq
+    OSP_ADD_EVENT_DESC(CU_CUI_FILE_IMPORT_STOP_EX_RSP);          // CCuFileImportStopExRsp
+    OSP_ADD_EVENT_DESC(CUI_REDIS_NTF_CALLBACK);                  // redis订阅通知的回调
+    OSP_ADD_EVENT_DESC(CUI_REDIS_DISC);                          // redis断链
+    OSP_ADD_EVENT_DESC(CU_CUI_DPS_SEARCH_REQ);                   // CCuDPSSearchReq
+    OSP_ADD_EVENT_DESC(CU_CUI_DPS_SEARCH_RSP);                   // CCuDPSSearchRsp
+    OSP_ADD_EVENT_DESC(CU_CUI_DPS_GET_SEARCH_RESULT_REQ);        // CCuDPSGetResultReq
+    OSP_ADD_EVENT_DESC(CU_CUI_DPS_GET_SEARCH_RESULT_RSP);        // CCuDPSGetResultRsp
+    OSP_ADD_EVENT_DESC(CU_CUI_DPS_GET_SEARCH_RESULT_BY_GROUP_REQ);// CCuDPSGetResultByGroupReq
+    OSP_ADD_EVENT_DESC(CU_CUI_DPS_GET_SEARCH_RESULT_BY_GROUP_RSP);// CCuDPSGetResultByGroupRsp
+    OSP_ADD_EVENT_DESC(CU_CUI_DPS_SEARCH_STOP_REQ);              // CCuDPSStopReq
+    OSP_ADD_EVENT_DESC(CU_CUI_DPS_SEARCH_STOP_RSP);              // CCuDPSStopRsp
+    OSP_ADD_EVENT_DESC(CU_CUI_GET_USER_VIDEOSRC_LIST_REQ);       // CCuUserDevGrpVidsrcQryReq
+    OSP_ADD_EVENT_DESC(CU_CUI_GET_USER_VIDEOSRC_LIST_RSP);       // CCuUserDevGrpVidsrcQryRsp
+    OSP_ADD_EVENT_DESC(CU_CUI_BATCH_OPT_REQ);                    // CCuBatOptReq
+    OSP_ADD_EVENT_DESC(CU_CUI_BATCH_OPT_RSP);                    // CCuBatOptRsp
+    OSP_ADD_EVENT_DESC(CU_CUI_GET_DEV_INFO_AND_STATUS_REQ);      // CCuGetDevInfoAndStatusReq
+    OSP_ADD_EVENT_DESC(CU_CUI_GET_DEV_INFO_AND_STATUS_RSP);      // CCuGetDevInfoAndStatusRsp
+    OSP_ADD_EVENT_DESC(CU_CUI_START_ENCODER_TRANS_NTF_REQ);      // CCuStartEncoderTransNtfReq
+    OSP_ADD_EVENT_DESC(CU_CUI_START_ENCODER_TRANS_NTF_RSP);      // CCuStartEncoderTransNtfRsp
+    OSP_ADD_EVENT_DESC(CU_CUI_DEV_RECORD_SVR_QRY_REQ);           // CDeviceRecordSvrQryReq
+    OSP_ADD_EVENT_DESC(CU_CUI_DEV_RECORD_SVR_QRY_RSP);           // CDeviceRecordSvrQryRsp
+    OSP_ADD_EVENT_DESC(CUI_BAT_OPT_TASK_NTF);                    //批量任务循环通知
+    OSP_ADD_EVENT_DESC(CUI_BAT_OPT_TASK_TIMER);                  //批量任务循环定时器
+    OSP_ADD_EVENT_DESC(CU_CUI_SECURE_CERTIFICATE_QRY_REQ);       // CCuCertificateQryReq
+    OSP_ADD_EVENT_DESC(CU_CUI_SECURE_CERTIFICATE_QRY_RSP);       // CCuCertificateQryRsp
+    OSP_ADD_EVENT_DESC(CU_CUI_SECURITY_AUTHORIZATION_FIRST_REQ); // CCuSecurityAuthorizationFirstReq
+    OSP_ADD_EVENT_DESC(CU_CUI_SECURITY_AUTHORIZATION_FIRST_RSP); // CCuSecurityAuthorizationFirstRsp
+    OSP_ADD_EVENT_DESC(CU_CUI_SECURITY_AUTHORIZATION_SECOND_REQ);// CCuSecurityAuthorizationSecondReq
+    OSP_ADD_EVENT_DESC(CU_CUI_SECURITY_AUTHORIZATION_SECOND_RSP);// CCuSecurityAuthorizationSecondRsp
+}
+
+//#define CU_PTZ_CTRL_HOLD_TIME 60 //默认CU的PTZ控制把持时间(秒)
+
+#endif
+

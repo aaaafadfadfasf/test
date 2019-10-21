@@ -1,0 +1,1 @@
+<CDeviceGroupDeviceQryReq><event>TAS_DEVICE_GROUP_DEVICE_QRY_REQ</event><seqNum>93</seqNum><session>Cu_In_Tas_Session</session><startEntryIndex>0</startEntryIndex><expectEntryNum>0</expectEntryNum><condition><optionField /><deviceCapID>0</deviceCapID><deviceCapIndex>-1</deviceCapIndex></condition></CDeviceGroupDeviceQryReq>

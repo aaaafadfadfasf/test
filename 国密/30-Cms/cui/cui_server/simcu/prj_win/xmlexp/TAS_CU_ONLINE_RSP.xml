@@ -1,0 +1,7 @@
+<CCuOnlineRsp>
+	<event>TAS_CU_ONLINE_RSP</event>
+	<seqNum>0</seqNum>
+	<session>Cu_In_Tas_Session</session>
+	<errorCode>0</errorCode>
+	<cuSessionId>Cu_In_Tas_Session</cuSessionId>
+</CCuOnlineRsp>

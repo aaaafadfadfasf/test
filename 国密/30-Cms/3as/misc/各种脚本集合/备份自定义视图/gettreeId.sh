@@ -1,0 +1,1 @@
+mysql KDMAAA -e "select * from tblDevTree"

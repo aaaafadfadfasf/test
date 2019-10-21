@@ -1,0 +1,28 @@
+问题现象：使用redis-cli -a kedacom连接不上服务器
+问题分析：redis服务器日志中未见异常，XXH说redis的堆栈正在一个循环之中。
+
+todo 待进一步分析，因为之前gbu也出现过一次，与redis只建立了一个连接（本来需要建立2个的）。
+
+bash-4.1# pstack 91594
+Thread 3 (Thread 0x7fc2b27ff700 (LWP 91596)):
+#0  0x00007fc2b34bd63c in pthread_cond_wait@@GLIBC_2.3.2 () from /lib64/libpthread.so.0
+#1  0x000000000045eb15 in bioProcessBackgroundJobs ()
+#2  0x00007fc2b34b9a51 in start_thread () from /lib64/libpthread.so.0
+#3  0x00007fc2b320693d in clone () from /lib64/libc.so.6
+Thread 2 (Thread 0x7fc2b1ffe700 (LWP 91597)):
+#0  0x00007fc2b34bd63c in pthread_cond_wait@@GLIBC_2.3.2 () from /lib64/libpthread.so.0
+#1  0x000000000045eb15 in bioProcessBackgroundJobs ()
+#2  0x00007fc2b34b9a51 in start_thread () from /lib64/libpthread.so.0
+#3  0x00007fc2b320693d in clone () from /lib64/libc.so.6
+Thread 1 (Thread 0x7fc2b3d68720 (LWP 91594)):
+#0  0x000000000041c390 in dictNext ()
+#1  0x000000000043cb29 in setTypeNext ()
+#2  0x000000000043dea8 in sinterGenericCommand ()
+#3  0x0000000000420292 in call ()
+#4  0x0000000000420835 in processCommand ()
+#5  0x000000000042c7ff in processInputBuffer ()
+#6  0x000000000042c942 in readQueryFromClient ()
+#7  0x000000000041a60c in aeProcessEvents ()
+#8  0x000000000041a8cb in aeMain ()
+#9  0x0000000000423dba in main ()
+

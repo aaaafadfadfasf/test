@@ -1,0 +1,132 @@
+搜索某用户以某分组为根分组的视频列表。
+
+原始：
+SELECT 
+	tblCuser2DeviceCap.devId, tblCuser2DeviceCap.devCapIndex 			
+	, tblDevice.devname, tblDevice.devModelId, tblDevice.domainId 			
+    , tblDevGrp2Dev.devgroupId 			
+    , tblDeviceCapIndexData.deviceCapIndexName ,tblDeviceCapIndexData.deviceCapIndexExtData 	
+    , tblDeviceModel.capNum, tblDevGroup.groupName, tblDevGroup.fullpath 		     
+    , tblDomainRelation.domainName 		
+FROM 
+	tblCuser2DeviceCap LEFT OUTER JOIN tblDeviceCapIndexData 	
+	ON tblCuser2DeviceCap.devId = tblDeviceCapIndexData.deviceId 			
+        AND tblCuser2DeviceCap.devCapIndex = tblDeviceCapIndexData.deviceCapIndex 			
+        AND tblCuser2DeviceCap.devCapId = tblDeviceCapIndexData.deviceCapId 			
+	, tblDevice 			
+    , tblDeviceModel 			, tblDevGrp2Dev 			, tblDevGroup 			
+    , tblDomainRelation 		
+WHERE			
+	tblCuser2DeviceCap.devCapId = 1 			
+    AND (tblDevGroup.fullPath like "%f986d5f0be4243fab03c9ccf83f8a2d5%" 			
+		OR tblDevGroup.devgroupId = "f986d5f0be4243fab03c9ccf83f8a2d5" )
+    AND tblCuser2DeviceCap.cuserId = "f986d5f0be4243fab03c9ccf83f8a2d5" 		     
+    AND tblDevice.devId = tblCuser2DeviceCap.devId 			
+    AND tblDevGrp2Dev.devCapIndex = tblCuser2DeviceCap.devCapIndex 			
+    AND tblDeviceModel.modelId = tblDevice.devModelId 			
+    AND tblDeviceModel.devCapId = tblCuser2DeviceCap.devCapId 			
+    AND tblDevGrp2Dev.devId = tblCuser2DeviceCap.devId 			
+    AND tblDevGrp2Dev.devCapIndex = tblCuser2DeviceCap.devCapIndex 			
+    AND tblDevGroup.devgroupId = tblDevGrp2Dev.devgroupId 			
+    AND tblDevice.domainId = tblDomainRelation.domainId
+
+time: 53secs   devgroupId='asdff3ffce5cf64b0482bb192a510001'时为25secs 
+    
+
+分析：
+devId, devCapIndex, devName, devModelId, domainId, devgroupId, 
+deviceCapIndexName, deviceCapIndexExtData, capNum, groupName, fullpath, domainName
+
+
+select devgroupId from tblDevGroup
+where fullPath like "%f986d5f0be4243fab03c9ccf83f8a2d5%"
+union all
+select 'f986d5f0be4243fab03c9ccf83f8a2d5' devgroupId
+ 
+
+select * from 
+(select devgroupId from tblDevGroup 
+where fullPath like '%f986d5f0be4243fab03c9ccf83f8a2d5%' 
+union all 
+select 'f986d5f0be4243fab03c9ccf83f8a2d5' devgroupId) a,
+tblDevGrp2Dev b, tblCuser2DeviceCap c 
+where b.devgroupId=a.devgroupId and b.devCapId=1 and c.cuserId='f986d5f0be4243fab03c9ccf83f8a2d5' 
+and c.devId=b.devId and c.devCapId=1 and c.devCapIndex=b.devCapIndex  
+
+time:27 secs   devgroupId='asdff3ffce5cf64b0482bb192a510001'时为0.05 secs
+
+
+
+time: 0.02 secs
+select c.devId, c.devCapIndex, a.devgroupId,a.groupName,a.fullPath  from 
+(select devgroupId,groupName,fullPath from tblDevGroup 
+where fullPath like '%asdff3ffce5cf64b0482bb192a510001%' 
+union all 
+select devgroupId,groupName,fullPath from tblDevGroup 
+where devgroupId='asdff3ffce5cf64b0482bb192a510001') a,
+tblDevGrp2Dev b, tblCuser2DeviceCap c 
+where b.devgroupId=a.devgroupId and b.devCapId=1 and c.cuserId='f986d5f0be4243fab03c9ccf83f8a2d5' 
+and c.devId=b.devId and c.devCapId=1 and c.devCapIndex=b.devCapIndex 
+
+
+time: 0.03 secs
+select c.devId, c.devCapIndex, a.devgroupId,a.groupName,a.fullPath, d.devName, d.devModelId, d.domainId 
+from (select devgroupId,groupName,fullPath from tblDevGroup 
+where fullPath like '%asdff3ffce5cf64b0482bb192a510001%' 
+union all 
+select devgroupId,groupName,fullPath from tblDevGroup 
+where devgroupId='asdff3ffce5cf64b0482bb192a510001') a,
+tblDevGrp2Dev b, tblCuser2DeviceCap c, tblDevice d  
+where b.devgroupId=a.devgroupId and b.devCapId=1 and c.cuserId='f986d5f0be4243fab03c9ccf83f8a2d5' 
+and c.devId=b.devId and c.devCapId=1 and c.devCapIndex=b.devCapIndex and d.devId=c.devId
+
+deviceCapIndexName, deviceCapIndexExtData
+d.devName, d.devModelId, d.domainId, e.domainName, f.capNum
+
+
+time: 45 secs
+select c.devId, c.devCapIndex, a.devgroupId,a.groupName,a.fullPath, d.devName, d.devModelId, d.domainId,
+e.domainName, f.capNum 
+from (select devgroupId,groupName,fullPath from tblDevGroup 
+where fullPath like '%asdff3ffce5cf64b0482bb192a510001%' 
+union all 
+select devgroupId,groupName,fullPath from tblDevGroup 
+where devgroupId='asdff3ffce5cf64b0482bb192a510001') a,
+tblDevGrp2Dev b, tblCuser2DeviceCap c, tblDevice d, tblDomainRelation e, tblDeviceModel f   
+where b.devgroupId=a.devgroupId and b.devCapId=1 and c.cuserId='f986d5f0be4243fab03c9ccf83f8a2d5' 
+and c.devId=b.devId and c.devCapId=1 and c.devCapIndex=b.devCapIndex and d.devId=c.devId 
+and e.domainId=d.domainId and f.modelId=d.devModelId and f.devCapId=1
+
+
+deviceCapIndexName, deviceCapIndexExtData
+
+
+
+time:0.03 secs
+select e.*,f.deviceCapIndexName,f.deviceCapIndexExtData from 
+(select c.devId, c.devCapIndex, a.devgroupId,a.groupName,a.fullPath, d.devName, d.devModelId, d.domainId 
+from (select devgroupId,groupName,fullPath from tblDevGroup 
+where fullPath like '%asdff3ffce5cf64b0482bb192a510001%' 
+union all 
+select devgroupId,groupName,fullPath from tblDevGroup 
+where devgroupId='asdff3ffce5cf64b0482bb192a510001') a,
+tblDevGrp2Dev b, tblCuser2DeviceCap c, tblDevice d  
+where b.devgroupId=a.devgroupId and b.devCapId=1 and c.cuserId='f986d5f0be4243fab03c9ccf83f8a2d5' 
+and c.devId=b.devId and c.devCapId=1 and c.devCapIndex=b.devCapIndex and d.devId=c.devId) e 
+left join tblDeviceCapIndexData f on f.deviceId=e.devId
+  
+time:0.04 secs
+select g.*,h.domainName,i.capNum from   
+(select e.*,f.deviceCapIndexName,f.deviceCapIndexExtData from 
+(select c.devId, c.devCapIndex, a.devgroupId,a.groupName,a.fullPath, d.devName, d.devModelId, d.domainId 
+from (select devgroupId,groupName,fullPath from tblDevGroup 
+where fullPath like '%asdff3ffce5cf64b0482bb192a510001%' 
+union all 
+select devgroupId,groupName,fullPath from tblDevGroup 
+where devgroupId='asdff3ffce5cf64b0482bb192a510001') a,
+tblDevGrp2Dev b, tblCuser2DeviceCap c, tblDevice d  
+where b.devgroupId=a.devgroupId and b.devCapId=1 and c.cuserId='f986d5f0be4243fab03c9ccf83f8a2d5' 
+and c.devId=b.devId and c.devCapId=1 and c.devCapIndex=b.devCapIndex and d.devId=c.devId) e 
+left join tblDeviceCapIndexData f on f.deviceId=e.devId) g, tblDomainRelation h, tblDeviceModel i 
+where h.domainId=g.domainId and i.modelId=g.devModelId and i.devCapId=1
+ 

@@ -1,0 +1,1 @@
+<CCuGetCuiListRsp><event>CU_GETCUILIST_RSP</event><seqNum>0</seqNum><session>Cu_In_Cmu_Session</session><errorCode>0</errorCode><addrList size="1"><item index="0"><ip>172.16.64.95</ip><port>1230</port></item></addrList></CCuGetCuiListRsp>

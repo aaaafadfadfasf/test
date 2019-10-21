@@ -1,0 +1,222 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="common">
+      <UniqueIdentifier>{a8f26314-22a1-4064-b502-8a66ed9cc71d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tasks">
+      <UniqueIdentifier>{6d9558b7-3fea-4e24-ad5d-41bd9d0b0e18}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="redis">
+      <UniqueIdentifier>{6914236f-da5c-4d16-a400-7039f6f0233e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tasks\normakcutasks">
+      <UniqueIdentifier>{5e6896ab-d5fe-4f03-a509-dccdcfd12299}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\main.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\cuiapp.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\transthread.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\cuidata.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\cuidbg.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\cuistruct.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\transutility.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\common.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\invitetasknatswitch.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\peinvitetasknatswitch.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\query_task4fetch.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\batoptchecktask.cpp">
+      <Filter>Tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\batopttask.cpp">
+      <Filter>Tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\dpssearchtask.cpp">
+      <Filter>Tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\culogintask.cpp">
+      <Filter>Tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\export_task.cpp">
+      <Filter>Tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\import_task.cpp">
+      <Filter>Tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\getptzlockuserinfotask.cpp">
+      <Filter>Tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\long_query_task.cpp">
+      <Filter>Tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\offlinevs_query_task.cpp">
+      <Filter>Tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\querydevgrouptask.cpp">
+      <Filter>Tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\recordontvtask.cpp">
+      <Filter>Tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\subscribe_task.cpp">
+      <Filter>Tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\redisdb.cpp">
+      <Filter>redis</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\normalcutask.cpp">
+      <Filter>Tasks\normakcutasks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\StreamAdapterSetter.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\StreamDecentrationAdapter.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\10-Common\include\cms\cmu\cmu_event.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\10-Common\include\cms\cmu\cmu_proto.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\10-Common\include\cms\cmu\cmu_struct.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\cuiproto.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\transutility.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cuiapp.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\transthread.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\10-Common\include\cms\tas\tas_event.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\10-Common\include\cms\tas\tas_proto.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\10-Common\include\cms\tas\tas_struct.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\10-Common\include\cms\cms_errorcode.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cuidata.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\cuistruct.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\cuievent.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cuidbg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\common.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\invitetasknatswitch.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\peinvitetasknatswitch.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\query_task4fetch.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\10-Common\include\sdk\fastdbsdk\fastdb.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\10-Common\include\sdk\fastdbsdk\keydef.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\batoptchecktask.h">
+      <Filter>Tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\batopttask.h">
+      <Filter>Tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\culogintask.h">
+      <Filter>Tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\dpssearchtask.h">
+      <Filter>Tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\export_task.h">
+      <Filter>Tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\getptzlockuserinfotask.h">
+      <Filter>Tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\import_task.h">
+      <Filter>Tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\long_query_task.h">
+      <Filter>Tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\offlinevs_query_task.h">
+      <Filter>Tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\querydevgrouptask.h">
+      <Filter>Tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\recordontvtask.h">
+      <Filter>Tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\subscribe_task.h">
+      <Filter>Tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\redisdb.h">
+      <Filter>redis</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\normalcutask.h">
+      <Filter>Tasks\normakcutasks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\StreamDecentrationAdapter.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

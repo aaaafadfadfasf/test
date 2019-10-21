@@ -1,0 +1,14 @@
+﻿使用说明
+
+一、新建一个设备组名和civilcode的对应文件（文件名任意，编码格式utf-8），
+    组名和civilcode使用(,)分隔，如附件testgrp所示。
+   
+二、上传setcivilcode.sh及上述新建的文件到平台任意目录，并给setcivilcode.sh增加
+    可执行权限（chmod +x setcivilcode.sh）
+    
+三、执行./setcivilcode.sh 新建文件 本域gbid
+
+异常：
+如果没有找到组名对应的组或者找到大于一个组则会打印：
+Invalid group [ 组名 ] can not find or find more than one
+	   

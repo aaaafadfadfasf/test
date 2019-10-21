@@ -1,0 +1,39 @@
+
+
+1、cu上要能显示出跨域授权的设备，信息是从3as获取的，所以3as需要有跨域授权的域信息、设备信息、设备型号信息、设备组信息、设备划归信息
+（这个过程通过后台配置完成，实现上可以通过脚本导入数据）
+
+
+2、跨域授权的设备要能实现浏览，首先必须要上线，上线通知来自于cmu，
+
+
+
+
+
+
+
+
+
+假设202和231是两个平级的平台，需要将202平台的设备vmt3授权给231平台，
+
+1、202平台上数据库的变动
+
+2、231平台上3as数据库的变动
+   a、设备型号表tblDeviceModel
+   b、设备表tblDevice
+   c、设备划归用户表tblCuser2Dev
+   d、设备能力划归用户表tblCuser2DeviceCap
+   e、设备组表tblDevGroup
+   f、设备划归设备组表tblDevGrp2Dev
+   g、视频源别名表tblDeviceCapIndexName
+   h、域关系表tblDomainRelation
+   
+
+   
+   
+   
+
+   
+   
+   
+   

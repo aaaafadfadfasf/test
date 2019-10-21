@@ -1,0 +1,14 @@
+﻿使用说明
+一、cleangbbaddev.sh清理残留国标数据
+1、上传cleangbbaddev.sh及上述新建的文件到平台任意目录，并给cleangbbaddev.sh增加
+    可执行权限（chmod +x cleangbbaddev.sh）
+    
+2、执行./cleangbbaddev.sh
+
+3、最后会提示所清理数据备份的路径：
+   all device's info need to clean exported to file[文件及目录]
+   可以根据该文件校验是否删除了所要删除的数据；
+   可以校验是否错误删除了数据。
+
+备注：目前该脚本只能删除以下残留：
+1、退网下级国标域后下级国标域上报的设备，被GBS中误认为是本级设备，导致的残留。

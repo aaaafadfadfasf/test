@@ -1,0 +1,10 @@
+2014-05-04 修改者
+	1、修改项
+
+2014-05-20 qiqianqian
+        1、增加GPS轨迹查询
+	2、增加前端录像启停
+
+2014-06-17 qiqianqian
+        1、CUI支持kdsip notify数量配置
+	2、CUI返回给CU CUI地址列表时需要考虑NAT映射地址

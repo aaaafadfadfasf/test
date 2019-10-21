@@ -1,0 +1,32 @@
+tas->pstat
+time : 6
+SQL : select a.modelId,a.licenseNum,a.manufacturer, count(b.devId) devNum from tblDeviceModel a inner join tblDevice b on a.modelId=b.devModelId where a.domainId='b8e3062f32fc401f92c12694e04ed10a' and a.deviceTypeId=1 group by a.modelId,a.licenseNum,a.manufacturer
+
+time : 38
+SQL : call procCuserDevQry('b8e3062f32fc401f92c12694e04ed10a', '', '', -1, -1, 0, 500000)
+
+time : 26
+tas->SQL : call procCuserDevQry('b8e3062f32fc401f92c12694e04ed10a', '', '', -1, -1, 0, 500000)
+
+time : 7
+SQL : select a.modelId,a.licenseNum,a.manufacturer, count(b.devId) devNum from tblDeviceModel a inner join tblDevice b on a.modelId=b.devModelId where a.domainId='b8e3062f32fc401f92c12694e04ed10a' and a.deviceTypeId=1 group by a.modelId,a.licenseNum,a.manufacturer
+
+time : 6
+SQL : select a.modelId,a.licenseNum,a.manufacturer, count(b.devId) devNum from tblDeviceModel a inner join tblDevice b on a.modelId=b.devModelId where a.domainId='b8e3062f32fc401f92c12694e04ed10a' and a.deviceTypeId=1 group by a.modelId,a.licenseNum,a.manufacturer
+
+time : 6
+SQL : select a.modelId,a.licenseNum,a.manufacturer, count(b.devId) devNum from tblDeviceModel a inner join tblDevice b on a.modelId=b.devModelId where a.domainId='b8e3062f32fc401f92c12694e04ed10a' and a.deviceTypeId=1 group by a.modelId,a.licenseNum,a.manufacturer
+
+time : 7
+SQL : select a.modelId,a.licenseNum,a.manufacturer, count(b.devId) devNum from tblDeviceModel a inner join tblDevice b on a.modelId=b.devModelId where a.domainId='b8e3062f32fc401f92c12694e04ed10a' and a.deviceTypeId=1 group by a.modelId,a.licenseNum,a.manufacturer
+
+time : 3
+SQL : select count(distinct a.devgroupId, a.devId) from tblDevGrp2Dev a inner join tblDevGroup b on a.devgroupId=b.devgroupId
+
+time : 2
+SQL : call procCuserDevQryCount('b8e3062f32fc401f92c12694e04ed10a','','',-1, -1)
+
+time : 18
+SQL : call procExportCuserDeviceData('b8e3062f32fc401f92c12694e04ed10a')
+
+Return value: 1

@@ -1,0 +1,5 @@
+#ifndef SOAP_TYPE_cusdk__EAlarmType
+#define SOAP_TYPE_cusdk__EAlarmType (47)
+/* cusdk:EAlarmType */
+enum cusdk__EAlarmType {cusdk__AlarmTypeInvalid = 0, cusdk__AlarmMove = 1, cusdk__AlarmInput = 2, cusdk__AlarmDiskfull = 3, cusdk__AlarmVideoLost = 4, cusdk__AlarmIntelligent = 5, cusdk__AlarmVideo = 6, cusdk__AlarmExceptionEvent = 7, cusdk__AlarmDefocus = 8, cusdk__AlarmSceneChange = 9, cusdk__AlarmRegionInvasion = 10, cusdk__AlarmRegionLeaving = 11, cusdk__AlarmObjectTaken = 12, cusdk__AlarmObjectLeft = 13, cusdk__AlarmPeopleGather = 14, cusdk__AlarmCorgon = 15, cusdk__AlarmAudioAbnormal = 16, cusdk__AlarmLumaChange = 17, cusdk__AlarmAntiDismantle = 18, cusdk__AlarmHighTemperature = 19, cusdk__AlarmLowTemperature = 20, cusdk__AlarmPersonVideo = 21, cusdk__AlarmSportGoalCheck = 22, cusdk__AlarmTripwireCheck = 23, cusdk__AlarmHoverCheck = 24, cusdk__AlarmTrafficStatisticsCheck = 25, cusdk__AlarmDensityCheck = 26, cusdk__AlarmVideoException = 27, cusdk__AlarmMoveFast = 28, cusdk__AlarmRetrogradeCheck = 29, cusdk__AlarmDiskFault = 30, cusdk__AlarmFanFault = 31, cusdk__AlarmGPSOverSpeed = 32, cusdk__AlarmSIMDataTrafficExceeded = 33};
+#endif

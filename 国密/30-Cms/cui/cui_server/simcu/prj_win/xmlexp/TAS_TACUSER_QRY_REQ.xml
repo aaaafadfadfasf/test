@@ -1,0 +1,1 @@
+<CTacUserQryReq><event>TAS_TACUSER_QRY_REQ</event><seqNum>128</seqNum><session>Cu_In_Tas_Session</session><startEntryIndex>0</startEntryIndex><expectEntryNum>0</expectEntryNum><condition><optionField /><type>0</type><mLoginFlag>1</mLoginFlag><enabledFlag>1</enabledFlag></condition></CTacUserQryReq>

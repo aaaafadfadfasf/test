@@ -1,0 +1,18 @@
+<CUserQryNtfReq>
+	<event>TAS_CUSER_QRY_NTF_REQ</event>
+	<seqNum>70</seqNum>
+	<session>Cu_In_Tas_Session</session>
+	<entryNum>1</entryNum>
+	<lastNtf>1</lastNtf>
+	<queryTag>UserQry</queryTag>
+	<infos size="1">
+		<item index="0">
+			<id>123</id>
+			<name>ligang</name>
+			<type>0</type>
+			<mLoginFlag>1</mLoginFlag>
+			<enabledFlag>1</enabledFlag>
+			<privilege/>
+		</item>
+	</infos>
+</CUserQryNtfReq>

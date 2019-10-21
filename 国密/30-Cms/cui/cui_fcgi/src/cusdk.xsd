@@ -1,0 +1,4947 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <schema targetNamespace="urn:cusdk"
+  xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
+  xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+  xmlns:cusdk="urn:cusdk"
+  xmlns="http://www.w3.org/2001/XMLSchema"
+  elementFormDefault="qualified"
+  attributeFormDefault="unqualified">
+  <import namespace="http://schemas.xmlsoap.org/soap/encoding/" schemaLocation="http://schemas.xmlsoap.org/soap/encoding/"/>
+  <simpleType name="ETransMode">
+   <restriction base="xsd:QName">
+    <enumeration value="cusdk:TransModeInvalid"/><!-- enum const = 0 -->
+    <enumeration value="cusdk:TransModeUDP"/><!-- enum const = 1 -->
+    <enumeration value="cusdk:TransModeTCP"/><!-- enum const = 2 -->
+   </restriction>
+  </simpleType>
+  <simpleType name="EUserType">
+   <restriction base="xsd:QName">
+    <enumeration value="cusdk:SuperAdmin"/><!-- enum const = 0 -->
+    <enumeration value="cusdk:Admin"/><!-- enum const = 1 -->
+    <enumeration value="cusdk:Operator"/><!-- enum const = 2 -->
+   </restriction>
+  </simpleType>
+  <simpleType name="EUserPri">
+   <restriction base="xsd:QName">
+    <enumeration value="cusdk:PriUserInvalid"/><!-- enum const = 0 -->
+    <enumeration value="cusdk:PriUserCMSRecStart"/><!-- enum const = 1 -->
+    <enumeration value="cusdk:PriUserCMSRecPlay"/><!-- enum const = 2 -->
+    <enumeration value="cusdk:PriUserCMSRecDel"/><!-- enum const = 3 -->
+    <enumeration value="cusdk:PriUserCMSRecDownload"/><!-- enum const = 4 -->
+    <enumeration value="cusdk:PriUserLocalRec"/><!-- enum const = 5 -->
+    <enumeration value="cusdk:PriUserCMSRecPlayOtherDomain"/><!-- enum const = 6 -->
+    <enumeration value="cusdk:PriUserPUCall"/><!-- enum const = 7 -->
+    <enumeration value="cusdk:PriUserAlarmLog"/><!-- enum const = 8 -->
+   </restriction>
+  </simpleType>
+  <simpleType name="EDevicePri">
+   <restriction base="xsd:QName">
+    <enumeration value="cusdk:PriPUInvalid"/><!-- enum const = 0 -->
+    <enumeration value="cusdk:PriPURecStart"/><!-- enum const = 1 -->
+    <enumeration value="cusdk:PriPURecPlay"/><!-- enum const = 2 -->
+    <enumeration value="cusdk:PriPURecDel"/><!-- enum const = 3 -->
+    <enumeration value="cusdk:PriPURecDownload"/><!-- enum const = 4 -->
+    <enumeration value="cusdk:PriPUConfig"/><!-- enum const = 5 -->
+    <enumeration value="cusdk:PriPUAlarmOutput"/><!-- enum const = 6 -->
+    <enumeration value="cusdk:PriPUAlarmConfig"/><!-- enum const = 7 -->
+   </restriction>
+  </simpleType>
+  <simpleType name="EDeviceType">
+   <restriction base="xsd:QName">
+    <enumeration value="cusdk:DevTypeUnknown"/><!-- enum const = 0 -->
+    <enumeration value="cusdk:DevTypeEncoder"/><!-- enum const = 1 -->
+    <enumeration value="cusdk:DevTypeDecoder"/><!-- enum const = 2 -->
+    <enumeration value="cusdk:DevTypeCodecer"/><!-- enum const = 3 -->
+    <enumeration value="cusdk:DevTypeTVWall"/><!-- enum const = 4 -->
+    <enumeration value="cusdk:DevTypeNVR"/><!-- enum const = 5 -->
+    <enumeration value="cusdk:DevTypeSVR"/><!-- enum const = 6 -->
+    <enumeration value="cusdk:DevAlarmHost"/><!-- enum const = 7 -->
+   </restriction>
+  </simpleType>
+  <simpleType name="ESubscribeNotifyType">
+   <restriction base="xsd:QName">
+    <enumeration value="cusdk:SubscribeNotifyInvalid"/><!-- enum const = 0 -->
+    <enumeration value="cusdk:SubscribePuStatus"/><!-- enum const = 1 -->
+    <enumeration value="cusdk:SubscribeTVWallStatus"/><!-- enum const = 2 -->
+    <enumeration value="cusdk:SubscribeNRUStatus"/><!-- enum const = 3 -->
+   </restriction>
+  </simpleType>
+  <simpleType name="EPuSubscribeType">
+   <restriction base="xsd:QName">
+    <enumeration value="cusdk:PuSubscribeTypeInvalid"/><!-- enum const = 0 -->
+    <enumeration value="cusdk:PUSubscribeOnlineStatus"/><!-- enum const = 1 -->
+    <enumeration value="cusdk:PUSubscribeConfigStatus"/><!-- enum const = 2 -->
+    <enumeration value="cusdk:PUSubscribeServiceStatus"/><!-- enum const = 3 -->
+    <enumeration value="cusdk:PUSubscribeAlarmStatus"/><!-- enum const = 4 -->
+   </restriction>
+  </simpleType>
+  <simpleType name="EPtzCmd">
+   <restriction base="xsd:QName">
+    <enumeration value="cusdk:PtzCmdInvalid"/><!-- enum const = 0 -->
+    <enumeration value="cusdk:PtzMoveUp"/><!-- enum const = 1 -->
+    <enumeration value="cusdk:PtzMoveDown"/><!-- enum const = 2 -->
+    <enumeration value="cusdk:PtzMoveLeft"/><!-- enum const = 3 -->
+    <enumeration value="cusdk:PtzMoveRight"/><!-- enum const = 4 -->
+    <enumeration value="cusdk:PtzMoveHome"/><!-- enum const = 5 -->
+    <enumeration value="cusdk:PtzMoveStop"/><!-- enum const = 6 -->
+    <enumeration value="cusdk:PtzZoomIn"/><!-- enum const = 7 -->
+    <enumeration value="cusdk:PtzZoomOut"/><!-- enum const = 8 -->
+    <enumeration value="cusdk:PtzZoomStop"/><!-- enum const = 9 -->
+    <enumeration value="cusdk:PtzFocusFar"/><!-- enum const = 10 -->
+    <enumeration value="cusdk:PtzFocusNear"/><!-- enum const = 11 -->
+    <enumeration value="cusdk:PtzFocusAuto"/><!-- enum const = 12 -->
+    <enumeration value="cusdk:PtzFocusStop"/><!-- enum const = 13 -->
+    <enumeration value="cusdk:PtzPresetSave"/><!-- enum const = 14 -->
+    <enumeration value="cusdk:PtzPresetCall"/><!-- enum const = 15 -->
+    <enumeration value="cusdk:PtzCameraReset"/><!-- enum const = 16 -->
+    <enumeration value="cusdk:PtzBrightUp"/><!-- enum const = 17 -->
+    <enumeration value="cusdk:PtzBrightDown"/><!-- enum const = 18 -->
+    <enumeration value="cusdk:PtzBrightStop"/><!-- enum const = 19 -->
+    <enumeration value="cusdk:PtzCommandNew"/><!-- enum const = 20 -->
+    <enumeration value="cusdk:PtzCommandAppend"/><!-- enum const = 21 -->
+    <enumeration value="cusdk:PtzGotoPoint"/><!-- enum const = 22 -->
+    <enumeration value="cusdk:PtzZoomArea"/><!-- enum const = 23 -->
+    <enumeration value="cusdk:PtzAlecPanSpeed"/><!-- enum const = 24 -->
+    <enumeration value="cusdk:PtzAlecTiltSpeed"/><!-- enum const = 25 -->
+    <enumeration value="cusdk:PtzSonySetBright"/><!-- enum const = 26 -->
+    <enumeration value="cusdk:PtzMatrixSwitch"/><!-- enum const = 27 -->
+    <enumeration value="cusdk:PtzMatrixVideoMix4"/><!-- enum const = 28 -->
+    <enumeration value="cusdk:PtzMatrixVideoMix9"/><!-- enum const = 29 -->
+    <enumeration value="cusdk:PtzMatrixVideoMix16"/><!-- enum const = 30 -->
+    <enumeration value="cusdk:PtzMatrixVideoMixPP"/><!-- enum const = 31 -->
+    <enumeration value="cusdk:PtzZoomAreaStop"/><!-- enum const = 32 -->
+    <enumeration value="cusdk:PtzMenuUp"/><!-- enum const = 33 -->
+    <enumeration value="cusdk:PtzMenuDown"/><!-- enum const = 34 -->
+    <enumeration value="cusdk:PtzMenuLeft"/><!-- enum const = 35 -->
+    <enumeration value="cusdk:PtzMenuRight"/><!-- enum const = 36 -->
+    <enumeration value="cusdk:PtzMenuShow"/><!-- enum const = 37 -->
+    <enumeration value="cusdk:PtzMenuHide"/><!-- enum const = 38 -->
+    <enumeration value="cusdk:PtzMenuEnter"/><!-- enum const = 39 -->
+    <enumeration value="cusdk:PtzMenuCancel"/><!-- enum const = 40 -->
+    <enumeration value="cusdk:PtzPresetDel"/><!-- enum const = 41 -->
+    <enumeration value="cusdk:PtzMatrixSwitchASC"/><!-- enum const = 42 -->
+    <enumeration value="cusdk:PtzMatrixSwitchESC"/><!-- enum const = 43 -->
+    <enumeration value="cusdk:PtzMatrixHoldImage"/><!-- enum const = 44 -->
+    <enumeration value="cusdk:PtzMoveLeftUp"/><!-- enum const = 45 -->
+    <enumeration value="cusdk:PtzMoveLeftDown"/><!-- enum const = 46 -->
+    <enumeration value="cusdk:PtzMoveRightUp"/><!-- enum const = 47 -->
+    <enumeration value="cusdk:PtzMoveRightDown"/><!-- enum const = 48 -->
+    <enumeration value="cusdk:PtzAutoScanStart"/><!-- enum const = 128 -->
+    <enumeration value="cusdk:PtzAutoScanStop"/><!-- enum const = 129 -->
+    <enumeration value="cusdk:PtzPresetScanStart"/><!-- enum const = 130 -->
+    <enumeration value="cusdk:PtzPresetScanStop"/><!-- enum const = 131 -->
+    <enumeration value="cusdk:PtzScanSpeedSet"/><!-- enum const = 132 -->
+   </restriction>
+  </simpleType>
+  <simpleType name="EVideoFormat">
+   <restriction base="xsd:QName">
+    <enumeration value="cusdk:VF-Invalid"/><!-- enum const = 0 -->
+    <enumeration value="cusdk:VF-SN4"/><!-- enum const = 1 -->
+    <enumeration value="cusdk:VF-MPEG4"/><!-- enum const = 2 -->
+    <enumeration value="cusdk:VF-H261"/><!-- enum const = 3 -->
+    <enumeration value="cusdk:VF-H263"/><!-- enum const = 4 -->
+    <enumeration value="cusdk:VF-H264"/><!-- enum const = 5 -->
+   </restriction>
+  </simpleType>
+  <simpleType name="EAudioFormat">
+   <restriction base="xsd:QName">
+    <enumeration value="cusdk:AF-Invalid"/><!-- enum const = 0 -->
+    <enumeration value="cusdk:AF-PCMA"/><!-- enum const = 1 -->
+    <enumeration value="cusdk:AF-PCMU"/><!-- enum const = 2 -->
+    <enumeration value="cusdk:AF-GSM"/><!-- enum const = 3 -->
+    <enumeration value="cusdk:AF-G729"/><!-- enum const = 4 -->
+   </restriction>
+  </simpleType>
+  <simpleType name="EVideoResolution">
+   <restriction base="xsd:QName">
+    <enumeration value="cusdk:VS-Invalid"/><!-- enum const = 0 -->
+    <enumeration value="cusdk:VS-AUTO"/><!-- enum const = 1 -->
+    <enumeration value="cusdk:VS-QCIF"/><!-- enum const = 2 -->
+    <enumeration value="cusdk:VS-CIF"/><!-- enum const = 3 -->
+    <enumeration value="cusdk:VS-2CIF"/><!-- enum const = 4 -->
+    <enumeration value="cusdk:VS-4CIF"/><!-- enum const = 5 -->
+    <enumeration value="cusdk:VS-QQCIF"/><!-- enum const = 6 -->
+    <enumeration value="cusdk:VS-QVGA"/><!-- enum const = 7 -->
+    <enumeration value="cusdk:VS-VGA"/><!-- enum const = 8 -->
+    <enumeration value="cusdk:VS-720P"/><!-- enum const = 9 -->
+    <enumeration value="cusdk:VS-1080A"/><!-- enum const = 10 -->
+    <enumeration value="cusdk:VS-1080P"/><!-- enum const = 11 -->
+    <enumeration value="cusdk:VS-QXGA"/><!-- enum const = 12 -->
+   </restriction>
+  </simpleType>
+  <simpleType name="EUserOrUserGroup">
+   <restriction base="xsd:QName">
+    <enumeration value="cusdk:TypeInvalid"/><!-- enum const = 0 -->
+    <enumeration value="cusdk:TypeUser"/><!-- enum const = 1 -->
+    <enumeration value="cusdk:TypeUserGroup"/><!-- enum const = 2 -->
+   </restriction>
+  </simpleType>
+  <simpleType name="ERS-CoverPolicy">
+   <restriction base="xsd:QName">
+    <enumeration value="cusdk:RS-CoverPolicyInvalid"/><!-- enum const = 0 -->
+    <enumeration value="cusdk:RS-COVERPOLICY-STOPRECORD"/><!-- enum const = 1 -->
+    <enumeration value="cusdk:RS-COVERPOLICY-COVERALL"/><!-- enum const = 2 -->
+    <enumeration value="cusdk:RS-COVERPOLICY-COVERNORMAL"/><!-- enum const = 3 -->
+    <enumeration value="cusdk:RS-COVERPOLICY-UNKNOWN"/><!-- enum const = 4 -->
+   </restriction>
+  </simpleType>
+  <simpleType name="ERS-PartFormat">
+   <restriction base="xsd:QName">
+    <enumeration value="cusdk:RS-PartFormatInvalid"/><!-- enum const = 0 -->
+    <enumeration value="cusdk:RS-PARTFORMAT-EXT3"/><!-- enum const = 1 -->
+    <enumeration value="cusdk:RS-PARTFORMAT-VBFS"/><!-- enum const = 2 -->
+    <enumeration value="cusdk:RS-PARTFORMAT-UNKNOWN"/><!-- enum const = 3 -->
+   </restriction>
+  </simpleType>
+  <simpleType name="ERS-PartStatus">
+   <restriction base="xsd:QName">
+    <enumeration value="cusdk:RS-PartStatusInvalid"/><!-- enum const = 0 -->
+    <enumeration value="cusdk:RS-PARTSTATUS-ONLINE"/><!-- enum const = 1 -->
+    <enumeration value="cusdk:RS-PARTSTATUS-OFFLINE"/><!-- enum const = 2 -->
+    <enumeration value="cusdk:RS-PARTSTATUS-ALARM"/><!-- enum const = 3 -->
+    <enumeration value="cusdk:RS-PARTSTATUS-UNKNOWN"/><!-- enum const = 4 -->
+   </restriction>
+  </simpleType>
+  <simpleType name="ERecordType">
+   <restriction base="xsd:QName">
+    <enumeration value="cusdk:ERecordTypeInvalid"/><!-- enum const = 0 -->
+    <enumeration value="cusdk:ERecordTypePlatformRecord"/><!-- enum const = 1 -->
+    <enumeration value="cusdk:ERecordTypePURecord"/><!-- enum const = 2 -->
+   </restriction>
+  </simpleType>
+  <simpleType name="ERecordEventType">
+   <restriction base="xsd:QName">
+    <enumeration value="cusdk:RSRecTypeInvalid"/><!-- enum const = 0 -->
+    <enumeration value="cusdk:RS-RECTYPE-ALL"/><!-- enum const = 1 -->
+    <enumeration value="cusdk:RS-RECTYPE-ALARM"/><!-- enum const = 2 -->
+    <enumeration value="cusdk:RS-RECTYPE-HANDLE"/><!-- enum const = 3 -->
+    <enumeration value="cusdk:RS-RECTYPE-PLAN"/><!-- enum const = 4 -->
+    <enumeration value="cusdk:RS-RECTYPE-UNKNOWN"/><!-- enum const = 5 -->
+   </restriction>
+  </simpleType>
+  <simpleType name="ERS-RecMode">
+   <restriction base="xsd:QName">
+    <enumeration value="cusdk:RSRecModeInvalid"/><!-- enum const = 0 -->
+    <enumeration value="cusdk:RS-RECMODE-ALL"/><!-- enum const = 1 -->
+    <enumeration value="cusdk:RS-RECMODE-ONLY-VIDEO"/><!-- enum const = 2 -->
+    <enumeration value="cusdk:RS-RECMODE-ONLY-KEYFRAME"/><!-- enum const = 3 -->
+   </restriction>
+  </simpleType>
+  <simpleType name="EVCRCmd">
+   <restriction base="xsd:QName">
+    <enumeration value="cusdk:VCRCmdInvalid"/><!-- enum const = 0 -->
+    <enumeration value="cusdk:VCRCMD-CONFIG"/><!-- enum const = 1 -->
+    <enumeration value="cusdk:VCRCMD-START"/><!-- enum const = 2 -->
+    <enumeration value="cusdk:VCRCMD-STOP"/><!-- enum const = 3 -->
+    <enumeration value="cusdk:VCRCMD-PAUSE"/><!-- enum const = 4 -->
+    <enumeration value="cusdk:VCRCMD-RESUME"/><!-- enum const = 5 -->
+    <enumeration value="cusdk:VCRCMD-SEEK"/><!-- enum const = 6 -->
+    <enumeration value="cusdk:VCRCMD-FASTPLAY"/><!-- enum const = 7 -->
+    <enumeration value="cusdk:VCRCMD-SLOWPLAY"/><!-- enum const = 8 -->
+    <enumeration value="cusdk:VCRCMD-ONEFRAME"/><!-- enum const = 9 -->
+    <enumeration value="cusdk:VCRCMD-KEYFRAME"/><!-- enum const = 10 -->
+    <enumeration value="cusdk:VCRCMD-REVERSEPLAY"/><!-- enum const = 11 -->
+    <enumeration value="cusdk:VCRCMD-FORWARDPLAY"/><!-- enum const = 12 -->
+    <enumeration value="cusdk:VCRCMD-KEYSEEK"/><!-- enum const = 13 -->
+    <enumeration value="cusdk:VCRCMD-UNKNOWN"/><!-- enum const = 14 -->
+   </restriction>
+  </simpleType>
+  <simpleType name="EDeviceChannelType">
+   <restriction base="xsd:QName">
+    <enumeration value="cusdk:DeviceChannelTypeInvalid"/><!-- enum const = 0 -->
+    <enumeration value="cusdk:DevChnTypeVideoSource"/><!-- enum const = 1 -->
+    <enumeration value="cusdk:DevChnTypeAlarmInput"/><!-- enum const = 2 -->
+   </restriction>
+  </simpleType>
+  <simpleType name="EDeviceCapLabel">
+   <restriction base="xsd:QName">
+    <enumeration value="cusdk:DeviceCapLabelInvalid"/><!-- enum const = 0 -->
+    <enumeration value="cusdk:DEVICE-CAP-LOCAL-STORAGE"/><!-- enum const = 2 -->
+    <enumeration value="cusdk:DEVICE-CAP-LABEL-ENCODE-NVR"/><!-- enum const = 7 -->
+    <enumeration value="cusdk:DEVICE-CAP-LABEL-ENCODE-SVR"/><!-- enum const = 8 -->
+    <enumeration value="cusdk:DEVICE-CAP-LABEL-ENCODE-IPC-BULLET"/><!-- enum const = 9 -->
+    <enumeration value="cusdk:DEVICE-CAP-LABEL-ENCODE-IPC-DOME"/><!-- enum const = 10 -->
+    <enumeration value="cusdk:DEVICE-CAP-LABEL-ENCODE-GENERAL"/><!-- enum const = 11 -->
+    <enumeration value="cusdk:DEVICE-CAP-LABEL-ENCODE-WIRELESS"/><!-- enum const = 12 -->
+   </restriction>
+  </simpleType>
+  <simpleType name="ERecordStatus">
+   <restriction base="xsd:QName">
+    <enumeration value="cusdk:RecordStatusInvalid"/><!-- enum const = 0 -->
+    <enumeration value="cusdk:RecordStatusIdel"/><!-- enum const = 1 -->
+    <enumeration value="cusdk:RecordStatusOk"/><!-- enum const = 2 -->
+    <enumeration value="cusdk:RecordStatusTry"/><!-- enum const = 3 -->
+   </restriction>
+  </simpleType>
+  <simpleType name="EAlarmType">
+   <restriction base="xsd:QName">
+    <enumeration value="cusdk:AlarmTypeInvalid"/><!-- enum const = 0 -->
+    <enumeration value="cusdk:AlarmMove"/><!-- enum const = 1 -->
+    <enumeration value="cusdk:AlarmInput"/><!-- enum const = 2 -->
+    <enumeration value="cusdk:AlarmDiskfull"/><!-- enum const = 3 -->
+    <enumeration value="cusdk:AlarmVideoLost"/><!-- enum const = 4 -->
+    <enumeration value="cusdk:AlarmIntelligent"/><!-- enum const = 5 -->
+   </restriction>
+  </simpleType>
+  <simpleType name="EAlarmStatus">
+   <restriction base="xsd:QName">
+    <enumeration value="cusdk:AlarmStatusInvalid"/><!-- enum const = 0 -->
+    <enumeration value="cusdk:AlarmOccur"/><!-- enum const = 1 -->
+    <enumeration value="cusdk:AlarmRestore"/><!-- enum const = 2 -->
+   </restriction>
+  </simpleType>
+  <simpleType name="EPollStatus">
+   <restriction base="xsd:QName">
+    <enumeration value="cusdk:PollStatusInvalid"/><!-- enum const = 0 -->
+    <enumeration value="cusdk:PollStarted"/><!-- enum const = 1 -->
+    <enumeration value="cusdk:PollStoped"/><!-- enum const = 2 -->
+    <enumeration value="cusdk:PollPaused"/><!-- enum const = 3 -->
+   </restriction>
+  </simpleType>
+  <simpleType name="ETVDivStyle">
+   <restriction base="xsd:QName">
+    <enumeration value="cusdk:TVDIV-Invalid"/><!-- enum const = 0 -->
+    <enumeration value="cusdk:TVDIV-1"/><!-- enum const = 1 -->
+    <enumeration value="cusdk:TVDIV-4"/><!-- enum const = 4 -->
+    <enumeration value="cusdk:TVDIV-9"/><!-- enum const = 9 -->
+    <enumeration value="cusdk:TVDIV-16"/><!-- enum const = 16 -->
+   </restriction>
+  </simpleType>
+  <simpleType name="ETVWallPlayMode">
+   <restriction base="xsd:QName">
+    <enumeration value="cusdk:TVWallPlayModeInvalid"/><!-- enum const = 0 -->
+    <enumeration value="cusdk:TVPlayModeLiveStream"/><!-- enum const = 1 -->
+    <enumeration value="cusdk:TVPlayModePlatformRecord"/><!-- enum const = 2 -->
+    <enumeration value="cusdk:TVPlayModePuRecord"/><!-- enum const = 3 -->
+   </restriction>
+  </simpleType>
+  <simpleType name="ECameraProtocolType">
+   <restriction base="xsd:QName">
+    <enumeration value="cusdk:CAM-TYPE-Invalid"/><!-- enum const = 0 -->
+    <enumeration value="cusdk:CAM-TYPE-SONY"/><!-- enum const = 1 -->
+    <enumeration value="cusdk:CAM-TYPE-AD"/><!-- enum const = 2 -->
+    <enumeration value="cusdk:CAM-TYPE-PELCO"/><!-- enum const = 3 -->
+    <enumeration value="cusdk:CAM-TYPE-PIH"/><!-- enum const = 4 -->
+    <enumeration value="cusdk:CAM-TYPE-PELCO-P"/><!-- enum const = 5 -->
+    <enumeration value="cusdk:CAM-TYPE-PARCO"/><!-- enum const = 6 -->
+    <enumeration value="cusdk:CAM-TYPE-AB"/><!-- enum const = 7 -->
+    <enumeration value="cusdk:CAM-TYPE-YUNTAI"/><!-- enum const = 8 -->
+    <enumeration value="cusdk:CAM-TYPE-Samsung"/><!-- enum const = 9 -->
+    <enumeration value="cusdk:CAM-TYPE-YAAN"/><!-- enum const = 10 -->
+    <enumeration value="cusdk:CAM-TYPE-AD168"/><!-- enum const = 11 -->
+    <enumeration value="cusdk:CAM-TYPE-KALATEL"/><!-- enum const = 12 -->
+    <enumeration value="cusdk:CAM-TYPE-JN"/><!-- enum const = 13 -->
+    <enumeration value="cusdk:CAM-TYPE-WV-CS650"/><!-- enum const = 14 -->
+    <enumeration value="cusdk:CAM-TYPE-WV-CS850"/><!-- enum const = 15 -->
+    <enumeration value="cusdk:CAM-TYPE-ALEC"/><!-- enum const = 16 -->
+    <enumeration value="cusdk:CAM-TYPE-AB-P"/><!-- enum const = 17 -->
+    <enumeration value="cusdk:CAM-TYPE-AB-D"/><!-- enum const = 18 -->
+    <enumeration value="cusdk:CAM-TYPE-PELCO-D-JEC"/><!-- enum const = 19 -->
+    <enumeration value="cusdk:CAM-TYPE-PELCO-P-JEC"/><!-- enum const = 20 -->
+    <enumeration value="cusdk:CAM-TYPE-TIANDY"/><!-- enum const = 21 -->
+    <enumeration value="cusdk:CAM-TYPE-G100"/><!-- enum const = 22 -->
+    <enumeration value="cusdk:CAM-TYPE-368ZT"/><!-- enum const = 23 -->
+    <enumeration value="cusdk:CAM-TYPE-GaoDeTI"/><!-- enum const = 24 -->
+    <enumeration value="cusdk:CAM-TYPE-DaliTI"/><!-- enum const = 25 -->
+    <enumeration value="cusdk:CAM-TYPE-2130-PELCO-P"/><!-- enum const = 26 -->
+    <enumeration value="cusdk:CAM-TYPE-K-PELCO-D"/><!-- enum const = 27 -->
+    <enumeration value="cusdk:CAM-TYPE-JVCTKC676"/><!-- enum const = 28 -->
+    <enumeration value="cusdk:CAM-TYPE-INFINOVA-PELCO-D"/><!-- enum const = 29 -->
+    <enumeration value="cusdk:CAM-TYPE-PEARMAIN-PELCO-D"/><!-- enum const = 30 -->
+    <enumeration value="cusdk:CAM-TYPE-PEARMAIN-PELCO-P"/><!-- enum const = 31 -->
+    <enumeration value="cusdk:CAM-TYPE-YAAN-PELCO-D"/><!-- enum const = 32 -->
+    <enumeration value="cusdk:CAM-TYPE-CAMERA-NUM"/><!-- enum const = 33 -->
+   </restriction>
+  </simpleType>
+  <simpleType name="EMapType">
+   <restriction base="xsd:QName">
+    <enumeration value="cusdk:MapTypeInvalid"/><!-- enum const = 0 -->
+    <enumeration value="cusdk:MapTypeGoogle"/><!-- enum const = 1 -->
+    <enumeration value="cusdk:MapTypeJpeg"/><!-- enum const = 2 -->
+   </restriction>
+  </simpleType>
+  <simpleType name="EMapElementType">
+   <restriction base="xsd:QName">
+    <enumeration value="cusdk:MapElementTypeInvalid"/><!-- enum const = 0 -->
+    <enumeration value="cusdk:MapEleCommon"/><!-- enum const = 1 -->
+    <enumeration value="cusdk:MapEleMove"/><!-- enum const = 2 -->
+   </restriction>
+  </simpleType>
+  <simpleType name="EMapCoordType">
+   <restriction base="xsd:QName">
+    <enumeration value="cusdk:MapCoordTypeInvalid"/><!-- enum const = 0 -->
+    <enumeration value="cusdk:MapCoordEarth"/><!-- enum const = 1 -->
+    <enumeration value="cusdk:MapCoordMar"/><!-- enum const = 2 -->
+   </restriction>
+  </simpleType>
+  <simpleType name="EUserOperateType">
+   <restriction base="xsd:QName">
+    <enumeration value="cusdk:UserOpTypeInvalid"/><!-- enum const = 0 -->
+    <enumeration value="cusdk:UserOpTypeLogin"/><!-- enum const = 1 -->
+    <enumeration value="cusdk:UserOpTypeLiveStream"/><!-- enum const = 2 -->
+    <enumeration value="cusdk:UserOpTypePlatformRecord"/><!-- enum const = 3 -->
+    <enumeration value="cusdk:UserOpTypePuRecord"/><!-- enum const = 4 -->
+    <enumeration value="cusdk:UserOpTypeTVWall"/><!-- enum const = 5 -->
+    <enumeration value="cusdk:UserOpTypeCall"/><!-- enum const = 6 -->
+    <enumeration value="cusdk:UserOpTypeUserManage"/><!-- enum const = 7 -->
+    <enumeration value="cusdk:UserOpTypeNRUManage"/><!-- enum const = 8 -->
+    <enumeration value="cusdk:UserOpTypeMapConfig"/><!-- enum const = 9 -->
+    <enumeration value="cusdk:UserOpTypePuConfig"/><!-- enum const = 10 -->
+    <enumeration value="cusdk:UserOpTypePtzCtrl"/><!-- enum const = 11 -->
+    <enumeration value="cusdk:UserOpTypeAlarmConfig"/><!-- enum const = 12 -->
+    <enumeration value="cusdk:UserOpTypeSysParamConfig"/><!-- enum const = 13 -->
+    <enumeration value="cusdk:UserOpTypeOther"/><!-- enum const = 14 -->
+   </restriction>
+  </simpleType>
+  <simpleType name="EVideoQuality">
+   <restriction base="xsd:QName">
+    <enumeration value="cusdk:VideoQualityInvalid"/><!-- enum const = 0 -->
+    <enumeration value="cusdk:VIDEO-QUALITY-PRIOR"/><!-- enum const = 1 -->
+    <enumeration value="cusdk:VIDEO-SPEED-PRIOR"/><!-- enum const = 2 -->
+   </restriction>
+  </simpleType>
+  <simpleType name="EDeviceLogType">
+   <restriction base="xsd:QName">
+    <enumeration value="cusdk:DeviceLogTypeInvalid"/><!-- enum const = 0 -->
+    <enumeration value="cusdk:DeviceLogTypeOnline"/><!-- enum const = 1 -->
+    <enumeration value="cusdk:DeviceLogTypeOffline"/><!-- enum const = 2 -->
+    <enumeration value="cusdk:DeviceLogTypePuException"/><!-- enum const = 3 -->
+    <enumeration value="cusdk:DeviceLogTypePlatformRecordException"/><!-- enum const = 4 -->
+    <enumeration value="cusdk:DeviceLogTypePuRecordToPlatform"/><!-- enum const = 5 -->
+    <enumeration value="cusdk:DeviceLogTypeOther"/><!-- enum const = 6 -->
+   </restriction>
+  </simpleType>
+  <simpleType name="EAlarmLinkActionType">
+   <restriction base="xsd:QName">
+    <enumeration value="cusdk:AlarmLinkActionTypeInvalid"/><!-- enum const = 0 -->
+    <enumeration value="cusdk:AlarmLinkActionPlatformRecord"/><!-- enum const = 1 -->
+    <enumeration value="cusdk:AlarmLinkActionPlayOnTV"/><!-- enum const = 2 -->
+    <enumeration value="cusdk:AlarmLinkActionReadSecond"/><!-- enum const = 3 -->
+    <enumeration value="cusdk:AlarmLinkActionIOOutput"/><!-- enum const = 4 -->
+    <enumeration value="cusdk:AlarmLinkCameraPrePos"/><!-- enum const = 5 -->
+   </restriction>
+  </simpleType>
+  <simpleType name="EMediaType">
+   <restriction base="xsd:QName">
+    <enumeration value="cusdk:MediaTypeInvalid"/><!-- enum const = 0 -->
+    <enumeration value="cusdk:MediaTypeVideo"/><!-- enum const = 1 -->
+    <enumeration value="cusdk:MediaTypeAudio"/><!-- enum const = 2 -->
+    <enumeration value="cusdk:MediaTypeData"/><!-- enum const = 3 -->
+   </restriction>
+  </simpleType>
+  <simpleType name="ETransChannelType">
+   <restriction base="xsd:QName">
+    <enumeration value="cusdk:TransChannelTypeInvalid"/><!-- enum const = 0 -->
+    <enumeration value="cusdk:TransChannelTypeRTP"/><!-- enum const = 1 -->
+    <enumeration value="cusdk:TransChannelTypeRTCP"/><!-- enum const = 2 -->
+    <enumeration value="cusdk:TransChannelTypeData"/><!-- enum const = 3 -->
+   </restriction>
+  </simpleType>
+  <simpleType name="EDeviceEntity">
+   <restriction base="xsd:QName">
+    <enumeration value="cusdk:VSIP-ENTITY-DEVICE"/><!-- enum const = 0 -->
+    <enumeration value="cusdk:VSIP-ENTITY-VIDEODECODER"/><!-- enum const = 1 -->
+    <enumeration value="cusdk:VSIP-ENTITY-VIDEOENCODER"/><!-- enum const = 2 -->
+    <enumeration value="cusdk:VSIP-ENTITY-AUDIODECODER"/><!-- enum const = 3 -->
+    <enumeration value="cusdk:VSIP-ENTITY-AUDIOENCODER"/><!-- enum const = 4 -->
+    <enumeration value="cusdk:VSIP-ENTITY-SERIALPORT"/><!-- enum const = 5 -->
+    <enumeration value="cusdk:VSIP-ENTITY-INPUTPIN"/><!-- enum const = 6 -->
+    <enumeration value="cusdk:VSIP-ENTITY-OUTPUTPIN"/><!-- enum const = 7 -->
+    <enumeration value="cusdk:VSIP-ENTITY-PTZMOTOR"/><!-- enum const = 8 -->
+    <enumeration value="cusdk:VSIP-ENTITY-PTZCONTROL"/><!-- enum const = 9 -->
+    <enumeration value="cusdk:VSIP-ENTITY-ARCHIVER"/><!-- enum const = 10 -->
+    <enumeration value="cusdk:VSIP-ENTITY-VIDEOIN"/><!-- enum const = 12 -->
+    <enumeration value="cusdk:VSIP-ENTITY-ETHERNET"/><!-- enum const = 13 -->
+    <enumeration value="cusdk:VSIP-ENTITY-WIRELESS"/><!-- enum const = 14 -->
+    <enumeration value="cusdk:VSIP-ENTITY-XIANTELE"/><!-- enum const = 15 -->
+    <enumeration value="cusdk:VSIP-ENTITY-VIDIOADPTER"/><!-- enum const = 16 -->
+    <enumeration value="cusdk:VSIP-ENTITY-VIDIOCOMP"/><!-- enum const = 17 -->
+    <enumeration value="cusdk:VSIP-ENTITY-VIDEOSRCPOLL"/><!-- enum const = 18 -->
+    <enumeration value="cusdk:VSIP-ENTITY-AUDIOMIX"/><!-- enum const = 19 -->
+    <enumeration value="cusdk:VSIP-ENTITY-SHADEAREANUM"/><!-- enum const = 20 -->
+    <enumeration value="cusdk:VSIP-ENTITY-DEVPOWERTYPE"/><!-- enum const = 21 -->
+    <enumeration value="cusdk:VSIP-ENTITY-MAXSTREAMSEND"/><!-- enum const = 22 -->
+    <enumeration value="cusdk:VSIP-ENTITY-MAXSTREAMDIRSEND"/><!-- enum const = 23 -->
+    <enumeration value="cusdk:VSIP-ENTITY-ENCRYPT"/><!-- enum const = 24 -->
+    <enumeration value="cusdk:VSIP-ENTITY-RECORDER"/><!-- enum const = 25 -->
+    <enumeration value="cusdk:VSIP-ENTITY-PLAYER"/><!-- enum const = 26 -->
+    <enumeration value="cusdk:VSIP-ENTITY-FILEDOWNLOAD"/><!-- enum const = 27 -->
+    <enumeration value="cusdk:VSIP-ENTITY-VGAOUT"/><!-- enum const = 28 -->
+    <enumeration value="cusdk:VSIP-ENTITY-VIDEOOUT"/><!-- enum const = 29 -->
+    <enumeration value="cusdk:VSIP-ENTITY-OSDCOLOR"/><!-- enum const = 30 -->
+    <enumeration value="cusdk:VSIP-ENTITY-PLATFORMTYPE"/><!-- enum const = 31 -->
+    <enumeration value="cusdk:VSIP-ENTITY-MOTIONDETECTAREANUM"/><!-- enum const = 32 -->
+    <enumeration value="cusdk:VSIP-ENTITY-SNAPSHOTCHANNUM"/><!-- enum const = 33 -->
+    <enumeration value="cusdk:VSIP-ENTITY-SLOTINFONUM"/><!-- enum const = 34 -->
+    <enumeration value="cusdk:VSIP-ENTITY-CBRVBR"/><!-- enum const = 35 -->
+    <enumeration value="cusdk:VSIP-ENTITY-MAXENCBITRATE"/><!-- enum const = 36 -->
+    <enumeration value="cusdk:VSIP-ENTITY-MULTICHAN"/><!-- enum const = 37 -->
+    <enumeration value="cusdk:VSIP-ENTITY-MATRIX"/><!-- enum const = 38 -->
+    <enumeration value="cusdk:VSIP-ENTITY-VIDEOENCSLAVECHANNELNUM"/><!-- enum const = 47 -->
+    <enumeration value="cusdk:VSIP-ENTITY-TRANSPORTDATA"/><!-- enum const = 41 -->
+    <enumeration value="cusdk:VSIP-ENTITY-GPS"/><!-- enum const = 53 -->
+    <enumeration value="cusdk:VSIP-ENTITY-EXTINPUTPIN"/><!-- enum const = 54 -->
+    <enumeration value="cusdk:VSIP-ENTITY-DECODEEXT"/><!-- enum const = 59 -->
+    <enumeration value="cusdk:VSIP-ENTITY-EXT-OSD"/><!-- enum const = 240 -->
+   </restriction>
+  </simpleType>
+  <simpleType name="EDeviceTransparentChannelType">
+   <restriction base="xsd:QName">
+    <enumeration value="cusdk:TransChnCOMPort"/><!-- enum const = 0 -->
+    <enumeration value="cusdk:TransChnCameraTaskConfig"/><!-- enum const = 1 -->
+   </restriction>
+  </simpleType>
+  <complexType name="UserGroup">
+   <sequence>
+     <element name="id" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="name" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="description" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="creator" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="userType" type="cusdk:EUserType" minOccurs="1" maxOccurs="1"/>
+     <element name="userPri" type="cusdk:EUserPri" minOccurs="0" maxOccurs="unbounded"/>
+   </sequence>
+  </complexType>
+  <complexType name="UserInfo">
+   <sequence>
+     <element name="uuid" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="userName" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="userPassword" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="domainID" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="userType" type="cusdk:EUserType" minOccurs="1" maxOccurs="1"/>
+     <element name="userPri" type="cusdk:EUserPri" minOccurs="0" maxOccurs="unbounded"/>
+     <element name="creator" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="userGroup" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="description" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="accountOverdueTime" type="xsd:dateTime" minOccurs="1" maxOccurs="1"/>
+     <element name="passwordOverdueTime" type="xsd:dateTime" minOccurs="1" maxOccurs="1"/>
+     <element name="enable" type="xsd:boolean" minOccurs="1" maxOccurs="1"/>
+     <element name="allowMultilogin" type="xsd:boolean" minOccurs="1" maxOccurs="1"/>
+   </sequence>
+  </complexType>
+  <complexType name="DeviceGroup">
+   <sequence>
+     <element name="id" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="parentId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="domainId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="name" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="description" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="hasDevice" type="xsd:boolean" minOccurs="1" maxOccurs="1"/>
+   </sequence>
+  </complexType>
+  <complexType name="EncoderChn">
+   <sequence>
+     <element name="id" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+   </sequence>
+  </complexType>
+  <complexType name="DevChannel">
+   <sequence>
+     <element name="deviceId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="channelId" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+   </sequence>
+  </complexType>
+  <complexType name="VideoSrc">
+   <sequence>
+     <element name="id" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="name" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="ptzLevel" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+   </sequence>
+  </complexType>
+  <complexType name="DeviceInfo">
+   <sequence>
+     <element name="deviceId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="domainId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="name" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="deviceAlias" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="deviceType" type="cusdk:EDeviceType" minOccurs="1" maxOccurs="1"/>
+     <element name="deviceModel" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="deviceCapLabelList" type="cusdk:EDeviceCapLabel" minOccurs="0" maxOccurs="unbounded"/>
+     <element name="manufacturer" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="description" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="videoSrcList" type="cusdk:VideoSrc" minOccurs="0" maxOccurs="unbounded"/>
+     <element name="priList" type="cusdk:EDevicePri" minOccurs="0" maxOccurs="unbounded"/>
+     <element name="videoSrcNum" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="encodeChnNum" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="decodeChnNum" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="alarmInputNum" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+   </sequence>
+  </complexType>
+  <complexType name="DeviceGroupRelation">
+   <sequence>
+     <element name="devGroupId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="devId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="videoSrcIdList" type="xsd:int" minOccurs="0" maxOccurs="unbounded"/>
+   </sequence>
+  </complexType>
+  <complexType name="AssignVideoSrc">
+   <sequence>
+     <element name="vieoSrcId" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="ptzLevel" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+   </sequence>
+  </complexType>
+  <complexType name="AssignDeviceInfo">
+   <sequence>
+     <element name="devId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="devPriSet" type="cusdk:EDevicePri" minOccurs="0" maxOccurs="unbounded"/>
+     <element name="videoSrcIdList" type="cusdk:AssignVideoSrc" minOccurs="0" maxOccurs="unbounded"/>
+   </sequence>
+  </complexType>
+  <complexType name="AuthorizationDeviceInfo">
+   <sequence>
+     <element name="userName" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="devInfo" type="cusdk:AssignDeviceInfo" minOccurs="1" maxOccurs="1"/>
+     <element name="description" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="createTime" type="xsd:dateTime" minOccurs="1" maxOccurs="1"/>
+   </sequence>
+  </complexType>
+  <complexType name="DeviceChannelNameChangeNotify">
+   <sequence>
+     <element name="deviceId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="chnType" type="cusdk:EDeviceChannelType" minOccurs="1" maxOccurs="1"/>
+     <element name="chnId" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="chnName" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+   </sequence>
+  </complexType>
+  <complexType name="DevOnlineNotify">
+   <sequence>
+     <element name="deviceId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="online" type="xsd:boolean" minOccurs="1" maxOccurs="1"/>
+   </sequence>
+  </complexType>
+  <complexType name="PuBaseCapSet">
+   <sequence>
+     <element name="videoEncNum" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="videoDecNum" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="audioEncNum" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="audioDecNum" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="serialPortNum" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="alarmInputChnNum" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="alarmOutputChnNum" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="videoInPortNum" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+   </sequence>
+  </complexType>
+  <complexType name="PuExtCap">
+   <sequence>
+     <element name="id" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="value" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+   </sequence>
+  </complexType>
+  <complexType name="AlarmInputChnEnable">
+   <sequence>
+     <element name="id" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="value" type="xsd:boolean" minOccurs="1" maxOccurs="1"/>
+   </sequence>
+  </complexType>
+  <complexType name="ChannelVideoFormat">
+   <sequence>
+     <element name="id" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="value" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+   </sequence>
+  </complexType>
+  <complexType name="ChannelVidDynValue">
+   <sequence>
+     <element name="id" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="value" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+   </sequence>
+  </complexType>
+  <complexType name="VideoSrcEncoderSet">
+   <sequence>
+     <element name="id" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="value" type="xsd:int" minOccurs="0" maxOccurs="unbounded"/>
+   </sequence>
+  </complexType>
+  <complexType name="EncoderAvailableVidSrcSet">
+   <sequence>
+     <element name="id" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="value" type="xsd:int" minOccurs="0" maxOccurs="unbounded"/>
+   </sequence>
+  </complexType>
+  <complexType name="VideoSrcCamType">
+   <sequence>
+     <element name="id" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="camType" type="cusdk:ECameraProtocolType" minOccurs="1" maxOccurs="1"/>
+   </sequence>
+  </complexType>
+  <complexType name="VideoSrcCamID">
+   <sequence>
+     <element name="id" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="value" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+   </sequence>
+  </complexType>
+  <complexType name="EncoderBitrate">
+   <sequence>
+     <element name="id" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="value" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+   </sequence>
+  </complexType>
+  <complexType name="DevConfigNotify">
+   <sequence>
+     <element name="deviceId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="devIp" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="devType" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="devMode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="baseCapSet" type="cusdk:PuBaseCapSet" minOccurs="1" maxOccurs="1"/>
+     <element name="extCapSet" type="cusdk:PuExtCap" minOccurs="0" maxOccurs="unbounded"/>
+     <element name="alarmInputChnEnable" type="cusdk:AlarmInputChnEnable" minOccurs="0" maxOccurs="unbounded"/>
+     <element name="chnVidFormat" type="cusdk:ChannelVideoFormat" minOccurs="0" maxOccurs="unbounded"/>
+     <element name="chnVidDynValue" type="cusdk:ChannelVidDynValue" minOccurs="0" maxOccurs="unbounded"/>
+     <element name="vidSrcChnSet" type="cusdk:VideoSrcEncoderSet" minOccurs="0" maxOccurs="unbounded"/>
+     <element name="chnVidSrcSet" type="cusdk:EncoderAvailableVidSrcSet" minOccurs="0" maxOccurs="unbounded"/>
+     <element name="camType" type="cusdk:VideoSrcCamType" minOccurs="0" maxOccurs="unbounded"/>
+     <element name="camId" type="cusdk:VideoSrcCamID" minOccurs="0" maxOccurs="unbounded"/>
+     <element name="bitRate" type="cusdk:EncoderBitrate" minOccurs="0" maxOccurs="unbounded"/>
+     <element name="freeLicenceNum" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="directTransNum" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="isDecCombined" type="xsd:boolean" minOccurs="1" maxOccurs="1"/>
+   </sequence>
+  </complexType>
+  <complexType name="VidDecoderToPuChn">
+   <sequence>
+     <element name="id" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="puChn" type="cusdk:DevChannel" minOccurs="1" maxOccurs="1"/>
+   </sequence>
+  </complexType>
+  <complexType name="AudDecoderToCuChn">
+   <sequence>
+     <element name="id" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="cuChn" type="cusdk:DevChannel" minOccurs="1" maxOccurs="1"/>
+   </sequence>
+  </complexType>
+  <complexType name="EncoderStatusInt">
+   <sequence>
+     <element name="id" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="value" type="xsd:boolean" minOccurs="1" maxOccurs="1"/>
+   </sequence>
+  </complexType>
+  <complexType name="RecordStatus">
+   <sequence>
+     <element name="encoderChannelId" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="recordStatus" type="cusdk:ERecordStatus" minOccurs="1" maxOccurs="1"/>
+   </sequence>
+  </complexType>
+  <complexType name="EncoderStatusStr">
+   <sequence>
+     <element name="id" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="value" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+   </sequence>
+  </complexType>
+  <complexType name="DecoderStatusStr">
+   <sequence>
+     <element name="id" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="value" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+   </sequence>
+  </complexType>
+  <complexType name="DevServiceStatusNotify">
+   <sequence>
+     <element name="deviceId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="audioCallSrc" type="cusdk:AudDecoderToCuChn" minOccurs="0" maxOccurs="unbounded"/>
+     <element name="isPlatPreRec" type="cusdk:EncoderStatusInt" minOccurs="0" maxOccurs="unbounded"/>
+     <element name="platRecStatus" type="cusdk:RecordStatus" minOccurs="0" maxOccurs="unbounded"/>
+     <element name="isPuPreRec" type="cusdk:EncoderStatusInt" minOccurs="0" maxOccurs="unbounded"/>
+     <element name="isPuRec" type="cusdk:EncoderStatusInt" minOccurs="0" maxOccurs="unbounded"/>
+     <element name="decPoll" type="cusdk:DecoderStatusStr" minOccurs="0" maxOccurs="unbounded"/>
+   </sequence>
+  </complexType>
+  <complexType name="DevAlarmNotify">
+   <sequence>
+     <element name="deviceId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="alarmType" type="cusdk:EAlarmType" minOccurs="1" maxOccurs="1"/>
+     <element name="alarmChnId" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="alarmStatus" type="cusdk:EAlarmStatus" minOccurs="1" maxOccurs="1"/>
+     <element name="detAreaId" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="time" type="xsd:dateTime" minOccurs="1" maxOccurs="1"/>
+     <element name="alarmData" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+   </sequence>
+  </complexType>
+  <complexType name="StopPlayNotify">
+   <sequence>
+     <element name="playId" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="errorCode" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+   </sequence>
+  </complexType>
+  <complexType name="NetworkAddr">
+   <sequence>
+     <element name="ip" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="port" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+   </sequence>
+  </complexType>
+  <complexType name="NatInfo">
+   <sequence>
+     <element name="natData" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="localAddr" type="cusdk:NetworkAddr" minOccurs="1" maxOccurs="1"/>
+     <element name="natAddr" type="cusdk:NetworkAddr" minOccurs="1" maxOccurs="1"/>
+   </sequence>
+  </complexType>
+  <complexType name="MediaNetInfo">
+   <sequence>
+     <element name="videoRtpNatInfo" type="cusdk:NatInfo" minOccurs="1" maxOccurs="1"/>
+     <element name="videoRtcpNatInfo" type="cusdk:NatInfo" minOccurs="1" maxOccurs="1"/>
+     <element name="audioRtpNatInfo" type="cusdk:NatInfo" minOccurs="1" maxOccurs="1"/>
+     <element name="audioRtcpNatInfo" type="cusdk:NatInfo" minOccurs="1" maxOccurs="1"/>
+   </sequence>
+  </complexType>
+  <complexType name="MediaFormat">
+   <sequence>
+     <element name="payloadType" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="encodingName" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="manufacture" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+   </sequence>
+  </complexType>
+  <complexType name="OrderMediaFormat">
+   <sequence>
+     <element name="needTransMediaFormat" type="xsd:boolean" minOccurs="1" maxOccurs="1"/>
+     <element name="dstVideoFormat" type="cusdk:EVideoFormat" minOccurs="1" maxOccurs="1"/>
+     <element name="dstSolution" type="cusdk:EVideoResolution" minOccurs="1" maxOccurs="1"/>
+     <element name="dstFrameRate" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="dstBitRate" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="dstAudioFormat" type="cusdk:EAudioFormat" minOccurs="1" maxOccurs="1"/>
+   </sequence>
+  </complexType>
+  <complexType name="TranscodeMediaFormat">
+   <sequence>
+     <element name="needTranscode" type="xsd:boolean" minOccurs="1" maxOccurs="1"/>
+     <element name="dstVideoFormat" type="cusdk:EVideoFormat" minOccurs="1" maxOccurs="1"/>
+     <element name="dstSolution" type="cusdk:EVideoResolution" minOccurs="1" maxOccurs="1"/>
+     <element name="dstFrameRate" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="dstBitRate" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="dstAudioFormat" type="cusdk:EAudioFormat" minOccurs="1" maxOccurs="1"/>
+   </sequence>
+  </complexType>
+  <complexType name="PartitionInfo">
+   <sequence>
+     <element name="diskId" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="partitionId" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="partName" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="totalSize" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="freeSize" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="partState" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="partType" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="abnNum" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="mountPath" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="start" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="end" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="recordNum" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+   </sequence>
+  </complexType>
+  <complexType name="DiskInfo">
+   <sequence>
+     <element name="diskId" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="diskName" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="diskSize" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="diskAbnNum" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="diskState" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="diskSource" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="cylinders" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="heads" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="sectors" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="partitionList" type="cusdk:PartitionInfo" minOccurs="0" maxOccurs="unbounded"/>
+   </sequence>
+  </complexType>
+  <complexType name="NruInfo">
+   <sequence>
+     <element name="nruId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="devName" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="devType" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="manuFactory" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="ifName" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="ipAddr" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="netMask" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="gateway" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="RMSAddr" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="maxBandWidthKb" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="online" type="xsd:boolean" minOccurs="1" maxOccurs="1"/>
+     <element name="used" type="xsd:boolean" minOccurs="1" maxOccurs="1"/>
+   </sequence>
+  </complexType>
+  <complexType name="TimeRange">
+   <sequence>
+     <element name="startTime" type="xsd:dateTime" minOccurs="1" maxOccurs="1"/>
+     <element name="endTime" type="xsd:dateTime" minOccurs="1" maxOccurs="1"/>
+   </sequence>
+  </complexType>
+  <complexType name="RecTimeRange">
+   <sequence>
+     <element name="recEventType" type="cusdk:ERecordEventType" minOccurs="1" maxOccurs="1"/>
+     <element name="timeRange" type="cusdk:TimeRange" minOccurs="1" maxOccurs="1"/>
+   </sequence>
+  </complexType>
+  <complexType name="RecDuration">
+   <sequence>
+     <element name="recordDurationId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="durationTimeRange" type="cusdk:TimeRange" minOccurs="1" maxOccurs="1"/>
+     <element name="subTimeRangeList" type="cusdk:RecTimeRange" minOccurs="0" maxOccurs="unbounded"/>
+     <element name="recordDomainName" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="encoderChn" type="cusdk:DevChannel" minOccurs="1" maxOccurs="1"/>
+   </sequence>
+  </complexType>
+  <complexType name="RecordPlayDuration">
+   <sequence>
+     <element name="recordDurationId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="recordType" type="cusdk:ERecordType" minOccurs="1" maxOccurs="1"/>
+     <element name="durationTimeRange" type="cusdk:TimeRange" minOccurs="1" maxOccurs="1"/>
+     <element name="recordDomainName" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="encoderChn" type="cusdk:DevChannel" minOccurs="1" maxOccurs="1"/>
+   </sequence>
+  </complexType>
+  <complexType name="OnePuChnRecDays">
+   <sequence>
+     <element name="puChn" type="cusdk:DevChannel" minOccurs="1" maxOccurs="1"/>
+     <element name="timeRange" type="cusdk:TimeRange" minOccurs="1" maxOccurs="1"/>
+     <element name="recordStateInDays" type="xsd:boolean" minOccurs="0" maxOccurs="unbounded"/>
+   </sequence>
+  </complexType>
+  <complexType name="RecordPlan">
+   <sequence>
+     <element name="prerecordDuration" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="recordMode" type="cusdk:ERS-RecMode" minOccurs="1" maxOccurs="1"/>
+     <element name="planedRecordCronTimeList" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+     <element name="recordDurationAfterAlarm" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+   </sequence>
+  </complexType>
+  <complexType name="TVDecoderBind">
+   <sequence>
+     <element name="tvId" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="decoderId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+   </sequence>
+  </complexType>
+  <complexType name="TVWall">
+   <sequence>
+     <element name="tvwallId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="domainId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="name" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="tvNum" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="tvwallStyle" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="tvwallCustomStyleData" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="desc" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="createTime" type="xsd:dateTime" minOccurs="1" maxOccurs="1"/>
+     <element name="tvDecoderBind" type="cusdk:TVDecoderBind" minOccurs="0" maxOccurs="unbounded"/>
+   </sequence>
+  </complexType>
+  <complexType name="TVWallWindowPollStep">
+   <sequence>
+     <element name="encoderChn" type="cusdk:DevChannel" minOccurs="1" maxOccurs="1"/>
+     <element name="duration" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+   </sequence>
+  </complexType>
+  <complexType name="TVWALLTVDivScheme">
+   <sequence>
+     <element name="divId" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="pollSteps" type="cusdk:TVWallWindowPollStep" minOccurs="0" maxOccurs="unbounded"/>
+   </sequence>
+  </complexType>
+  <complexType name="TVWallTVScheme">
+   <sequence>
+     <element name="tvId" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="divStyle" type="cusdk:ETVDivStyle" minOccurs="1" maxOccurs="1"/>
+     <element name="tvWallDivList" type="cusdk:TVWALLTVDivScheme" minOccurs="0" maxOccurs="unbounded"/>
+   </sequence>
+  </complexType>
+  <complexType name="TVWallScheme">
+   <sequence>
+     <element name="schemeName" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="tvWallId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="tvSchemeList" type="cusdk:TVWallTVScheme" minOccurs="0" maxOccurs="unbounded"/>
+   </sequence>
+  </complexType>
+  <complexType name="TVWallSchemePollStep">
+   <sequence>
+     <element name="tvWallSchemeName" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="duration" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+   </sequence>
+  </complexType>
+  <complexType name="TVWallTVDivState">
+   <sequence>
+     <element name="divId" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="divPlayMode" type="cusdk:ETVWallPlayMode" minOccurs="1" maxOccurs="1"/>
+     <element name="recordPlaySession" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="recordPlayDuration" type="cusdk:RecordPlayDuration" minOccurs="1" maxOccurs="1"/>
+     <element name="pollState" type="cusdk:EPollStatus" minOccurs="1" maxOccurs="1"/>
+     <element name="encoderChn" type="cusdk:DevChannel" minOccurs="1" maxOccurs="1"/>
+     <element name="errorCode" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+   </sequence>
+  </complexType>
+  <complexType name="TVWallTVState">
+   <sequence>
+     <element name="tvId" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="divStateList" type="cusdk:TVWallTVDivState" minOccurs="0" maxOccurs="unbounded"/>
+   </sequence>
+  </complexType>
+  <complexType name="TVWallStateNotify">
+   <sequence>
+     <element name="tvWallId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="schemePollState" type="cusdk:EPollStatus" minOccurs="1" maxOccurs="1"/>
+     <element name="pollSteps" type="cusdk:TVWallSchemePollStep" minOccurs="0" maxOccurs="unbounded"/>
+     <element name="curSchemeInfo" type="cusdk:TVWallScheme" minOccurs="1" maxOccurs="1"/>
+     <element name="tvStateList" type="cusdk:TVWallTVState" minOccurs="0" maxOccurs="unbounded"/>
+   </sequence>
+  </complexType>
+  <complexType name="DomainInfo">
+   <sequence>
+     <element name="domainId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="domainName" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="parentDomainId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+   </sequence>
+  </complexType>
+  <complexType name="TransChannel">
+   <sequence>
+     <element name="transChannelType" type="cusdk:ETransChannelType" minOccurs="1" maxOccurs="1"/>
+     <element name="natData" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="netAddrList" type="cusdk:NetworkAddr" minOccurs="0" maxOccurs="unbounded"/>
+   </sequence>
+  </complexType>
+  <complexType name="MediaDescription">
+   <sequence>
+     <element name="transMode" type="cusdk:ETransMode" minOccurs="1" maxOccurs="1"/>
+     <element name="mediaType" type="cusdk:EMediaType" minOccurs="1" maxOccurs="1"/>
+     <element name="transChannelList" type="cusdk:TransChannel" minOccurs="0" maxOccurs="unbounded"/>
+     <element name="supportedFormats" type="cusdk:MediaFormat" minOccurs="0" maxOccurs="unbounded"/>
+     <element name="supportedResolution" type="cusdk:EVideoResolution" minOccurs="0" maxOccurs="unbounded"/>
+   </sequence>
+  </complexType>
+  <complexType name="BaseReq">
+   <sequence>
+     <element name="session" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+   </sequence>
+  </complexType>
+  <complexType name="BaseRsp">
+   <sequence>
+     <element name="session" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="errorCode" type="xsd:long" minOccurs="1" maxOccurs="1"/>
+   </sequence>
+  </complexType>
+  <complexType name="STUNServerInfo">
+   <sequence>
+     <element name="ip" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="port" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+   </sequence>
+  </complexType>
+  <complexType name="LoginReq">
+   <sequence>
+     <element name="userName" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="password" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="cusdkVersion" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+   </sequence>
+  </complexType>
+  <complexType name="LogoutReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="NotifySubscription">
+   <sequence>
+     <element name="subscribeNotifyType" type="cusdk:ESubscribeNotifyType" minOccurs="1" maxOccurs="1"/>
+     <element name="deviceId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="subscribeTypes" type="cusdk:EPuSubscribeType" minOccurs="0" maxOccurs="unbounded"/>
+   </sequence>
+  </complexType>
+  <complexType name="SubscribeNotifyReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="subscriptionList" type="cusdk:NotifySubscription" minOccurs="0" maxOccurs="unbounded"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="UnsubscribeNotifyReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="subscriptionList" type="cusdk:NotifySubscription" minOccurs="0" maxOccurs="unbounded"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="DeviceFullInfo">
+   <complexContent>
+    <extension base="cusdk:DeviceInfo">
+     <sequence>
+     <element name="devGroupToChannel" type="cusdk:DeviceGroupRelation" minOccurs="0" maxOccurs="unbounded"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="AlarmLinkAction">
+   <sequence>
+     <element name="actionType" type="cusdk:EAlarmLinkActionType" minOccurs="0" maxOccurs="unbounded"/>
+     <element name="encoderChn" type="cusdk:DevChannel" minOccurs="1" maxOccurs="1"/>
+     <element name="camPrePos" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="tvWallId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="tvId" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="tvDivId" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="alarmIOOutputChnId" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+   </sequence>
+  </complexType>
+  <complexType name="AlarmSource">
+   <sequence>
+     <element name="alarmDeviceId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="alarmInputChnId" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="alarmType" type="cusdk:EAlarmType" minOccurs="1" maxOccurs="1"/>
+   </sequence>
+  </complexType>
+  <complexType name="AlarmLinkConfig">
+   <sequence>
+     <element name="alarmSource" type="cusdk:AlarmSource" minOccurs="1" maxOccurs="1"/>
+     <element name="enabled" type="xsd:boolean" minOccurs="1" maxOccurs="1"/>
+     <element name="enabledCronTimeList" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+     <element name="alarmLinkActionList" type="cusdk:AlarmLinkAction" minOccurs="0" maxOccurs="unbounded"/>
+   </sequence>
+  </complexType>
+  <complexType name="GetNotifyReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="GetCUIListReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="GetDomainListReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="SetupStreamReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="playId" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="devId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="devChnId" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="mediaDescriptionList" type="cusdk:MediaDescription" minOccurs="0" maxOccurs="unbounded"/>
+     <element name="transcodeMeidaFormat" type="cusdk:TranscodeMediaFormat" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="PlayStreamReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="playId" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="StopStreamReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="playId" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="SendKeyFrameReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="devId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="encoderChannelId" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="PtzCtrlReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="devId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="videoSrcId" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="ptzCmd" type="cusdk:EPtzCmd" minOccurs="1" maxOccurs="1"/>
+     <element name="ptzParam" type="xsd:int" minOccurs="0" maxOccurs="unbounded"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="PtzLockReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="devId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="videoSrcId" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="beginTime" type="xsd:dateTime" minOccurs="1" maxOccurs="1"/>
+     <element name="endTime" type="xsd:dateTime" minOccurs="1" maxOccurs="1"/>
+     <element name="password" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="PtzUnlockReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="devId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="videoSrcId" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="password" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="SendTransDataReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="transChnType" type="cusdk:EDeviceTransparentChannelType" minOccurs="1" maxOccurs="1"/>
+     <element name="devId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="channelId" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="base64TransDataReq" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="GetUserInfoReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="userName" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="GetUserGroupInfoReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="userGroupId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="GetUserDataReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="key" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="dataType" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="fragNo" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="SetUserDataReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="key" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="dataType" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="fragNo" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="allFragNum" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="value" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="GetUserDevGroupByGroupReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="userId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="parentDevGroupId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="beginIndex" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="num" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="GetUserDevByGroupReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="userId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="devGroupId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="beginIndex" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="num" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="GetUserDevGroupReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="userId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="beginIndex" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="num" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="GetDomainDevGroupReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="userId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="domainId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="beginIndex" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="num" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="GetUserDevReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="userId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="beginIndex" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="num" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="GetDevByDomainReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="domainId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="userId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="beginIndex" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="num" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="GetDeviceGroupDeviceRelationsReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="userId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="beginIndex" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="num" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="CreateDeviceGroupReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="deviceGroupInfo" type="cusdk:DeviceGroup" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="DelDeviceGroupReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="deviceGroupId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="ModifyDeviceGroupReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="deviceGroupInfo" type="cusdk:DeviceGroup" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="DeviceGroupAddDeviceReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="relationList" type="cusdk:DeviceGroupRelation" minOccurs="0" maxOccurs="unbounded"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="DeviceGroupDelDeviceReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="relationList" type="cusdk:DeviceGroupRelation" minOccurs="0" maxOccurs="unbounded"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="GetUserListReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="userId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="beginIndex" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="num" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="GetUserGroupListReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="userId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="beginIndex" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="num" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="CreateUserGroupReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="userGroupInfo" type="cusdk:UserGroup" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="DelUserGroupReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="userGroupId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="ModifyUserGroupReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="userGroupInfo" type="cusdk:UserGroup" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="CreateUserReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="userInfo" type="cusdk:UserInfo" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="DelUserReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="userId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="ModifyUserReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="userInfo" type="cusdk:UserInfo" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="ChangePasswordReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="oldPassword" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="newPassword" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="passwordOverdueTime" type="xsd:dateTime" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="UserGetDeviceByGroupReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="id" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="type" type="cusdk:EUserOrUserGroup" minOccurs="1" maxOccurs="1"/>
+     <element name="deviceGroupId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="beginIndex" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="num" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="UserAddDeviceReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="id" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="type" type="cusdk:EUserOrUserGroup" minOccurs="1" maxOccurs="1"/>
+     <element name="deviceList" type="cusdk:AssignDeviceInfo" minOccurs="0" maxOccurs="unbounded"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="UserDelDeviceReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="id" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="type" type="cusdk:EUserOrUserGroup" minOccurs="1" maxOccurs="1"/>
+     <element name="deviceList" type="cusdk:AssignDeviceInfo" minOccurs="0" maxOccurs="unbounded"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="UserGetTVWallReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="id" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="type" type="cusdk:EUserOrUserGroup" minOccurs="1" maxOccurs="1"/>
+     <element name="beginIndex" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="num" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="UserAddTVWallReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="id" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="type" type="cusdk:EUserOrUserGroup" minOccurs="1" maxOccurs="1"/>
+     <element name="tvwallList" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="UserDelTVWallReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="id" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="type" type="cusdk:EUserOrUserGroup" minOccurs="1" maxOccurs="1"/>
+     <element name="tvwallId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="UserModifyDeviceReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="id" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="type" type="cusdk:EUserOrUserGroup" minOccurs="1" maxOccurs="1"/>
+     <element name="deviceList" type="cusdk:AssignDeviceInfo" minOccurs="0" maxOccurs="unbounded"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="GetAuthorizationDeviceReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="beginIndex" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="num" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="AddAuthorizationDeviceReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="authorizedDev" type="cusdk:AuthorizationDeviceInfo" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="DelAuthorizationDeviceReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="authorizedDev" type="cusdk:AuthorizationDeviceInfo" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="ModifyAuthorizationDeviceReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="authorizedDev" type="cusdk:AuthorizationDeviceInfo" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="GetDeviceBaseInfoReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="devId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="GetRCSSysParamReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="SetRCSSysParamReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="coverPolicy" type="cusdk:ERS-CoverPolicy" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="GetNruListReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="beginIndex" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="num" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="GetDiskListReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="nruId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="beginIndex" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="num" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="GetPuChnBindingReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="nruId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="diskMountPath" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="beginIndex" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="num" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="BindPuReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="nruId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="diskMountPath" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="channelList" type="cusdk:DevChannel" minOccurs="0" maxOccurs="unbounded"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="UnbindPuReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="nruId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="diskMountPath" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="channelList" type="cusdk:DevChannel" minOccurs="0" maxOccurs="unbounded"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="GetPlatformRecordDaysReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="devChnList" type="cusdk:DevChannel" minOccurs="0" maxOccurs="unbounded"/>
+     <element name="timeRange" type="cusdk:TimeRange" minOccurs="1" maxOccurs="1"/>
+     <element name="recordDomainName" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="QueryRecordReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="recordType" type="cusdk:ERecordType" minOccurs="1" maxOccurs="1"/>
+     <element name="devChn" type="cusdk:DevChannel" minOccurs="1" maxOccurs="1"/>
+     <element name="recEventType" type="cusdk:ERecordEventType" minOccurs="1" maxOccurs="1"/>
+     <element name="timeRange" type="cusdk:TimeRange" minOccurs="1" maxOccurs="1"/>
+     <element name="recordDomainName" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="StartPlatformRecordReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="devChn" type="cusdk:DevChannel" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="StopPlatformRecordReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="devChn" type="cusdk:DevChannel" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="SetupPlayRecordReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="playId" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="recordPlayDuration" type="cusdk:RecordPlayDuration" minOccurs="1" maxOccurs="1"/>
+     <element name="mediaDescriptionList" type="cusdk:MediaDescription" minOccurs="0" maxOccurs="unbounded"/>
+     <element name="transcodeMeidaFormat" type="cusdk:TranscodeMediaFormat" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="PlayRecordReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="playId" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="VcrCtrlReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="playId" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="vcrCmd" type="cusdk:EVCRCmd" minOccurs="1" maxOccurs="1"/>
+     <element name="seekTime" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="playSpeed" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="GetCurRecordPlayPositionReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="playId" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="StopPlayRecordReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="playId" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="SetupDownloadPlatformRecordReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="playId" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="recordPlayDuration" type="cusdk:RecordPlayDuration" minOccurs="1" maxOccurs="1"/>
+     <element name="mediaDescriptionList" type="cusdk:MediaDescription" minOccurs="0" maxOccurs="unbounded"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="StartDownloadPlatformRecordReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="playId" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="StopDownloadPlatformRecordReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="playId" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="SetupDownloadRecordReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="playId" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="recordPlayDuration" type="cusdk:RecordPlayDuration" minOccurs="1" maxOccurs="1"/>
+     <element name="mediaDescriptionList" type="cusdk:MediaDescription" minOccurs="0" maxOccurs="unbounded"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="StartDownloadRecordReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="playId" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="StopDownloadRecordReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="playId" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="GetRecordPlanReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="devChn" type="cusdk:DevChannel" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="SetRecordPlanReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="devChn" type="cusdk:DevChannel" minOccurs="1" maxOccurs="1"/>
+     <element name="recordPlan" type="cusdk:RecordPlan" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="GetAllTVWallReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="beginIndex" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="num" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="GetTVWallReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="tvwallId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="CreateTVWallReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="TVWallInfo" type="cusdk:TVWall" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="DelTVWallReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="TVWallId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="ModifyTVWallReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="TVWallInfo" type="cusdk:TVWall" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="TVWallStartPlayReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="TVWallId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="tvId" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="tvDivId" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="encoderChn" type="cusdk:DevChannel" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="TVWallStopPlayReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="encoderChn" type="cusdk:DevChannel" minOccurs="1" maxOccurs="1"/>
+     <element name="TVWallId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="tvId" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="tvDivId" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="TVWallWindowPollContrlReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="TVWallId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="tvId" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="tvDivId" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="pollSteps" type="cusdk:TVWallWindowPollStep" minOccurs="0" maxOccurs="unbounded"/>
+     <element name="pollCmd" type="cusdk:EVCRCmd" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="TVWallSaveSchemeReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="scheme" type="cusdk:TVWallScheme" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="TVWallDelSchemeReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="tvwallId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="schemeName" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="TVWallLoadSchemeReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="tvwallId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="schemeName" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="TVWallQuerySchemeReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="tvWallId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="TVWallSetSchemePollReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="tvWallId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="pollSteps" type="cusdk:TVWallSchemePollStep" minOccurs="0" maxOccurs="unbounded"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="TVWallGetSchemePollReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="tvWallId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="TVWallSchemePollControlReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="tvWallId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="pollCmd" type="cusdk:EVCRCmd" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="SetTVDivNumReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="tvwallId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="tvId" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="tvDivNum" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="PlayRecordOnTVWallReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="TVWallId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="tvId" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="tvDivId" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="recordPlayDuration" type="cusdk:RecordPlayDuration" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="StopPlayRecordOnTVWallReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="TVWallId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="tvId" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="tvDivId" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="MapTypeInfo">
+   <sequence>
+     <element name="mapType" type="cusdk:EMapType" minOccurs="1" maxOccurs="1"/>
+     <element name="mapVersion" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="accessUrl" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+   </sequence>
+  </complexType>
+  <complexType name="GetSupportMapTypesReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="Map">
+   <sequence>
+     <element name="mapId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="mapName" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="mapType" type="cusdk:EMapType" minOccurs="1" maxOccurs="1"/>
+     <element name="mapUrl" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="parentMapId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="description" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="minLongitude" type="xsd:double" minOccurs="1" maxOccurs="1"/>
+     <element name="maxLongitude" type="xsd:double" minOccurs="1" maxOccurs="1"/>
+     <element name="minLatitude" type="xsd:double" minOccurs="1" maxOccurs="1"/>
+     <element name="maxLatitude" type="xsd:double" minOccurs="1" maxOccurs="1"/>
+     <element name="minScaleLevel" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="maxScaleLevel" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="screenCenterLongitude" type="xsd:double" minOccurs="1" maxOccurs="1"/>
+     <element name="screenCenterLatitude" type="xsd:double" minOccurs="1" maxOccurs="1"/>
+     <element name="defaultScaleLevel" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="coordType" type="cusdk:EMapCoordType" minOccurs="1" maxOccurs="1"/>
+     <element name="version" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+   </sequence>
+  </complexType>
+  <complexType name="GetMapImageUploadUrlReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="parentMapId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="CreateMapReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="mapInfo" type="cusdk:Map" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="ModifyMapReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="mapInfo" type="cusdk:Map" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="DelMapReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="mapId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="QueryMapReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="mapId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="mapIdEnabled" type="xsd:boolean" minOccurs="1" maxOccurs="1"/>
+     <element name="parentMapId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="parentMapIdEnabled" type="xsd:boolean" minOccurs="1" maxOccurs="1"/>
+     <element name="mapType" type="cusdk:EMapType" minOccurs="1" maxOccurs="1"/>
+     <element name="mapTypeEnabled" type="xsd:boolean" minOccurs="1" maxOccurs="1"/>
+     <element name="mapName" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="mapNameEnabled" type="xsd:boolean" minOccurs="1" maxOccurs="1"/>
+     <element name="beginIndex" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="num" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="MapPosition">
+   <sequence>
+     <element name="longitude" type="xsd:double" minOccurs="1" maxOccurs="1"/>
+     <element name="latitude" type="xsd:double" minOccurs="1" maxOccurs="1"/>
+   </sequence>
+  </complexType>
+  <complexType name="MapArea">
+   <sequence>
+     <element name="areaId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="parentMapId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="refMapId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="layerId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="layerColor" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="customStyle" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="opacity" type="xsd:double" minOccurs="1" maxOccurs="1"/>
+     <element name="trace" type="cusdk:MapPosition" minOccurs="0" maxOccurs="unbounded"/>
+   </sequence>
+  </complexType>
+  <complexType name="QueryMapAreaReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="areaId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="areaIdEnabled" type="xsd:boolean" minOccurs="1" maxOccurs="1"/>
+     <element name="parentMapId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="parentMapIdEnabled" type="xsd:boolean" minOccurs="1" maxOccurs="1"/>
+     <element name="refMapId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="refMapIdEnabled" type="xsd:boolean" minOccurs="1" maxOccurs="1"/>
+     <element name="beginIndex" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="num" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="CreateMapAreaReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="mapAreaInfo" type="cusdk:MapArea" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="ModifyMapAreaReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="mapAreaInfo" type="cusdk:MapArea" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="MapElement">
+   <sequence>
+     <element name="id" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="name" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="mapId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="layerId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="type" type="cusdk:EMapElementType" minOccurs="1" maxOccurs="1"/>
+     <element name="deviceId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="deviceChannel" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="channelType" type="cusdk:EDeviceChannelType" minOccurs="1" maxOccurs="1"/>
+     <element name="position" type="cusdk:MapPosition" minOccurs="1" maxOccurs="1"/>
+     <element name="coordType" type="cusdk:EMapCoordType" minOccurs="1" maxOccurs="1"/>
+     <element name="picUrl" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="description" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+   </sequence>
+  </complexType>
+  <complexType name="CreateMapElementReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="mapEleInfo" type="cusdk:MapElement" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="ModifyMapElementReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="mapElementInfo" type="cusdk:MapElement" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="DelMapElementReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="mapElementId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="QueryMapElementReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="mapId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="mapIdEnabled" type="xsd:boolean" minOccurs="1" maxOccurs="1"/>
+     <element name="elementId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="elementIdEnabled" type="xsd:boolean" minOccurs="1" maxOccurs="1"/>
+     <element name="elementType" type="cusdk:EMapElementType" minOccurs="1" maxOccurs="1"/>
+     <element name="elementTypeEnabled" type="xsd:boolean" minOccurs="1" maxOccurs="1"/>
+     <element name="deviceId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="deviceChannel" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="channelType" type="cusdk:EDeviceChannelType" minOccurs="1" maxOccurs="1"/>
+     <element name="deviceChannelEnabled" type="xsd:boolean" minOccurs="1" maxOccurs="1"/>
+     <element name="beginIndex" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="num" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="GetMapElementImageUploadUrlReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="imageName" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="QueryMapElementImageListReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="MapPositionMar2EarthReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="marPos" type="cusdk:MapPosition" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="MapPositionEarth2MarReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="earthPos" type="cusdk:MapPosition" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="QueryAlarmLinkConfigReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="beginIndex" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="num" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="GetAlarmLinkConfigReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="alarmSource" type="cusdk:AlarmSource" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="SetAlarmLinkConfigReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="alarmLinkCoonfig" type="cusdk:AlarmLinkConfig" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="AlarmLinkArea">
+   <sequence>
+     <element name="id" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="name" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="alarmLinkSourceList" type="cusdk:AlarmSource" minOccurs="0" maxOccurs="unbounded"/>
+   </sequence>
+  </complexType>
+  <complexType name="QueryAlarmLinkAreaReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="beginIndex" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="num" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="CreateAlarmLinkAreaReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="alarmLinkAreaInfo" type="cusdk:AlarmLinkArea" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="DelAlarmLinkAreaReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="alarmLinkAreaId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="ModifyAlarmLinkAreaReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="alarmLinkAreaInfo" type="cusdk:AlarmLinkArea" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="UserLog">
+   <sequence>
+     <element name="logId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="loginSession" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="userId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="domainName" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="userName" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="ipAddr" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="happenedTime" type="xsd:dateTime" minOccurs="1" maxOccurs="1"/>
+     <element name="operateType" type="cusdk:EUserOperateType" minOccurs="1" maxOccurs="1"/>
+     <element name="operateResult" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="operateDesc" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+   </sequence>
+  </complexType>
+  <complexType name="QueryUserLogReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="userId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="userIdEnabled" type="xsd:boolean" minOccurs="1" maxOccurs="1"/>
+     <element name="userLoginSession" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="userLoginSessionEnabled" type="xsd:boolean" minOccurs="1" maxOccurs="1"/>
+     <element name="domainName" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="domainNameEnabled" type="xsd:boolean" minOccurs="1" maxOccurs="1"/>
+     <element name="timeBegin" type="xsd:dateTime" minOccurs="1" maxOccurs="1"/>
+     <element name="timeEnd" type="xsd:dateTime" minOccurs="1" maxOccurs="1"/>
+     <element name="timeEnabled" type="xsd:boolean" minOccurs="1" maxOccurs="1"/>
+     <element name="operateType" type="cusdk:EUserOperateType" minOccurs="1" maxOccurs="1"/>
+     <element name="operateTypeEnabled" type="xsd:boolean" minOccurs="1" maxOccurs="1"/>
+     <element name="beginIndex" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="num" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="DeviceLog">
+   <sequence>
+     <element name="logId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="deviceId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="deviceName" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="deviceIp" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="deviceAlias" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="happenedTime" type="xsd:dateTime" minOccurs="1" maxOccurs="1"/>
+     <element name="logType" type="cusdk:EDeviceLogType" minOccurs="1" maxOccurs="1"/>
+     <element name="logDesc" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+   </sequence>
+  </complexType>
+  <complexType name="QueryDeviceLogReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="deviceId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="deviceIdEnabled" type="xsd:boolean" minOccurs="1" maxOccurs="1"/>
+     <element name="deviceName" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="deviceNameEnabled" type="xsd:boolean" minOccurs="1" maxOccurs="1"/>
+     <element name="timeBegin" type="xsd:dateTime" minOccurs="1" maxOccurs="1"/>
+     <element name="timeEnd" type="xsd:dateTime" minOccurs="1" maxOccurs="1"/>
+     <element name="timeEnabled" type="xsd:boolean" minOccurs="1" maxOccurs="1"/>
+     <element name="logType" type="cusdk:EDeviceLogType" minOccurs="1" maxOccurs="1"/>
+     <element name="logTypeEnabled" type="xsd:boolean" minOccurs="1" maxOccurs="1"/>
+     <element name="beginIndex" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="num" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="AlarmLog">
+   <sequence>
+     <element name="logId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="deviceId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="deviceDomainName" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="deviceName" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="deviceAlias" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="alarmChannelId" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="alarmType" type="cusdk:EAlarmType" minOccurs="1" maxOccurs="1"/>
+     <element name="alarmStatus" type="cusdk:EAlarmStatus" minOccurs="1" maxOccurs="1"/>
+     <element name="occurTime" type="xsd:dateTime" minOccurs="1" maxOccurs="1"/>
+     <element name="resumeTime" type="xsd:dateTime" minOccurs="1" maxOccurs="1"/>
+     <element name="alarmName" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="description" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+   </sequence>
+  </complexType>
+  <complexType name="QueryAlarmLogReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="deviceId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="deviceIdEnabled" type="xsd:boolean" minOccurs="1" maxOccurs="1"/>
+     <element name="alarmChannelId" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="alarmChannelIdEnabled" type="xsd:boolean" minOccurs="1" maxOccurs="1"/>
+     <element name="alarmName" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="alarmNameEnabled" type="xsd:boolean" minOccurs="1" maxOccurs="1"/>
+     <element name="deviceDomainName" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="deviceDomainNameEnabled" type="xsd:boolean" minOccurs="1" maxOccurs="1"/>
+     <element name="timeBegin" type="xsd:dateTime" minOccurs="1" maxOccurs="1"/>
+     <element name="timeEnd" type="xsd:dateTime" minOccurs="1" maxOccurs="1"/>
+     <element name="timeEnabled" type="xsd:boolean" minOccurs="1" maxOccurs="1"/>
+     <element name="alarmType" type="cusdk:EAlarmType" minOccurs="1" maxOccurs="1"/>
+     <element name="alarmTypeEnabled" type="xsd:boolean" minOccurs="1" maxOccurs="1"/>
+     <element name="beginIndex" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="num" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="GetLogConfigReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="SetLogConfigReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="maxUserLogSavedDays" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="maxUserLogSavedNumber" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="enableUserLog" type="xsd:boolean" minOccurs="1" maxOccurs="1"/>
+     <element name="maxDeviceLogSavedNumber" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="maxDeviceLogSavedDays" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="enableDeviceLog" type="xsd:boolean" minOccurs="1" maxOccurs="1"/>
+     <element name="maxAlarmLogSavedNumber" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="maxAlarmLogSavedDays" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="CallPuReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="encodeChnId" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="devId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="devDecChnId" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="mediaDescriptionList" type="cusdk:MediaDescription" minOccurs="0" maxOccurs="unbounded"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="HangUpPuReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="encodeChnId" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="devId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="devDecChnId" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="VideoMode">
+   <sequence>
+     <element name="videoFormat" type="cusdk:EVideoFormat" minOccurs="1" maxOccurs="1"/>
+     <element name="videoRes" type="cusdk:EVideoResolution" minOccurs="1" maxOccurs="1"/>
+   </sequence>
+  </complexType>
+  <complexType name="VideoEncodeParam">
+   <sequence>
+     <element name="videoMode" type="cusdk:VideoMode" minOccurs="1" maxOccurs="1"/>
+     <element name="frameRate" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="quality" type="cusdk:EVideoQuality" minOccurs="1" maxOccurs="1"/>
+     <element name="bitRate" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="interval" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="brightness" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="contrast" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="saturation" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="sharpness" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+   </sequence>
+  </complexType>
+  <complexType name="GetDeviceEncoderParamReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="deviceId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="encodeChnId" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="SetDeviceEncoderParamReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="deviceId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="encodeChnId" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="videoParam" type="cusdk:VideoEncodeParam" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="SetDeviceNameReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="deviceId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="deviceName" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="GetCameraProtocolTypeReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="deviceId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="videoSrcId" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="SetCameraProtocolTypeReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="deviceId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="videoSrcId" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="cameraProtocolType" type="cusdk:ECameraProtocolType" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="Area">
+   <sequence>
+     <element name="x" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="y" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="width" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="height" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+   </sequence>
+  </complexType>
+  <complexType name="MotionDetectAreaConfig">
+   <sequence>
+     <element name="enable" type="xsd:boolean" minOccurs="1" maxOccurs="1"/>
+     <element name="detectArea" type="cusdk:Area" minOccurs="1" maxOccurs="1"/>
+     <element name="alarmRate" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="restoreRate" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+   </sequence>
+  </complexType>
+  <complexType name="GetMotionDetectConfigReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="deviceId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="videoSrcId" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="SetMotionDetectConfigReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="deviceId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="videoSrcId" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="motionDetectAreaConfigList" type="cusdk:MotionDetectAreaConfig" minOccurs="0" maxOccurs="unbounded"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="ShadeAreaConfig">
+   <sequence>
+     <element name="enable" type="xsd:boolean" minOccurs="1" maxOccurs="1"/>
+     <element name="shadeArea" type="cusdk:Area" minOccurs="1" maxOccurs="1"/>
+   </sequence>
+  </complexType>
+  <complexType name="GetShadeConfigReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="deviceId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="videoSrcId" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="SetShadeConfigReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="deviceId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="videoSrcId" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="shadeAreaConfigList" type="cusdk:ShadeAreaConfig" minOccurs="0" maxOccurs="unbounded"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="GetDeviceChannelNameReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="deviceId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="chnType" type="cusdk:EDeviceChannelType" minOccurs="1" maxOccurs="1"/>
+     <element name="chnId" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="ChannelName">
+   <sequence>
+     <element name="chnId" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="chnName" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+   </sequence>
+  </complexType>
+  <complexType name="SetDeviceChannelNameReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="deviceId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="chnType" type="cusdk:EDeviceChannelType" minOccurs="1" maxOccurs="1"/>
+     <element name="chnId" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="chnName" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="GetPtzPresetNameReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="deviceId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="vieoSrcId" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="PresetName">
+   <sequence>
+     <element name="presetId" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="presetName" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+   </sequence>
+  </complexType>
+  <complexType name="SetPtzPresetNameReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="deviceId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="vieoSrcId" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="presetId" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="presetName" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="DelPtzPresetNameReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="deviceId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="vieoSrcId" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="presetId" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <complexType name="VsipChannelDataReq">
+   <complexContent>
+    <extension base="cusdk:BaseReq">
+     <sequence>
+     <element name="deviceId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="deviceIndex" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="vsipBase64DataReq" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     </sequence>
+    </extension>
+   </complexContent>
+  </complexType>
+  <!-- operation request element -->
+  <element name="Login">
+   <complexType>
+    <sequence>
+     <element name="loginReq" type="cusdk:LoginReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="LoginRsp">
+   <complexType>
+    <sequence>
+     <element name="cmsVersion" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="cuVersion" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="cuUpdateUrl" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="stunInfo" type="cusdk:STUNServerInfo" minOccurs="1" maxOccurs="1"/>
+     <element name="serverDataVersion" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="Logout">
+   <complexType>
+    <sequence>
+     <element name="logoutReq" type="cusdk:LogoutReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="LogoutRsp">
+   <complexType>
+    <sequence>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="SubscribeNotify">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:SubscribeNotifyReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="SubscribeNotifyRsp">
+   <complexType>
+    <sequence>
+     <element name="failedList" type="cusdk:NotifySubscription" minOccurs="0" maxOccurs="unbounded"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="UnsubscribeNotify">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:UnsubscribeNotifyReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="UnsubscribeNotifyRsp">
+   <complexType>
+    <sequence>
+     <element name="failedList" type="cusdk:NotifySubscription" minOccurs="0" maxOccurs="unbounded"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="GetNotify">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:GetNotifyReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="GetNotifyRsp">
+   <complexType>
+    <sequence>
+     <element name="deviceAddNotify" type="cusdk:DeviceFullInfo" minOccurs="0" maxOccurs="unbounded"/>
+     <element name="deviceDelNotify" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+     <element name="deviceModNotify" type="cusdk:DeviceFullInfo" minOccurs="0" maxOccurs="unbounded"/>
+     <element name="deviceChannelNameChangeNotify" type="cusdk:DeviceChannelNameChangeNotify" minOccurs="0" maxOccurs="unbounded"/>
+     <element name="deviceGroupAddNotify" type="cusdk:DeviceGroup" minOccurs="0" maxOccurs="unbounded"/>
+     <element name="deviceGroupDelNotify" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+     <element name="deviceGroupModNotify" type="cusdk:DeviceGroup" minOccurs="0" maxOccurs="unbounded"/>
+     <element name="devOnlineNotify" type="cusdk:DevOnlineNotify" minOccurs="0" maxOccurs="unbounded"/>
+     <element name="devConfigNotify" type="cusdk:DevConfigNotify" minOccurs="0" maxOccurs="unbounded"/>
+     <element name="devServiceStatusNotify" type="cusdk:DevServiceStatusNotify" minOccurs="0" maxOccurs="unbounded"/>
+     <element name="devAlarmNotify" type="cusdk:DevAlarmNotify" minOccurs="0" maxOccurs="unbounded"/>
+     <element name="stopPlayNotify" type="cusdk:StopPlayNotify" minOccurs="0" maxOccurs="unbounded"/>
+     <element name="tvWallStateNotify" type="cusdk:TVWallStateNotify" minOccurs="0" maxOccurs="unbounded"/>
+     <element name="userAddNotify" type="cusdk:UserInfo" minOccurs="0" maxOccurs="unbounded"/>
+     <element name="userDelNotify" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+     <element name="userModNotify" type="cusdk:UserInfo" minOccurs="0" maxOccurs="unbounded"/>
+     <element name="userGroupAddNotify" type="cusdk:UserGroup" minOccurs="0" maxOccurs="unbounded"/>
+     <element name="userGroupDelNotify" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+     <element name="userGroupModNotify" type="cusdk:UserGroup" minOccurs="0" maxOccurs="unbounded"/>
+     <element name="tvWallAddNotify" type="cusdk:TVWall" minOccurs="0" maxOccurs="unbounded"/>
+     <element name="tvWallDelNotify" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+     <element name="tvWallModNotify" type="cusdk:TVWall" minOccurs="0" maxOccurs="unbounded"/>
+     <element name="deviceGroupAddDeviceNotify" type="cusdk:DeviceGroupRelation" minOccurs="0" maxOccurs="unbounded"/>
+     <element name="deviceGroupDelDeviceNotify" type="cusdk:DeviceGroupRelation" minOccurs="0" maxOccurs="unbounded"/>
+     <element name="alarmLinkConfigChangeNotify" type="cusdk:AlarmLinkConfig" minOccurs="0" maxOccurs="unbounded"/>
+     <element name="seqMarks" type="xsd:int" minOccurs="0" maxOccurs="unbounded"/>
+     <element name="hasDataLeft" type="xsd:boolean" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="GetCUIList">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:GetCUIListReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="GetCUIListRsp">
+   <complexType>
+    <sequence>
+     <element name="cuiList" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="GetDomainList">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:GetDomainListReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="GetDomainListRsp">
+   <complexType>
+    <sequence>
+     <element name="domainList" type="cusdk:DomainInfo" minOccurs="0" maxOccurs="unbounded"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="SetupStream">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:SetupStreamReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="SetupStreamRsp">
+   <complexType>
+    <sequence>
+     <element name="mediaDescriptionList" type="cusdk:MediaDescription" minOccurs="0" maxOccurs="unbounded"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="PlayStream">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:PlayStreamReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="PlayStreamRsp">
+   <complexType>
+    <sequence>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="StopStream">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:StopStreamReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="StopStreamRsp">
+   <complexType>
+    <sequence>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="SendKeyFrame">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:SendKeyFrameReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="SendKeyFrameRsp">
+   <complexType>
+    <sequence>
+     <element name="errorDesc" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="PtzCtrl">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:PtzCtrlReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="PtzCtrlRsp">
+   <complexType>
+    <sequence>
+     <element name="errorDesc" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="PtzLock">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:PtzLockReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="PtzLockRsp">
+   <complexType>
+    <sequence>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="PtzUnlock">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:PtzUnlockReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="PtzUnlockRsp">
+   <complexType>
+    <sequence>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="SendTransData">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:SendTransDataReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="SendTransDataRsp">
+   <complexType>
+    <sequence>
+     <element name="base64TransDataRsp" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="GetUserInfo">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:GetUserInfoReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="GetUserInfoRsp">
+   <complexType>
+    <sequence>
+     <element name="userInfo" type="cusdk:UserInfo" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="GetUserGroupInfo">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:GetUserGroupInfoReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="GetUserGroupInfoRsp">
+   <complexType>
+    <sequence>
+     <element name="userGroupInfo" type="cusdk:UserGroup" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="GetUserData">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:GetUserDataReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="GetUserDataRsp">
+   <complexType>
+    <sequence>
+     <element name="key" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="dataType" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="fragNo" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="allFragNum" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="value" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="SetUserData">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:SetUserDataReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="SetUserDataRsp">
+   <complexType>
+    <sequence>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="GetUserDevGroupByGroup">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:GetUserDevGroupByGroupReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="GetUserDevGroupByGroupRsp">
+   <complexType>
+    <sequence>
+     <element name="devGroupList" type="cusdk:DeviceGroup" minOccurs="0" maxOccurs="unbounded"/>
+     <element name="totalNum" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="GetUserDevByGroup">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:GetUserDevByGroupReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="GetUserDevByGroupRsp">
+   <complexType>
+    <sequence>
+     <element name="devList" type="cusdk:DeviceInfo" minOccurs="0" maxOccurs="unbounded"/>
+     <element name="totalNum" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="GetUserDevGroup">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:GetUserDevGroupReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="GetUserDevGroupRsp">
+   <complexType>
+    <sequence>
+     <element name="devGroupList" type="cusdk:DeviceGroup" minOccurs="0" maxOccurs="unbounded"/>
+     <element name="totalNum" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="GetDomainDevGroup">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:GetDomainDevGroupReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="GetDomainDevGroupRsp">
+   <complexType>
+    <sequence>
+     <element name="devGroupList" type="cusdk:DeviceGroup" minOccurs="0" maxOccurs="unbounded"/>
+     <element name="totalNum" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="GetUserDev">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:GetUserDevReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="GetUserDevRsp">
+   <complexType>
+    <sequence>
+     <element name="devList" type="cusdk:DeviceInfo" minOccurs="0" maxOccurs="unbounded"/>
+     <element name="totalNum" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="GetUserDevByDomain">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:GetDevByDomainReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="GetDevByDomainRsp">
+   <complexType>
+    <sequence>
+     <element name="devList" type="cusdk:DeviceInfo" minOccurs="0" maxOccurs="unbounded"/>
+     <element name="totalNum" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="GetDeviceGroupDeviceRelations">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:GetDeviceGroupDeviceRelationsReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="GetDeviceGroupDeviceRelationsRsp">
+   <complexType>
+    <sequence>
+     <element name="devGroupRelationList" type="cusdk:DeviceGroupRelation" minOccurs="0" maxOccurs="unbounded"/>
+     <element name="totalNum" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="CreateDeviceGroup">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:CreateDeviceGroupReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="CreateDeviceGroupRsp">
+   <complexType>
+    <sequence>
+     <element name="deviceGroupId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="DelDeviceGroup">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:DelDeviceGroupReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="DelDeviceGroupRsp">
+   <complexType>
+    <sequence>
+     <element name="conflictedNames" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="ModifyDeviceGroup">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:ModifyDeviceGroupReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="ModifyDeviceGroupRsp">
+   <complexType>
+    <sequence>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="DeviceGroupAddDevice">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:DeviceGroupAddDeviceReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="DeviceGroupAddDeviceRsp">
+   <complexType>
+    <sequence>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="DeviceGroupDelDevice">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:DeviceGroupDelDeviceReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="DeviceGroupDelDeviceRsp">
+   <complexType>
+    <sequence>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="GetUserList">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:GetUserListReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="GetUserListRsp">
+   <complexType>
+    <sequence>
+     <element name="userInfoList" type="cusdk:UserInfo" minOccurs="0" maxOccurs="unbounded"/>
+     <element name="totalNum" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="GetUserGroupList">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:GetUserGroupListReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="GetUserGroupListRsp">
+   <complexType>
+    <sequence>
+     <element name="userGroupList" type="cusdk:UserGroup" minOccurs="0" maxOccurs="unbounded"/>
+     <element name="totalNum" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="CreateUserGroup">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:CreateUserGroupReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="CreateUserGroupRsp">
+   <complexType>
+    <sequence>
+     <element name="userGroupId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="DelUserGroup">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:DelUserGroupReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="DelUserGroupRsp">
+   <complexType>
+    <sequence>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="ModifyUserGroup">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:ModifyUserGroupReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="ModifyUserGroupRsp">
+   <complexType>
+    <sequence>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="CreateUser">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:CreateUserReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="CreateUserRsp">
+   <complexType>
+    <sequence>
+     <element name="userId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="DelUser">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:DelUserReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="DelUserRsp">
+   <complexType>
+    <sequence>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="ModifyUser">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:ModifyUserReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="ModifyUserRsp">
+   <complexType>
+    <sequence>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="ChangePassword">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:ChangePasswordReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="ChangePasswordRsp">
+   <complexType>
+    <sequence>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="UserGetDeviceByGroup">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:UserGetDeviceByGroupReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="UserGetDeviceByGroupRsp">
+   <complexType>
+    <sequence>
+     <element name="deviceList" type="cusdk:AssignDeviceInfo" minOccurs="0" maxOccurs="unbounded"/>
+     <element name="totalNum" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="UserAddDevice">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:UserAddDeviceReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="UserAddDeviceRsp">
+   <complexType>
+    <sequence>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="UserDelDevice">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:UserDelDeviceReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="UserDelDeviceRsp">
+   <complexType>
+    <sequence>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="UserGetTVWall">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:UserGetTVWallReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="UserGetTVWallRsp">
+   <complexType>
+    <sequence>
+     <element name="tvWallIdList" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+     <element name="totalNum" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="UserAddTVWall">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:UserAddTVWallReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="UserAddTVWallRsp">
+   <complexType>
+    <sequence>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="UserDelTVWall">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:UserDelTVWallReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="UserDelTVWallRsp">
+   <complexType>
+    <sequence>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="UserModifyDevice">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:UserModifyDeviceReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="UserModifyDeviceRsp">
+   <complexType>
+    <sequence>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="GetAuthorizationDevice">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:GetAuthorizationDeviceReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="GetAuthorizationDeviceRsp">
+   <complexType>
+    <sequence>
+     <element name="authorizedDeviceList" type="cusdk:AuthorizationDeviceInfo" minOccurs="0" maxOccurs="unbounded"/>
+     <element name="totalNum" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="AddAuthorizationDevice">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:AddAuthorizationDeviceReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="AddAuthorizationDeviceRsp">
+   <complexType>
+    <sequence>
+     <element name="createTime" type="xsd:dateTime" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="DelAuthorizationDevice">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:DelAuthorizationDeviceReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="DelAuthorizationDeviceRsp">
+   <complexType>
+    <sequence>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="ModifyAuthorizationDevice">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:ModifyAuthorizationDeviceReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="ModifyAuthorizationDeviceRsp">
+   <complexType>
+    <sequence>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="GetDeviceBaseInfo">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:GetDeviceBaseInfoReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="GetDeviceBaseInfoRsp">
+   <complexType>
+    <sequence>
+     <element name="devInfo" type="cusdk:DeviceInfo" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="GetRCSSysParam">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:GetRCSSysParamReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="GetRCSSysParamRsp">
+   <complexType>
+    <sequence>
+     <element name="coverPolicy" type="cusdk:ERS-CoverPolicy" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="SetRCSSysParam">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:SetRCSSysParamReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="SetRCSSysParamRsp">
+   <complexType>
+    <sequence>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="GetNruList">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:GetNruListReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="GetNruListRsp">
+   <complexType>
+    <sequence>
+     <element name="totalNum" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="nruList" type="cusdk:NruInfo" minOccurs="0" maxOccurs="unbounded"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="GetDiskList">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:GetDiskListReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="GetDiskListRsp">
+   <complexType>
+    <sequence>
+     <element name="diskList" type="cusdk:DiskInfo" minOccurs="0" maxOccurs="unbounded"/>
+     <element name="totalNum" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="GetPuChnBinding">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:GetPuChnBindingReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="GetPuChnBindingRsp">
+   <complexType>
+    <sequence>
+     <element name="nruId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="diskMountPath" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="totalNum" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="channelList" type="cusdk:DevChannel" minOccurs="0" maxOccurs="unbounded"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="BindPu">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:BindPuReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="BindPuRsp">
+   <complexType>
+    <sequence>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="UnbindPu">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:UnbindPuReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="UnbindPuRsp">
+   <complexType>
+    <sequence>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="GetPlatformRecordDays">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:GetPlatformRecordDaysReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="GetPlatformRecordDaysRsp">
+   <complexType>
+    <sequence>
+     <element name="recordStateInDaysList" type="cusdk:OnePuChnRecDays" minOccurs="0" maxOccurs="unbounded"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="QueryRecord">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:QueryRecordReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="QueryRecordRsp">
+   <complexType>
+    <sequence>
+     <element name="devChn" type="cusdk:DevChannel" minOccurs="1" maxOccurs="1"/>
+     <element name="recordDurationList" type="cusdk:RecDuration" minOccurs="0" maxOccurs="unbounded"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="StartPlatformRecord">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:StartPlatformRecordReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="StartPlatformRecordRsp">
+   <complexType>
+    <sequence>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="StopPlatformRecord">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:StopPlatformRecordReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="StopPlatformRecordRsp">
+   <complexType>
+    <sequence>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="SetupPlayRecord">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:SetupPlayRecordReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="SetupPlayRecordRsp">
+   <complexType>
+    <sequence>
+     <element name="recordPlaySession" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="mediaDescriptionList" type="cusdk:MediaDescription" minOccurs="0" maxOccurs="unbounded"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="PlayRecord">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:PlayRecordReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="PlayRecordRsp">
+   <complexType>
+    <sequence>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="VcrCtrl">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:VcrCtrlReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="VcrCtrlRsp">
+   <complexType>
+    <sequence>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="GetCurRecordPlayPosition">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:GetCurRecordPlayPositionReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="GetCurRecordPlayPositionRsp">
+   <complexType>
+    <sequence>
+     <element name="playId" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="curTime" type="xsd:dateTime" minOccurs="1" maxOccurs="1"/>
+     <element name="recordTimeRange" type="cusdk:TimeRange" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="StopPlayRecord">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:StopPlayRecordReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="StopPlayRecordRsp">
+   <complexType>
+    <sequence>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="SetupDownloadPlatformRecord">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:SetupDownloadPlatformRecordReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="SetupDownloadPlatformRecordRsp">
+   <complexType>
+    <sequence>
+     <element name="mediaDescriptionList" type="cusdk:MediaDescription" minOccurs="0" maxOccurs="unbounded"/>
+     <element name="recordFilePath" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="recordFileName" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="StartDownloadPlatformRecord">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:StartDownloadPlatformRecordReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="StartDownloadPlatformRecordRsp">
+   <complexType>
+    <sequence>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="StopDownloadPlatformRecord">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:StopDownloadPlatformRecordReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="StopDownloadPlatformRecordRsp">
+   <complexType>
+    <sequence>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="SetupDownloadRecord">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:SetupDownloadRecordReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="SetupDownloadRecordRsp">
+   <complexType>
+    <sequence>
+     <element name="mediaDescriptionList" type="cusdk:MediaDescription" minOccurs="0" maxOccurs="unbounded"/>
+     <element name="recordFilePath" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="recordFileName" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="StartDownloadRecord">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:StartDownloadRecordReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="StartDownloadRecordRsp">
+   <complexType>
+    <sequence>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="StopDownloadRecord">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:StopDownloadRecordReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="StopDownloadRecordRsp">
+   <complexType>
+    <sequence>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="GetRecordPlan">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:GetRecordPlanReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="GetRecordPlanRsp">
+   <complexType>
+    <sequence>
+     <element name="devChn" type="cusdk:DevChannel" minOccurs="1" maxOccurs="1"/>
+     <element name="recordPlan" type="cusdk:RecordPlan" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="SetRecordPlan">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:SetRecordPlanReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="SetRecordPlanRsp">
+   <complexType>
+    <sequence>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="GetAllTVWall">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:GetAllTVWallReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="GetAllTVWallRsp">
+   <complexType>
+    <sequence>
+     <element name="tvWallList" type="cusdk:TVWall" minOccurs="0" maxOccurs="unbounded"/>
+     <element name="totalNum" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="GetTVWall">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:GetTVWallReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="GetTVWallRsp">
+   <complexType>
+    <sequence>
+     <element name="tvWallInfo" type="cusdk:TVWall" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="CreateTVWall">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:CreateTVWallReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="CreateTVWallRsp">
+   <complexType>
+    <sequence>
+     <element name="TVWallId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="creatTime" type="xsd:dateTime" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="DelTVWall">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:DelTVWallReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="DelTVWallRsp">
+   <complexType>
+    <sequence>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="ModifyTVWall">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:ModifyTVWallReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="ModifyTVWallRsp">
+   <complexType>
+    <sequence>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="TVWallStartPlay">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:TVWallStartPlayReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="TVWallStartPlayRsp">
+   <complexType>
+    <sequence>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="TVWallStopPlay">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:TVWallStopPlayReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="TVWallStopPlayRsp">
+   <complexType>
+    <sequence>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="TVWallWindowPollContrl">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:TVWallWindowPollContrlReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="TVWallWindowPollContrlRsp">
+   <complexType>
+    <sequence>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="TVWallSaveScheme">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:TVWallSaveSchemeReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="TVWallSaveSchemeRsp">
+   <complexType>
+    <sequence>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="TVWallDelScheme">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:TVWallDelSchemeReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="TVWallDelSchemeRsp">
+   <complexType>
+    <sequence>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="TVWallLoadScheme">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:TVWallLoadSchemeReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="TVWallLoadSchemeRsp">
+   <complexType>
+    <sequence>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="TVWallQueryScheme">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:TVWallQuerySchemeReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="TVWallQuerySchemeRsp">
+   <complexType>
+    <sequence>
+     <element name="schemeList" type="cusdk:TVWallScheme" minOccurs="0" maxOccurs="unbounded"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="TVWallSetSchemePoll">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:TVWallSetSchemePollReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="TVWallSetSchemePollRsp">
+   <complexType>
+    <sequence>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="TVWallGetSchemePoll">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:TVWallGetSchemePollReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="TVWallGetSchemePollRsp">
+   <complexType>
+    <sequence>
+     <element name="pollSteps" type="cusdk:TVWallSchemePollStep" minOccurs="0" maxOccurs="unbounded"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="TVWallSchemePollControl">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:TVWallSchemePollControlReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="TVWallSchemePollControlRsp">
+   <complexType>
+    <sequence>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="SetTVDivNum">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:SetTVDivNumReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="SetTVDivNumRsp">
+   <complexType>
+    <sequence>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="PlayRecordOnTVWall">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:PlayRecordOnTVWallReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="PlayRecordOnTVWallRsp">
+   <complexType>
+    <sequence>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="StopPlayRecordOnTVWall">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:StopPlayRecordOnTVWallReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="StopPlayRecordOnTVWallRsp">
+   <complexType>
+    <sequence>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="GetSupportMapTypes">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:GetSupportMapTypesReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="GetSupportMapTypesRsp">
+   <complexType>
+    <sequence>
+     <element name="supportMapTypes" type="cusdk:MapTypeInfo" minOccurs="0" maxOccurs="unbounded"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="GetMapImageUploadUrl">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:GetMapImageUploadUrlReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="GetMapImageUploadUrlRsp">
+   <complexType>
+    <sequence>
+     <element name="imageUploadUrl" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="CreateMap">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:CreateMapReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="CreateMapRsp">
+   <complexType>
+    <sequence>
+     <element name="mapId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="ModifyMap">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:ModifyMapReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="ModifyMapRsp">
+   <complexType>
+    <sequence>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="DelMap">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:DelMapReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="DelMapRsp">
+   <complexType>
+    <sequence>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="QueryMap">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:QueryMapReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="QueryMapRsp">
+   <complexType>
+    <sequence>
+     <element name="totalNum" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="mapList" type="cusdk:Map" minOccurs="0" maxOccurs="unbounded"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="QueryMapArea">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:QueryMapAreaReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="QueryMapAreaRsp">
+   <complexType>
+    <sequence>
+     <element name="totalNum" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="areaList" type="cusdk:MapArea" minOccurs="0" maxOccurs="unbounded"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="CreateMapArea">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:CreateMapAreaReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="CreateMapAreaRsp">
+   <complexType>
+    <sequence>
+     <element name="mapAreaId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="ModifyMapArea">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:ModifyMapAreaReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="ModifyMapAreaRsp">
+   <complexType>
+    <sequence>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="CreateMapElement">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:CreateMapElementReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="CreateMapElementRsp">
+   <complexType>
+    <sequence>
+     <element name="mapEleId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="ModifyMapElement">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:ModifyMapElementReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="ModifyMapElementRsp">
+   <complexType>
+    <sequence>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="DelMapElement">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:DelMapElementReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="DelMapElementRsp">
+   <complexType>
+    <sequence>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="QueryMapElement">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:QueryMapElementReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="QueryMapElementRsp">
+   <complexType>
+    <sequence>
+     <element name="totalNum" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="mapElementList" type="cusdk:MapElement" minOccurs="0" maxOccurs="unbounded"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="GetMapElementImageUploadUrl">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:GetMapElementImageUploadUrlReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="GetMapElementImageUploadUrlRsp">
+   <complexType>
+    <sequence>
+     <element name="imageUploadUrl" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="QueryMapElementImageList">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:QueryMapElementImageListReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="QueryMapElementImageListRsp">
+   <complexType>
+    <sequence>
+     <element name="mapElementImageUrlList" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="MapPositionMar2Earth">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:MapPositionMar2EarthReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="MapPositionMar2EarthRsp">
+   <complexType>
+    <sequence>
+     <element name="earthPos" type="cusdk:MapPosition" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="MapPositionEarth2Mar">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:MapPositionEarth2MarReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="MapPositionEarth2MarRsp">
+   <complexType>
+    <sequence>
+     <element name="marPos" type="cusdk:MapPosition" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="QueryAlarmLinkConfig">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:QueryAlarmLinkConfigReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="QueryAlarmLinkConfigRsp">
+   <complexType>
+    <sequence>
+     <element name="totalNum" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="alarmLinkConfigList" type="cusdk:AlarmLinkConfig" minOccurs="0" maxOccurs="unbounded"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="GetAlarmLinkConfig">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:GetAlarmLinkConfigReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="GetAlarmLinkConfigRsp">
+   <complexType>
+    <sequence>
+     <element name="alarmLinkCoonfig" type="cusdk:AlarmLinkConfig" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="SetAlarmLinkConfig">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:SetAlarmLinkConfigReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="SetAlarmLinkConfigRsp">
+   <complexType>
+    <sequence>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="QueryAlarmLinkArea">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:QueryAlarmLinkAreaReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="QueryAlarmLinkAreaRsp">
+   <complexType>
+    <sequence>
+     <element name="totalNum" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="alarmLinkAreaList" type="cusdk:AlarmLinkArea" minOccurs="0" maxOccurs="unbounded"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="CreateAlarmLinkArea">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:CreateAlarmLinkAreaReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="CreateAlarmLinkAreaRsp">
+   <complexType>
+    <sequence>
+     <element name="alarmLinkAreaId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="DelAlarmLinkArea">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:DelAlarmLinkAreaReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="DelAlarmLinkAreaRsp">
+   <complexType>
+    <sequence>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="ModifyAlarmLinkArea">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:ModifyAlarmLinkAreaReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="ModifyAlarmLinkAreaRsp">
+   <complexType>
+    <sequence>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="QueryUserLog">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:QueryUserLogReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="QueryUserLogRsp">
+   <complexType>
+    <sequence>
+     <element name="totalNum" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="userLogList" type="cusdk:UserLog" minOccurs="0" maxOccurs="unbounded"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="QueryDeviceLog">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:QueryDeviceLogReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="QueryDeviceLogRsp">
+   <complexType>
+    <sequence>
+     <element name="totalNum" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="deviceLogList" type="cusdk:DeviceLog" minOccurs="0" maxOccurs="unbounded"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="QueryAlarmLog">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:QueryAlarmLogReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="QueryAlarmLogRsp">
+   <complexType>
+    <sequence>
+     <element name="totalNum" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="alarmLogList" type="cusdk:AlarmLog" minOccurs="0" maxOccurs="unbounded"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="GetLogConfig">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:GetLogConfigReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="GetLogConfigRsp">
+   <complexType>
+    <sequence>
+     <element name="maxUserLogSavedDays" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="maxUserLogSavedNumber" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="enableUserLog" type="xsd:boolean" minOccurs="1" maxOccurs="1"/>
+     <element name="maxDeviceLogSavedNumber" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="maxDeviceLogSavedDays" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="enableDeviceLog" type="xsd:boolean" minOccurs="1" maxOccurs="1"/>
+     <element name="maxAlarmLogSavedNumber" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="maxAlarmLogSavedDays" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="SetLogConfig">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:SetLogConfigReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="SetLogConfigRsp">
+   <complexType>
+    <sequence>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="CallPu">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:CallPuReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="CallPuRsp">
+   <complexType>
+    <sequence>
+     <element name="mediaDescriptionList" type="cusdk:MediaDescription" minOccurs="0" maxOccurs="unbounded"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="HangUpPu">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:HangUpPuReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="HangUpPuRsp">
+   <complexType>
+    <sequence>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="GetDeviceEncoderParam">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:GetDeviceEncoderParamReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="GetDeviceEncoderParamRsp">
+   <complexType>
+    <sequence>
+     <element name="videoEncParam" type="cusdk:VideoEncodeParam" minOccurs="1" maxOccurs="1"/>
+     <element name="suportedVideoModeList" type="cusdk:VideoMode" minOccurs="0" maxOccurs="unbounded"/>
+     <element name="supportedAudioModeList" type="cusdk:EAudioFormat" minOccurs="0" maxOccurs="unbounded"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="SetDeviceEncoderParam">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:SetDeviceEncoderParamReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="SetDeviceEncoderParamRsp">
+   <complexType>
+    <sequence>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="SetDeviceName">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:SetDeviceNameReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="SetDeviceNameRsp">
+   <complexType>
+    <sequence>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="GetCameraProtocolType">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:GetCameraProtocolTypeReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="GetCameraProtocolTypeRsp">
+   <complexType>
+    <sequence>
+     <element name="cameraProtocolType" type="cusdk:ECameraProtocolType" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="SetCameraProtocolType">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:SetCameraProtocolTypeReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="SetCameraProtocolTypeRsp">
+   <complexType>
+    <sequence>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="GetMotionDetectConfig">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:GetMotionDetectConfigReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="GetMotionDetectConfigRsp">
+   <complexType>
+    <sequence>
+     <element name="motionDetectAreaConfigList" type="cusdk:MotionDetectAreaConfig" minOccurs="0" maxOccurs="unbounded"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="SetMotionDetectConfig">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:SetMotionDetectConfigReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="SetMotionDetectConfigRsp">
+   <complexType>
+    <sequence>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="GetShadeConfig">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:GetShadeConfigReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="GetShadeConfigRsp">
+   <complexType>
+    <sequence>
+     <element name="shadeAreaConfigList" type="cusdk:ShadeAreaConfig" minOccurs="0" maxOccurs="unbounded"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="SetShadeConfig">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:SetShadeConfigReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="SetShadeConfigRsp">
+   <complexType>
+    <sequence>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="GetDeviceChannelName">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:GetDeviceChannelNameReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="GetDeviceChannelNameRsp">
+   <complexType>
+    <sequence>
+     <element name="chnNameList" type="cusdk:ChannelName" minOccurs="0" maxOccurs="unbounded"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="SetDeviceChannelName">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:SetDeviceChannelNameReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="SetDeviceChannelNameRsp">
+   <complexType>
+    <sequence>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="GetPtzPresetName">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:GetPtzPresetNameReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="GetPtzPresetNameRsp">
+   <complexType>
+    <sequence>
+     <element name="presetNameList" type="cusdk:PresetName" minOccurs="0" maxOccurs="unbounded"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="SetPtzPresetName">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:SetPtzPresetNameReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="SetPtzPresetNameRsp">
+   <complexType>
+    <sequence>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="DelPtzPresetName">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:DelPtzPresetNameReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="DelPtzPresetNameRsp">
+   <complexType>
+    <sequence>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="VsipChannelData">
+   <complexType>
+    <sequence>
+     <element name="req" type="cusdk:VsipChannelDataReq" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="VsipChannelDataRsp">
+   <complexType>
+    <sequence>
+     <element name="vsipBase64DataRsp" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+ </schema>
+

@@ -1,0 +1,1 @@
+<CDomainNameGetReq><event>TAS_DOMAIN_NAME_GET_REQ</event><seqNum>100</seqNum><session>CEvent_Req_Session</session><domainId>dbdada6272c9102fb4b400141008f694</domainId></CDomainNameGetReq>
