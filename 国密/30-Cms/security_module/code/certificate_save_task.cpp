@@ -194,7 +194,8 @@ bool CCertificateSaveTask::CheckSign(const CSecurityModuleCertificateSaveReq &cR
 	else
 	{
 		TASKLOG(EVENT_LEV, "找到id:%s的公钥!\n", cReq.GetOwnerid().c_str());
-
+		
+		//分别对加密证书和签名证书验签
 		//直接用公钥验证私钥，如果通过则验签成功
 		int ret;
 		int engine_id = 0;
@@ -292,11 +293,6 @@ void CCertificateSaveTask::ProcCertBySm3(string& strCert4Sm3)
 
 void CCertificateSaveTask::ProcCertBySm4(const string& strSm4Key,string& strCert4Sm4)
 {
-	unsigned char iv[16] = {
-		0x66, 0x03, 0x54, 0x92, 0x78, 0x00, 0x00, 0x00,
-		0x66, 0x03, 0x54, 0x92, 0x78, 0x00, 0x00, 0x00,
-	};//sm4加密的子密钥，暂且这样写吧
-
 	int ret;
 	u8 *out = (u8*)malloc(BUFF_LEN);
 	s32 count;
@@ -304,7 +300,7 @@ void CCertificateSaveTask::ProcCertBySm4(const string& strSm4Key,string& strCert
 	int engine_id = 0;
 	enc_cipher = KdSSL_CIPHER_CTX_new();
 	/* sm4 加密*/
-	ret = KdSSL_CipherInit_ex(enc_cipher, KDC_EXT_SM4_OFB, engine_id, (u8*)strSm4Key.c_str(), iv, 1);
+	ret = KdSSL_CipherInit_ex(enc_cipher, KDC_EXT_SM4_ECB, engine_id, (u8*)strSm4Key.c_str(), NULL, 1);
 	assert(!ret);
 	KdSSL_EncryptUpdate(enc_cipher, out, &count, (const u8*)m_strCertContent.c_str(), strlen(m_strCertContent.c_str()));
 	assert(!ret);

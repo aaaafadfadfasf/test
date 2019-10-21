@@ -50,6 +50,7 @@ public:
 public:
 	bool GetDbCertInfo(const string& strOwnerid);//获取数据库中证书信息
 	void GetUsbKeySm4Passwd(string& strUsbKeyPasswd);//获取usbkey中的加密密钥
+	u32 ProcQeryData(CMessage *const pcMsg);
 	void DecryptCertInfoBySm4(const string& strUsbKeyPasswd);//使用usbkey中的密钥对证书进行sm4解密
 	bool CompareCertHashAndSrcHash();//对解密后的证书进行杂凑，然后与数据库中的杂凑值比较
 private:
